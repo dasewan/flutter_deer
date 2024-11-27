@@ -89,7 +89,7 @@ dependencies:
   flutter_native_contact_picker: ^0.0.9
   android_id: ^0.4.0
   network_info_plus: ^6.1.1
-  #  photo_manager: ^3.6.3
+#  photo_manager: ^3.0.0-dev.2
   #  -liveness_detection_flutter_plugin:
   #    git: git@gitee.com:dasewan/liveness.git
   #  -platform_device_id: ^1.0.1
