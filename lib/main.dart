@@ -1,15 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/demo/demo_page.dart';
-import 'package:flutter_deer/home/splash_page.dart';
 import 'package:flutter_deer/net/dio_utils.dart';
 import 'package:flutter_deer/net/intercept.dart';
+import 'package:flutter_deer/providers/locale_provider.dart';
+import 'package:flutter_deer/providers/theme_provider.dart';
 import 'package:flutter_deer/res/constant.dart';
 import 'package:flutter_deer/routers/not_found_page.dart';
 import 'package:flutter_deer/routers/routers.dart';
-import 'package:flutter_deer/setting/provider/locale_provider.dart';
-import 'package:flutter_deer/setting/provider/theme_provider.dart';
 import 'package:flutter_deer/util/device_utils.dart';
 import 'package:flutter_deer/util/handle_error_utils.dart';
 import 'package:flutter_deer/util/log_utils.dart';
@@ -115,7 +113,7 @@ class MyApp extends StatelessWidget {
         quickActions.initialize((String shortcutType) async {
           if (shortcutType == 'demo') {
             navigatorKey.currentState?.push<dynamic>(MaterialPageRoute<dynamic>(
-              builder: (BuildContext context) => const DemoPage(),
+              builder: (BuildContext context) => const Text('kuangjia'),
             ));
           }
         });
@@ -167,7 +165,7 @@ class MyApp extends StatelessWidget {
       theme: theme ?? provider.getTheme(),
       darkTheme: provider.getTheme(isDarkMode: true),
       themeMode: provider.getThemeMode(),
-      home: home ?? const SplashPage(),
+      home: home ?? const Text('kuangjia'),
       onGenerateRoute: Routes.router.generator,
       localizationsDelegates: DeerLocalizations.localizationsDelegates,
       supportedLocales: DeerLocalizations.supportedLocales,

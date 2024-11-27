@@ -1,4 +1,4 @@
-import 'package:flutter_deer/generated/json/base/json_convert_content.dart';
+// import 'package:flutter_deer/generated/json/base/json_convert_content.dart';
 import 'package:flutter_deer/res/constant.dart';
 
 class BaseEntity<T> {
@@ -27,7 +27,7 @@ class BaseEntity<T> {
       return json as T;
     } else {
       /// List类型数据由fromJsonAsT判断处理
-      return JsonConvert.fromJsonAsT<T>(json);
+      return null;
     }
   }
 }
