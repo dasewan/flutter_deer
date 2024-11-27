@@ -54,10 +54,6 @@ dependencies:
   # 状态管理 https://github.com/rrousselGit/provider
   provider: ^6.1.2
   # 扫码 https://github.com/juliuscanute/qr_code_scanner
-  qr_code_scanner:
-    git:
-      url: 'https://github.com/NeverOvO/qr_code_scanner.git'
-      ref: '3fe7b88'
   # App Shortcuts https://github.com/flutter/packages/tree/main/packages/quick_actions
   quick_actions: 1.0.7
   # 振动 https://github.com/benjamindean/flutter_vibration
@@ -68,16 +64,38 @@ dependencies:
   # 桌面应用调整窗口的大小和位置 https://github.com/leanflutter/window_manager
   window_manager: 0.4.0
   # 高德2D地图插件（支持Web） https://github.com/simplezhli/flutter_2d_amap
-  flutter_2d_amap:
-    git:
-      ref: '0105ceae'
-      url: 'https://github.com/simplezhli/flutter_2d_amap.git'
   # demo 用到的库
   # 刮刮卡 https://github.com/vintage/scratcher
-  scratcher: ^2.5.0
   # 动画效果 https://github.com/xvrh/lottie-flutter
   lottie: ^3.1.2
   win32: 5.5.3
+  # 以下是新增的
+  carousel_slider: ^5.0.0
+  flutter_custom_carousel_slider: ^1.2.0
+  text_scroll: ^0.2.0
+  skeletonizer: ^1.4.2
+  just_the_tooltip: ^0.0.12
+  permission_handler: ^11.3.1
+  appcheck: ^1.5.2
+  sticky_headers: ^0.3.0+2
+  timelines: ^0.1.0
+  google_fonts: ^6.2.1
+  card_swiper: ^3.0.1
+  connectivity_plus: ^6.1.0
+  geolocator: ^13.0.2
+  get_ip_address: ^0.0.7
+  flutter_contacts: ^1.1.9+2
+  livelyness_detection: ^0.0.1+5
+  flutter_native_contact_picker: ^0.0.9
+  android_id: ^0.4.0
+  network_info_plus: ^6.1.1
+  #  photo_manager: ^3.6.3
+  #  -liveness_detection_flutter_plugin:
+  #    git: git@gitee.com:dasewan/liveness.git
+  #  -platform_device_id: ^1.0.1
+  #  -root_check: ^0.0.2+1
+  #  -wifi_info_plugin_plus: ^2.0.2
+  #  -fluttercontactpicker: ^4.7.0
 
 # https://github.com/simplezhli/flutter_deer/issues/187
 dependency_overrides:
