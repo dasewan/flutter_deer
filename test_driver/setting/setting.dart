@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/main.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/setting/page/setting_page.dart';
+import 'package:myapp9/main.dart';
+import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/setting/page/setting_page.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:sp_util/sp_util.dart';
 

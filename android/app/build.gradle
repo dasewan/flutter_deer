@@ -30,7 +30,7 @@ android {
     compileSdkVersion 34
 
     defaultConfig {
-        applicationId "com.weilu.deer"
+        applicationId "com.dasewan.myapp9"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
@@ -68,7 +68,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    namespace 'com.weilu.deer'
+    namespace 'com.dasewan.myapp9'
     lint {
         disable 'InvalidPackage'
     }

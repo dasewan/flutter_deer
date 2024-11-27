@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/colors.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
+import 'package:myapp9/res/colors.dart';
+import 'package:myapp9/util/theme_utils.dart';
 
 class MyCard extends StatelessWidget {
 

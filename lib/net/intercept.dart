@@ -2,10 +2,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/util/log_utils.dart';
-import 'package:flutter_deer/util/other_utils.dart';
+import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/util/device_utils.dart';
+import 'package:myapp9/util/log_utils.dart';
+import 'package:myapp9/util/other_utils.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:sprintf/sprintf.dart';
 

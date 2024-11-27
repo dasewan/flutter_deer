@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
-import 'package:flutter_deer/widgets/state_layout.dart';
+import 'package:myapp9/widgets/my_app_bar.dart';
+import 'package:myapp9/widgets/state_layout.dart';
 
 class NotFoundPage extends StatelessWidget {
 

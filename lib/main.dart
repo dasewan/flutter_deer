@@ -1,17 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/net/dio_utils.dart';
-import 'package:flutter_deer/net/intercept.dart';
-import 'package:flutter_deer/providers/locale_provider.dart';
-import 'package:flutter_deer/providers/theme_provider.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/routers/not_found_page.dart';
-import 'package:flutter_deer/routers/routers.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/util/handle_error_utils.dart';
-import 'package:flutter_deer/util/log_utils.dart';
-import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
+import 'package:myapp9/net/dio_utils.dart';
+import 'package:myapp9/net/intercept.dart';
+import 'package:myapp9/providers/locale_provider.dart';
+import 'package:myapp9/providers/theme_provider.dart';
+import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/routers/not_found_page.dart';
+import 'package:myapp9/routers/routers.dart';
+import 'package:myapp9/util/device_utils.dart';
+import 'package:myapp9/util/handle_error_utils.dart';
+import 'package:myapp9/util/log_utils.dart';
+import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_actions/quick_actions.dart';
@@ -66,7 +66,7 @@ Future<void> main() async {
 
   /// 隐藏状态栏，导航栏。为启动页、引导页设置全屏显示。完成后还原。
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  // TODO(weilu): 启动体验不佳。状态栏、导航栏在冷启动开始的一瞬间为黑色，且无法通过隐藏、修改颜色等方式进行处理。。。
+  // TODO(dasewan): 启动体验不佳。状态栏、导航栏在冷启动开始的一瞬间为黑色，且无法通过隐藏、修改颜色等方式进行处理。。。
   // 相关问题跟踪：https://github.com/flutter/flutter/issues/73351
 }
 
@@ -155,7 +155,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildMaterialApp(ThemeProvider provider, LocaleProvider localeProvider) {
     return MaterialApp(
-      title: 'Flutter Deer',
+      title: 'Flutter Myapp9',
       // showPerformanceOverlay: true, //显示性能标签
       // debugShowCheckedModeBanner: false, // 去除右上角debug的标签
       // checkerboardRasterCacheImages: true,
@@ -167,8 +167,8 @@ class MyApp extends StatelessWidget {
       themeMode: provider.getThemeMode(),
       home: home ?? const Text('kuangjia'),
       onGenerateRoute: Routes.router.generator,
-      localizationsDelegates: DeerLocalizations.localizationsDelegates,
-      supportedLocales: DeerLocalizations.supportedLocales,
+      localizationsDelegates: Myapp9Localizations.localizationsDelegates,
+      supportedLocales: Myapp9Localizations.supportedLocales,
       locale: localeProvider.locale,
       navigatorKey: navigatorKey,
       builder: (BuildContext context, Widget? child) {

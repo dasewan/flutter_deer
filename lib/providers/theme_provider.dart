@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/web_page_transitions.dart';
+import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/res/resources.dart';
+import 'package:myapp9/routers/web_page_transitions.dart';
 import 'package:sp_util/sp_util.dart';
 
 import '../../util/theme_utils.dart';

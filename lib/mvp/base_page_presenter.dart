@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter_deer/mvp/base_presenter.dart';
-import 'package:flutter_deer/net/net.dart';
+import 'package:myapp9/mvp/base_presenter.dart';
+import 'package:myapp9/net/net.dart';
 
 import 'mvps.dart';
 
