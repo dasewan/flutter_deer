@@ -1,0 +1,22 @@
+{
+  "id": 1,
+  "a_parent_id": 0,
+  "b_name": "id card",
+  "c_code": "id_number",
+  "d_status": "y",
+  "e_sort": 1,
+  "f_valid_days": 60,
+  "g_edit": "y",
+  "h_opertional": "y",
+  "i_description": "身份认证",
+  "j_remark": "身份认证",
+  "k_rules": "test",
+  "l_type": "text",
+  "m_text_input_type": "text",
+  "n_max_length": 50,
+  "o_label_text": "test",
+  "p_hint_text": "test",
+  "q_validator": "test",
+  "r_multi_validator": "test",
+  "s_on_submitted": "test"
+}

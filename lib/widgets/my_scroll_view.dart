@@ -20,6 +20,7 @@ class MyScrollView extends StatelessWidget {
     this.keyboardConfig,
     this.tapOutsideToDismiss = false,
     this.overScroll = 16.0,
+    this.color,
   });
 
   final List<Widget> children;
@@ -28,6 +29,8 @@ class MyScrollView extends StatelessWidget {
   final CrossAxisAlignment crossAxisAlignment;
   final Widget? bottomButton;
   final KeyboardActionsConfig? keyboardConfig;
+  final Color? color;
+
   /// 键盘外部按下将其关闭
   final bool tapOutsideToDismiss;
   /// 默认弹起位置在TextField的文字下面，可以添加此属性继续向上滑动一段距离。用来露出完整的TextField。
@@ -78,6 +81,15 @@ class MyScrollView extends StatelessWidget {
           )
         ],
       );
+    }
+    if (color != null) {
+      contents = Container(
+          margin: EdgeInsets.only(left: 15, right: 15, bottom: 15),
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
+          width: double.infinity,
+          decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
+          // margin: const EdgeInsets.only(left: 10),
+          child: contents);
     }
 
     return contents;

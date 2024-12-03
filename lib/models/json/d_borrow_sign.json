@@ -1,0 +1,100 @@
+{
+  "success": true,
+  "message": "messages.deleted",
+  "data":{
+    "pre_compute": [
+      {
+        "field": "loan_amount",
+        "sort": 1,
+        "text": "贷款金额",
+        "value": "780.00",
+        "remark": ""
+      },
+      {
+        "field": "days",
+        "sort": 1,
+        "text": "贷款期限",
+        "value": "7",
+        "remark": ""
+      },
+      {
+        "field": "interset_day_amount",
+        "sort": 1,
+        "text": "每日利息",
+        "value": "50.00",
+        "remark": ""
+      },
+      {
+        "field": "interset_amount",
+        "sort": 1,
+        "text": "利息总和",
+        "value": "50.00",
+        "remark": "此费用为固定头收费用，只收一次"
+      },
+      {
+        "field": "service_amount",
+        "sort": 1,
+        "text": "服务费",
+        "value": "50.00",
+        "remark": "此费用为固定头收费用，只收一次"
+      },
+      {
+        "field": "violate_amount",
+        "sort": 1,
+        "text": "违约金",
+        "value": "50.00",
+        "remark": "如果您没有按时还款，则收取一次费用"
+      },
+      {
+        "field": "overdue_day_amount",
+        "sort": 1,
+        "text": "每日逾期费用",
+        "value": "50.00",
+        "remark": "逾期天数*此费用"
+      },
+      {
+        "field": "expect_loan_time",
+        "sort": 1,
+        "text": "预计放款时间",
+        "value": "2021-10-30",
+        "remark": ""
+      },
+      {
+        "field": "expect_repay_time",
+        "sort": 1,
+        "text": "预计还款时间",
+        "value": "2021-11-06",
+        "remark": ""
+      },
+      {
+        "field": "bank_name",
+        "sort": 1,
+        "text": "放款银行",
+        "value": "icbc",
+        "remark": ""
+      },
+      {
+        "field": "bank_no",
+        "sort": 1,
+        "text": "放款银行卡号",
+        "value": "2342341112345",
+        "remark": ""
+      },
+      {
+        "field": "bank_holder_name",
+        "sort": 1,
+        "text": "放款银行卡所属人",
+        "value": "50.00",
+        "remark": ""
+      }
+    ],
+    "sync_info": {
+      "last_sms_time": 123123,
+      "last_app_install_time": 22222,
+      "last_call_time": 123,
+      "last_battery": 123,
+      "last_device": 123,
+      "verify_data_update_time": 123
+    }
+}
+}

@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data":{
+    "g_verify": {
+      "h_index_no": 1,
+      "i_index_action": 12,
+      "ae_message": 0
+    }
+  },
+  "message": "messages.deleted"
+}

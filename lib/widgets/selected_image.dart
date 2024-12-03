@@ -16,12 +16,18 @@ class SelectedImage extends StatefulWidget {
     super.key,
     this.url,
     this.heroTag,
+    this.holderImg = 'icon_zj',
     this.size = 80.0,
+    this.height = 180.0,
+    this.width = 260.0,
   });
 
   final String? url;
   final String? heroTag;
   final double size;
+  final double height;
+  final double width;
+  final String holderImg;
 
   @override
   SelectedImageState createState() => SelectedImageState();
@@ -61,21 +67,21 @@ class SelectedImageState extends State<SelectedImage> {
 
   @override
   Widget build(BuildContext context) {
-    final ColorFilter colorFilter = ColorFilter.mode(
-        ThemeUtils.isDark(context) ? Colours.dark_unselected_item_color : Colours.text_gray,
-        BlendMode.srcIn
-    );
+    // final ColorFilter colorFilter = ColorFilter.mode(
+    //     ThemeUtils.isDark(context) ? Colours.dark_unselected_item_color : Colours.text_gray,
+    //     BlendMode.srcIn
+    // );
 
     Widget image = Container(
-      width: widget.size,
-      height: widget.size,
+      width: widget.width,
+      height: widget.height,
       decoration: BoxDecoration(
         // 图片圆角展示
         borderRadius: BorderRadius.circular(16.0),
         image: DecorationImage(
-            image: _imageProvider ?? ImageUtils.getImageProvider(widget.url, holderImg: 'store/icon_zj'),
-            fit: BoxFit.cover,
-            colorFilter: _imageProvider == null && TextUtil.isEmpty(widget.url) ? colorFilter : null
+          image: _imageProvider ?? ImageUtils.getImageProvider(widget.url, holderImg: widget.holderImg),
+          // fit: BoxFit.cover,
+          // colorFilter: _imageProvider == null && TextUtil.isEmpty(widget.url) ? _colorFilter : null
         ),
       ),
     );

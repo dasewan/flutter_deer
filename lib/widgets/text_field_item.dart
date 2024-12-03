@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp9/res/resources.dart';
+import 'package:myapp9/util/formFieldValidator.dart';
 import 'package:myapp9/util/input_formatter/number_text_input_formatter.dart';
 
 /// 封装输入框
-class TextFieldItem extends StatelessWidget {
+class TextFieldItem extends StatefulWidget {
 
   const TextFieldItem({
     super.key,
@@ -13,44 +14,81 @@ class TextFieldItem extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.hintText = '',
     this.focusNode,
+    this.onChanged,
+    this.onFieldSubmitted,
+    this.readOnly = false,
+    required this.validator, this.value,
   });
 
   final TextEditingController? controller;
+  final String? value;
   final String title;
   final String hintText;
   final TextInputType keyboardType;
   final FocusNode? focusNode;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onFieldSubmitted;
+  final FieldValidator<String?> validator;
+  final bool readOnly;
+
+  @override
+  State<TextFieldItem> createState() => _TextFieldItemState();
+}
+
+class _TextFieldItemState extends State<TextFieldItem> {
+  double height = 50;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.value != null) {
+      /*widget.controller?.value =
+          TextEditingValue(text: widget.value!, selection: TextSelection.fromPosition(TextPosition(affinity: TextAffinity.downstream, offset: widget.value!.length)));*/
+    }
     final Row child = Row(
       children: <Widget>[
-        Text(title),
+        // Text(title),
         Gaps.hGap16,
         Expanded(
-          child: Semantics(
-            label: hintText.isEmpty ? '请输入$title' : hintText,
-            child: TextField(
-              focusNode: focusNode,
-              keyboardType: keyboardType,
-              inputFormatters: _getInputFormatters(),
-              controller: controller,
-              //style: TextStyles.textDark14,
-              decoration: InputDecoration(
-                hintText: hintText,
-                border: InputBorder.none, //去掉下划线
-                //hintStyle: TextStyles.textGrayC14
-              ),
+          child: TextFormField(
+            focusNode: widget.focusNode,
+            keyboardType: widget.keyboardType,
+            inputFormatters: _getInputFormatters(),
+            controller: widget.controller,
+            // initialValue: widget.value,
+            validator: (value) {
+              final String? errorText = widget.validator(value);
+              if (errorText == null) {
+                setState(() {
+                  height = 50;
+                });
+                return null; // 验证成功，返回null
+              } else {
+                setState(() {
+                  height = 140;
+                });
+                return errorText; // 验证失败，返回提示信息
+              }
+            },
+            onChanged: widget.onChanged,
+            onFieldSubmitted: widget.onFieldSubmitted,
+            readOnly: widget.readOnly,
+            //style: TextStyles.textDark14,
+            decoration: InputDecoration(
+              labelText: widget.title,
+              hintText: widget.hintText,
+              border: InputBorder.none, //去掉下划线
+              contentPadding: EdgeInsets.only(top: 14, bottom: 2),
+              //hintStyle: TextStyles.textGrayC14
             ),
           ),
         ),
         Gaps.hGap16
       ],
     );
-    
+
     return Container(
-      height: 50.0,
-      margin: const EdgeInsets.only(left: 16.0),
+      height: height,
+      margin: const EdgeInsets.only(left: 15.0),
       width: double.infinity,
       decoration: BoxDecoration(
         border: Border(
@@ -62,10 +100,10 @@ class TextFieldItem extends StatelessWidget {
   }
 
   List<TextInputFormatter>? _getInputFormatters() {
-    if (keyboardType == const TextInputType.numberWithOptions(decimal: true)) {
+    if (widget.keyboardType == const TextInputType.numberWithOptions(decimal: true)) {
       return <TextInputFormatter>[UsNumberTextInputFormatter()];
     }
-    if (keyboardType == TextInputType.number || keyboardType == TextInputType.phone) {
+    if (widget.keyboardType == TextInputType.number || widget.keyboardType == TextInputType.phone) {
       return <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly];
     }
     return null;

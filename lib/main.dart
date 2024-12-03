@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:myapp9/pages/home/splash_page.dart';
 import 'package:myapp9/net/dio_utils.dart';
 import 'package:myapp9/net/intercept.dart';
 import 'package:myapp9/providers/locale_provider.dart';
 import 'package:myapp9/providers/theme_provider.dart';
-import 'package:myapp9/res/constant.dart';
+// import 'package:myapp9/res/constant.dart';
 import 'package:myapp9/routers/not_found_page.dart';
 import 'package:myapp9/routers/routers.dart';
 import 'package:myapp9/util/device_utils.dart';
@@ -18,6 +19,16 @@ import 'package:quick_actions/quick_actions.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:window_manager/window_manager.dart';
+
+import 'package:myapp9/config/constant.dart';
+import 'package:myapp9/providers/index_new_provider.dart';
+import 'package:myapp9/providers/product_new_provider.dart';
+import 'package:myapp9/providers/product_provider.dart';
+import 'package:myapp9/providers/user_provider.dart';
+import 'package:myapp9/providers/verify_provider.dart';
+import 'package:myapp9/util/theme_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 Future<void> main() async {
 //  debugProfileBuildsEnabled = true;
@@ -32,6 +43,7 @@ Future<void> main() async {
   handleError(() async {
     /// 确保初始化完成
     WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences.setMockInitialValues({});
 
     if (Device.isDesktop) {
       await WindowManager.instance.ensureInitialized();
@@ -68,6 +80,10 @@ Future<void> main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   // TODO(dasewan): 启动体验不佳。状态栏、导航栏在冷启动开始的一瞬间为黑色，且无法通过隐藏、修改颜色等方式进行处理。。。
   // 相关问题跟踪：https://github.com/flutter/flutter/issues/73351
+  String uuid = SpUtil.getString(Constant.uuid, defValue: '')!;
+  if (uuid == '') {
+    SpUtil.putString(Constant.uuid, const Uuid().v4());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -99,7 +115,7 @@ class MyApp extends StatelessWidget {
     /// 适配数据(根据自己的数据结构，可自行选择添加)
     interceptors.add(AdapterInterceptor());
     configDio(
-      baseUrl: 'https://api.github.com/',
+      baseUrl: Constant.proxyDomain,
       interceptors: interceptors,
     );
   }
@@ -134,7 +150,12 @@ class MyApp extends StatelessWidget {
     final Widget app = MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        ChangeNotifierProvider(create: (_) => LocaleProvider())
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ProductNewProvider()),
+        ChangeNotifierProvider(create: (_) => VerifyProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+        ChangeNotifierProvider(create: (_) => IndexNewProvider()),
       ],
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (_, ThemeProvider provider, LocaleProvider localeProvider, __) {
@@ -155,7 +176,7 @@ class MyApp extends StatelessWidget {
 
   Widget _buildMaterialApp(ThemeProvider provider, LocaleProvider localeProvider) {
     return MaterialApp(
-      title: 'Flutter Myapp9',
+      title: Constant.appTitle,
       // showPerformanceOverlay: true, //显示性能标签
       // debugShowCheckedModeBanner: false, // 去除右上角debug的标签
       // checkerboardRasterCacheImages: true,
@@ -163,9 +184,9 @@ class MyApp extends StatelessWidget {
       // checkerboardOffscreenLayers: true, // 检查离屏渲染
 
       theme: theme ?? provider.getTheme(),
-      darkTheme: provider.getTheme(isDarkMode: true),
+      darkTheme: provider.getTheme(isDarkMode: false),
       themeMode: provider.getThemeMode(),
-      home: home ?? const Text('kuangjia'),
+      home: home ?? const SplashPage(),
       onGenerateRoute: Routes.router.generator,
       localizationsDelegates: Myapp9Localizations.localizationsDelegates,
       supportedLocales: Myapp9Localizations.supportedLocales,

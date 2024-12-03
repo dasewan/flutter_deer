@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:myapp9/res/resources.dart';
 import 'package:myapp9/util/theme_utils.dart';
 import 'package:myapp9/widgets/state_layout.dart';
 
 /// 封装下拉刷新与加载更多
-class Myapp9ListView extends StatefulWidget {
+class MyListView extends StatefulWidget {
 
-  const Myapp9ListView({
+  const MyListView({
     super.key,
     required this.itemCount,
     required this.itemBuilder,
@@ -34,13 +33,13 @@ class Myapp9ListView extends StatefulWidget {
   final double? itemExtent;
 
   @override
-  _Myapp9ListViewState createState() => _Myapp9ListViewState();
+  _MyListViewState createState() => _MyListViewState();
 }
 
 typedef RefreshCallback = Future<void> Function();
 typedef LoadMoreCallback = Future<void> Function();
 
-class _Myapp9ListViewState extends State<Myapp9ListView> {
+class _MyListViewState extends State<MyListView> {
 
   /// 是否正在加载数据
   bool _isLoading = false;

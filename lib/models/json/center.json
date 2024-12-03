@@ -1,0 +1,117 @@
+{
+  "success": true,
+  "data": {
+    "b_name": "",
+    "a_phone": "52345678905",
+    "a_e_message": 88,
+    "a_o_service_count": 0,
+    "g_credit_fraction": 0,
+    "current_level": "D(900)",
+    "f_credit_amount": 2000000,
+    "next_amount": 1000,
+    "process_tip": "Complete the certification in order to obtain the correct credit score ",
+    "last_refresh_time": "2023-06-25T00:40:11.000000Z",
+    "show_active": 0,
+    "amount_progress": [
+      {
+        "amount": 0,
+        "type": 2
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 1000,
+        "type": 1
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 2000,
+        "type": 1
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 4000,
+        "type": 1
+      },
+      {
+        "amount": 0,
+        "type": 0
+      },
+      {
+        "amount": 8000,
+        "type": 1
+      }
+    ],
+    "level_progress": [
+      {
+        "level": "",
+        "type": 2
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "A(300)",
+        "type": 1
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "B(500)",
+        "type": 1
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "C(800)",
+        "type": 1
+      },
+      {
+        "level": "",
+        "type": 0
+      },
+      {
+        "level": "D(900)",
+        "type": 1
+      }
+    ],
+    "point": [
+      "0.00",
+      "3.00",
+      "5.00",
+      "8.00",
+      "10.00"
+    ]
+  },
+  "other": [],
+  "message": "messages.deleted"
+}

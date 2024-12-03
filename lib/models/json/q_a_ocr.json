@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": {
+    "ocr_result": {
+      "h_idnumber": "",
+      "i_idnumber2": "",
+      "l_name1": "",
+      "m_name2": "",
+      "n_name3": "",
+      "p_birthday": ""
+    },
+    "next": ""
+  },
+  "message": "messages.deleted"
+}

@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "data": {
+    "id": 181,
+    "a_user_id": 225,
+    "l_app_version": 123,
+    "m_init_msg_count": 0,
+    "n_last_msg_time": "2024-04-06T06:30:34.000000Z",
+    "o_sms_count": 0,
+    "p_init_album_count": 0,
+    "q_last_album_time": "2024-04-06T06:30:36.000000Z",
+    "r_album_count": 0,
+    "s_init_app_count": 4,
+    "t_last_app_time": "2024-04-06T06:30:34.000000Z",
+    "u_app_count": 4,
+    "v_init_contact_count": 262,
+    "w_last_contact_time": "2024-04-06T06:30:36.000000Z",
+    "x_contact_count": 262,
+    "y_last_device_time": "2024-04-06T06:30:36.000000Z"
+  },
+  "other": {
+    "tip1": "",
+    "tip2": "",
+    "tip3": "",
+    "tip4": ""
+  },
+  "message": "messages.retrieved"
+}
