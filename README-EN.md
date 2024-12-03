@@ -60,11 +60,11 @@ For the Android version, kindly click on the link provided: [Download here](http
 
 As for iOS, you will need to download and run the code on your own.
 
-For web experience, please visit: https://simplezhli.github.io/myapp9/
+For web experience, please visit: https://dasewan.github.io/myapp9/
 
 ## The project's operational environment.
 
-[![myapp9 driver](https://github.com/simplezhli/myapp9/actions/workflows/flutter-drive.yml/badge.svg?branch=master)](https://github.com/simplezhli/myapp9/actions/workflows/flutter-drive.yml)
+[![myapp9 driver](https://github.com/dasewan/myapp9/actions/workflows/flutter-drive.yml/badge.svg?branch=master)](https://github.com/dasewan/myapp9/actions/workflows/flutter-drive.yml)
 
     1. Flutter version 3.24.0
 
@@ -126,7 +126,7 @@ For web experience, please visit: https://simplezhli.github.io/myapp9/
 | -------------------------- | --------------- |
 | [dio](https://github.com/cfug/dio)                            | **Networking library**       |
 | [provider](https://github.com/rrousselGit/provider)                   | **State management**     |
-| [flutter_2d_amap](https://github.com/simplezhli/flutter_2d_amap)      | **2D map from Amap**   |
+| [flutter_2d_amap](https://github.com/dasewan/flutter_2d_amap)      | **2D map from Amap**   |
 | [cached_network_image](https://github.com/renefloor/flutter_cached_network_image)       | **Image loading**       |
 | [fluro](https://github.com/theyakka/fluro)                            | **Routing management**     |
 | [flutter_oktoast](https://github.com/OpenFlutter/flutter_oktoast)     | **Toast notifications**        |
@@ -149,7 +149,7 @@ For web experience, please visit: https://simplezhli.github.io/myapp9/
 | [vibration](https://github.com/benjamindean/flutter_vibration)     | **Vibration** |
 | [lottie](https://github.com/xvrh/lottie-flutter)     | **Animation effects** |
 
-For details, please refer to the [pubspec.yaml](https://github.com/simplezhli/myapp9/blob/master/pubspec.yaml) file.  
+For details, please refer to the [pubspec.yaml](https://github.com/dasewan/myapp9/blob/master/pubspec.yaml) file.  
 
 ## Plan:
 
@@ -165,7 +165,7 @@ For details, please refer to the [pubspec.yaml](https://github.com/simplezhli/my
 
 ## License
 
-	Copyright 2019 simplezhli
+	Copyright 2019 dasewan
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

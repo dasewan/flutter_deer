@@ -63,7 +63,7 @@ dependencies:
   device_info_plus: 11.1.1
   # 桌面应用调整窗口的大小和位置 https://github.com/leanflutter/window_manager
   window_manager: 0.4.0
-  # 高德2D地图插件（支持Web） https://github.com/simplezhli/flutter_2d_amap
+  # 高德2D地图插件（支持Web） https://github.com/dasewan/flutter_2d_amap
   # demo 用到的库
   # 刮刮卡 https://github.com/vintage/scratcher
   # 动画效果 https://github.com/xvrh/lottie-flutter
@@ -97,7 +97,7 @@ dependencies:
   #  -wifi_info_plugin_plus: ^2.0.2
   #  -fluttercontactpicker: ^4.7.0
 
-# https://github.com/simplezhli/myapp9/issues/187
+# https://github.com/dasewan/myapp9/issues/187
 dependency_overrides:
   scrollable_positioned_list: ^0.3.2
 
@@ -129,19 +129,16 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/data/
     - assets/images/
-    - assets/images/home/
-    - assets/images/store/
-    - assets/images/state/
-    - assets/images/order/
-    - assets/images/order/dark/
     - assets/images/login/
-    - assets/images/goods/
+    - assets/images/home/
+    - assets/images/index/
+    - assets/images/verify/
+    - assets/images/verify/swipper/
     - assets/images/shop/
-    - assets/images/account/
-    - assets/images/statistic/
-    - assets/lottie/
+    - assets/images/banks/
+    - assets/images/merchant/
+    - assets/images/liveness/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

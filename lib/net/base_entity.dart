@@ -1,5 +1,5 @@
-// import 'package:myapp9/generated/json/base/json_convert_content.dart';
-import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/generated/json/base/json_convert_content.dart';
+import 'package:myapp9/config/constant.dart';
 
 class BaseEntity<T> {
 
@@ -27,7 +27,7 @@ class BaseEntity<T> {
       return json as T;
     } else {
       /// List类型数据由fromJsonAsT判断处理
-      return null;
+      return JsonConvert.fromJsonAsT<T>(json);
     }
   }
 }

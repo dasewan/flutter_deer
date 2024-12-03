@@ -56,15 +56,15 @@
 
 具体可以下载体验：
 
-Android版安装包：[点击去下载](https://github.com/simplezhli/myapp9/releases)。
+Android版安装包：[点击去下载](https://github.com/dasewan/myapp9/releases)。
 
 iOS需要自行下载代码运行。
 
-Web体验地址：https://simplezhli.github.io/myapp9/
+Web体验地址：https://dasewan.github.io/myapp9/
 
 ## 项目运行环境
 
-[![myapp9 driver](https://github.com/simplezhli/myapp9/actions/workflows/flutter-drive.yml/badge.svg?branch=master)](https://github.com/simplezhli/myapp9/actions/workflows/flutter-drive.yml)
+[![myapp9 driver](https://github.com/dasewan/myapp9/actions/workflows/flutter-drive.yml/badge.svg?branch=master)](https://github.com/dasewan/myapp9/actions/workflows/flutter-drive.yml)
 
     1. Flutter version 3.24.0
 
@@ -130,7 +130,7 @@ Web体验地址：https://simplezhli.github.io/myapp9/
 | -------------------------- | --------------- |
 | [dio](https://github.com/cfug/dio)                            | **网络库**       |
 | [provider](https://github.com/rrousselGit/provider)                   | **状态管理**     |
-| [flutter_2d_amap](https://github.com/simplezhli/flutter_2d_amap)      | **高德2D地图**   |
+| [flutter_2d_amap](https://github.com/dasewan/flutter_2d_amap)      | **高德2D地图**   |
 | [cached_network_image](https://github.com/renefloor/flutter_cached_network_image)       | **图片加载**       |
 | [fluro](https://github.com/theyakka/fluro)                            | **路由管理**     |
 | [flutter_oktoast](https://github.com/OpenFlutter/flutter_oktoast)     | **Toast**        |
@@ -153,11 +153,11 @@ Web体验地址：https://simplezhli.github.io/myapp9/
 | [vibration](https://github.com/benjamindean/flutter_vibration)     | **振动** |
 | [lottie](https://github.com/xvrh/lottie-flutter)     | **动画效果** |
 
-详细内容可以参看[pubspec.yaml](https://github.com/simplezhli/myapp9/blob/master/pubspec.yaml)文件
+详细内容可以参看[pubspec.yaml](https://github.com/dasewan/myapp9/blob/master/pubspec.yaml)文件
 
 ## 后续计划：
 
-* [x] 添加地图功能，具体实现插件见 [flutter_2d_amap](https://github.com/simplezhli/flutter_2d_amap)
+* [x] 添加地图功能，具体实现插件见 [flutter_2d_amap](https://github.com/dasewan/flutter_2d_amap)
 
 * [x] 下拉刷新 + 上拉加载更多
 
@@ -195,7 +195,7 @@ Web体验地址：https://simplezhli.github.io/myapp9/
 
 ## License
 
-	Copyright 2019 simplezhli
+	Copyright 2019 dasewan
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

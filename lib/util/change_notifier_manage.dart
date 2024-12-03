@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-/// @dasewan https://github.com/simplezhli/myapp9
+/// @dasewan https://github.com/dasewan/myapp9
 /// 
 /// 便于管理ChangeNotifier，不用重复写模板代码。
 /// 之前：

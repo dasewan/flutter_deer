@@ -2,15 +2,17 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:myapp9/res/constant.dart';
+import 'package:myapp9/config/constant.dart';
 import 'package:myapp9/util/log_utils.dart';
 import 'base_entity.dart';
 import 'error_handle.dart';
 
+import 'dart:io';
+
 /// 默认dio配置
-Duration _connectTimeout = const Duration(seconds: 15);
-Duration _receiveTimeout = const Duration(seconds: 15);
-Duration _sendTimeout = const Duration(seconds: 10);
+Duration _connectTimeout = const Duration(seconds: 45);
+Duration _receiveTimeout = const Duration(seconds: 45);
+Duration _sendTimeout = const Duration(seconds: 40);
 String _baseUrl = '';
 List<Interceptor> _interceptors = [];
 
@@ -33,7 +35,7 @@ typedef NetSuccessCallback<T> = void Function(T data);
 typedef NetSuccessListCallback<T> = void Function(List<T> data);
 typedef NetErrorCallback = void Function(int code, String msg);
 
-/// @dasewan https://github.com/simplezhli
+/// @dasewan https://github.com/dasewan
 class DioUtils {
 
   factory DioUtils() => _singleton;
@@ -48,6 +50,9 @@ class DioUtils {
       validateStatus: (_) {
         // 不使用http状态码判断状态，使用AdapterInterceptor来处理（适用于标准REST风格）
         return true;
+      },
+      headers: {
+        HttpHeaders.acceptHeader: "application/json",
       },
       baseUrl: _baseUrl,
 //      contentType: Headers.formUrlEncodedContentType, // 适用于post form表单提交
@@ -98,6 +103,8 @@ class DioUtils {
       /// 主要目的减少不必要的性能开销
       final bool isCompute = !Constant.isDriverTest && data.length > 10 * 1024;
       debugPrint('isCompute:$isCompute');
+      debugPrint(data.length.toString());
+      debugPrint('10 * 1024');
       final Map<String, dynamic> map = isCompute ? await compute(parseData, data) : parseData(data);
       return BaseEntity<T>.fromJson(map);
     } catch(e) {
@@ -120,7 +127,7 @@ class DioUtils {
     CancelToken? cancelToken,
     Options? options,
   }) {
-    return _request<T>(method.value, url,
+    return _request<T>(method.value, url + "?XDEBUG_SESSION_START=19867",
       data: params,
       queryParameters: queryParameters,
       options: options,
@@ -170,16 +177,16 @@ class DioUtils {
 
   void _cancelLogPrint(dynamic e, String url) {
     if (e is DioException && CancelToken.isCancel(e)) {
-      Log.e('取消请求接口： $url');
+      Log.e('❌\x1B[31m取消请求接口： $url\x1B[0m');
     }
   }
 
   void _onError(int? code, String msg, NetErrorCallback? onError) {
     if (code == null) {
       code = ExceptionHandle.unknown_error;
-      msg = '未知异常';
+      msg = 'unknown error.';
     }
-    Log.e('接口请求异常： code: $code, mag: $msg');
+    Log.e('❌\x1B[31m接口请求异常： code: $code, mag: $msg\x1B[0m');
     onError?.call(code, msg);
   }
 }
