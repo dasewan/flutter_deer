@@ -199,18 +199,30 @@ class _LoginPageState extends State<LoginPage>
 
   List<Widget> get _buildBody =>
       <Widget>[
+        Gaps.vGap16,
+        Gaps.vGap16,
+        Gaps.vGap16,
         Text(
-          Myapp9Localizations.of(context)!.passwordLogin,
-          style: TextStyles.textBold26,
+          'Hey, Login Now',
+          style: const TextStyle(color: Colors.black, fontSize: 28.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
+        ),
+        Gaps.vGap8,
+        Text(
+          'Get Your Credit Amount!',
+          style: const TextStyle(color: Colors.black, fontSize: 28.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
         ),
         Gaps.vGap16,
-        MyTextField(
-          key: const Key('phone'),
-          focusNode: _nodeText1,
-          controller: _phoneController,
-          maxLength: 11,
-          keyboardType: TextInputType.phone,
-          hintText: Myapp9Localizations.of(context)!.inputUsernameHint,
+        Container(
+          color: Colors.blueGrey.shade50,
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: MyTextField(
+            key: const Key('phone'),
+            focusNode: _nodeText1,
+            controller: _phoneController,
+            maxLength: 11,
+            keyboardType: TextInputType.phone,
+            hintText: Myapp9Localizations.of(context)!.inputUsernameHint,
+          ),
         ),
         Visibility(
           visible: _captchaVisable,
