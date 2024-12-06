@@ -246,6 +246,11 @@ class IndexNewPagePresenter extends BasePagePresenter<IndexNewIMvpView> {
           }
         }
 
+        /// loginInfo
+        if (reponse.data!.loginPageInfo != null ) {
+            SpUtil.putObject(Constant.loginPageInfo, reponse.data!.loginPageInfo!);
+        }
+
         String maxUpdatedAt = '';
         if (reponse.data!.dBorrowsNewestUpdatedAt != null && reponse.data!.dBorrowsNewestUpdatedAt!.compareTo(reponse.data!.bProductsNewestUpdatedAt!) > 0) {
           maxUpdatedAt = reponse.data!.dBorrowsNewestUpdatedAt!;

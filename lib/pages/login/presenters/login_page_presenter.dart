@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
 import 'package:myapp9/config/constant.dart';
 import 'package:myapp9/generated/captcha_entity.dart';
 import 'package:myapp9/models/authorizations_store_entity.dart';
+import 'package:myapp9/models/index_entity.dart';
 import 'package:myapp9/mvp/base_page_presenter.dart';
 import 'package:myapp9/net/dio_utils.dart';
 import 'package:myapp9/net/http_api.dart';
@@ -19,11 +20,14 @@ import '../../../util/my_permission.dart';
 
 class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
   late Map<String, dynamic> deviceInfo;
+  late IndexDataLoginPageInfo loginPageInfo;
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await MyPermission().myGeolocator(view: view);
+      loginPageInfo = SpUtil.getObj(Constant.loginPageInfo,(v) => IndexDataLoginPageInfo.fromJson(v as Map<String, dynamic>))!;
+      view.setLoginPageInfo(loginPageInfo);
       deviceInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: true);
     });
   }
@@ -114,6 +118,7 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
       view.verificationCodesSuccess(data!.key!);
       view.showToast(Myapp9Localizations.of(view.getContext())!.otpSented);
     }, onError: (_, __) async {
+      //todo ,如果验证码输入次数过多，则直接返回图片验证码，不需要再次请求
       if (_ == 200001 || _ == 200002 || _ == 200006) {
         await captchas(phone, false);
       } else {

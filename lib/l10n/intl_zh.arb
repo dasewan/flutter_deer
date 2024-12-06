@@ -6,7 +6,7 @@
   "forgotPasswordLink": "无法登录请联系:021-6483123",
   "inputPasswordHint": "请输入密码",
   "inputUsernameHint": "请输入账号",
-  "noAccountRegisterLink": "请阅读并同意《注册协议》",
+  "registerPolicy": "请阅读并同意《注册协议》",
   "register": "注册",
   "openYourAccount": "开启你的账号",
   "inputPhoneHint": "请输入手机号",
@@ -40,6 +40,10 @@
   "contactsPermissionContent": "请到系统设置，授权app的通讯录权限",
   "verifyBtnTip": "请确保您填写的信息真实有效",
   "apply": "立即申请",
-
-  "next": "下一步"
+  "next": "下一步",
+  "cantLogin": "无法登陆 ",
+  "or": " 或者 ",
+  "inputVerificationCode": "OTP",
+  "inputCaptcha": "Captcha",
+  "inputPhone": "Phone"
 }

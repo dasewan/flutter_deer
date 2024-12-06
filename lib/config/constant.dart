@@ -105,6 +105,9 @@ class Constant {
   /// backTips最新更新时间
   static const String backTipsUpdatedAt = '_backTipsUpdatedAt';
 
+  /// loginPageInfo
+  static const String loginPageInfo = '_loginPageInfo';
+
   /// 首页产品列表
   static const String bProductsList = 'bProductsList';
 

@@ -83,12 +83,14 @@ class JsonConvert {
     }
   }
 
-  List<T?>? convertList<T>(List<dynamic>? value, {EnumConvertFunction? enumConvert}) {
+  List<T?>? convertList<T>(List<dynamic>? value,
+      {EnumConvertFunction? enumConvert}) {
     if (value == null) {
       return null;
     }
     try {
-      return value.map((dynamic e) => _asT<T>(e, enumConvert: enumConvert)).toList();
+      return value.map((dynamic e) => _asT<T>(e, enumConvert: enumConvert))
+          .toList();
     } catch (e, stackTrace) {
       debugPrint('asT<$T> $e $stackTrace');
       if (onError != null) {
@@ -98,12 +100,14 @@ class JsonConvert {
     }
   }
 
-  List<T>? convertListNotNull<T>(dynamic value, {EnumConvertFunction? enumConvert}) {
+  List<T>? convertListNotNull<T>(dynamic value,
+      {EnumConvertFunction? enumConvert}) {
     if (value == null) {
       return null;
     }
     try {
-      return (value as List<dynamic>).map((dynamic e) => _asT<T>(e, enumConvert: enumConvert)!).toList();
+      return (value as List<dynamic>).map((dynamic e) =>
+      _asT<T>(e, enumConvert: enumConvert)!).toList();
     } catch (e, stackTrace) {
       debugPrint('asT<$T> $e $stackTrace');
       if (onError != null) {
@@ -113,7 +117,8 @@ class JsonConvert {
     }
   }
 
-  T? _asT<T extends Object?>(dynamic value, {EnumConvertFunction? enumConvert}) {
+  T? _asT<T extends Object?>(dynamic value,
+      {EnumConvertFunction? enumConvert}) {
     final String type = T.toString();
     final String valueS = value.toString();
     if (enumConvert != null) {
@@ -143,9 +148,15 @@ class JsonConvert {
         if (value == null) {
           return null;
         }
-        return convertFuncMap[type]!(value as Map<String, dynamic>) as T;
+        var covertFunc = convertFuncMap[type]!;
+        if (covertFunc is Map<String, dynamic>) {
+          return covertFunc(value as Map<String, dynamic>) as T;
+        } else {
+          return covertFunc(Map<String, dynamic>.from(value)) as T;
+        }
       } else {
-        throw UnimplementedError('$type unimplemented,you can try running the app again');
+        throw UnimplementedError(
+            '$type unimplemented,you can try running the app again');
       }
     }
   }
@@ -153,166 +164,224 @@ class JsonConvert {
   //list is returned by type
   static M? _getListChildType<M>(List<Map<String, dynamic>> data) {
     if (<CaptchaEntity>[] is M) {
-      return data.map<CaptchaEntity>((Map<String, dynamic> e) => CaptchaEntity.fromJson(e)).toList() as M;
+      return data.map<CaptchaEntity>((Map<String, dynamic> e) =>
+          CaptchaEntity.fromJson(e)).toList() as M;
     }
     if (<CenterEntity>[] is M) {
-      return data.map<CenterEntity>((Map<String, dynamic> e) => CenterEntity.fromJson(e)).toList() as M;
+      return data.map<CenterEntity>((Map<String, dynamic> e) =>
+          CenterEntity.fromJson(e)).toList() as M;
     }
     if (<CenterData>[] is M) {
-      return data.map<CenterData>((Map<String, dynamic> e) => CenterData.fromJson(e)).toList() as M;
+      return data.map<CenterData>((Map<String, dynamic> e) =>
+          CenterData.fromJson(e)).toList() as M;
     }
     if (<CenterDataAmountProgress>[] is M) {
-      return data.map<CenterDataAmountProgress>((Map<String, dynamic> e) => CenterDataAmountProgress.fromJson(e)).toList() as M;
+      return data.map<CenterDataAmountProgress>((Map<String, dynamic> e) =>
+          CenterDataAmountProgress.fromJson(e)).toList() as M;
     }
     if (<CenterDataLevelProgress>[] is M) {
-      return data.map<CenterDataLevelProgress>((Map<String, dynamic> e) => CenterDataLevelProgress.fromJson(e)).toList() as M;
+      return data.map<CenterDataLevelProgress>((Map<String, dynamic> e) =>
+          CenterDataLevelProgress.fromJson(e)).toList() as M;
     }
     if (<DBorrowIndexEntity>[] is M) {
-      return data.map<DBorrowIndexEntity>((Map<String, dynamic> e) => DBorrowIndexEntity.fromJson(e)).toList() as M;
+      return data.map<DBorrowIndexEntity>((Map<String, dynamic> e) =>
+          DBorrowIndexEntity.fromJson(e)).toList() as M;
     }
     if (<DBorrowIndexData>[] is M) {
-      return data.map<DBorrowIndexData>((Map<String, dynamic> e) => DBorrowIndexData.fromJson(e)).toList() as M;
+      return data.map<DBorrowIndexData>((Map<String, dynamic> e) =>
+          DBorrowIndexData.fromJson(e)).toList() as M;
     }
     if (<VerificationCodeEntity>[] is M) {
-      return data.map<VerificationCodeEntity>((Map<String, dynamic> e) => VerificationCodeEntity.fromJson(e)).toList() as M;
+      return data.map<VerificationCodeEntity>((Map<String, dynamic> e) =>
+          VerificationCodeEntity.fromJson(e)).toList() as M;
     }
     if (<AUserEntity>[] is M) {
-      return data.map<AUserEntity>((Map<String, dynamic> e) => AUserEntity.fromJson(e)).toList() as M;
+      return data.map<AUserEntity>((Map<String, dynamic> e) =>
+          AUserEntity.fromJson(e)).toList() as M;
     }
     if (<AuthorizationsStoreEntity>[] is M) {
-      return data.map<AuthorizationsStoreEntity>((Map<String, dynamic> e) => AuthorizationsStoreEntity.fromJson(e)).toList() as M;
+      return data.map<AuthorizationsStoreEntity>((Map<String, dynamic> e) =>
+          AuthorizationsStoreEntity.fromJson(e)).toList() as M;
     }
     if (<AuthorizationsStorePassport>[] is M) {
-      return data.map<AuthorizationsStorePassport>((Map<String, dynamic> e) => AuthorizationsStorePassport.fromJson(e)).toList() as M;
+      return data.map<AuthorizationsStorePassport>((Map<String, dynamic> e) =>
+          AuthorizationsStorePassport.fromJson(e)).toList() as M;
     }
     if (<BProductEntity>[] is M) {
-      return data.map<BProductEntity>((Map<String, dynamic> e) => BProductEntity.fromJson(e)).toList() as M;
+      return data.map<BProductEntity>((Map<String, dynamic> e) =>
+          BProductEntity.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailEntity>[] is M) {
-      return data.map<BorrowDetailEntity>((Map<String, dynamic> e) => BorrowDetailEntity.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailEntity>((Map<String, dynamic> e) =>
+          BorrowDetailEntity.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailData>[] is M) {
-      return data.map<BorrowDetailData>((Map<String, dynamic> e) => BorrowDetailData.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailData>((Map<String, dynamic> e) =>
+          BorrowDetailData.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailDataBorrow>[] is M) {
-      return data.map<BorrowDetailDataBorrow>((Map<String, dynamic> e) => BorrowDetailDataBorrow.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailDataBorrow>((Map<String, dynamic> e) =>
+          BorrowDetailDataBorrow.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailDataPeriods>[] is M) {
-      return data.map<BorrowDetailDataPeriods>((Map<String, dynamic> e) => BorrowDetailDataPeriods.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailDataPeriods>((Map<String, dynamic> e) =>
+          BorrowDetailDataPeriods.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailDataProduct>[] is M) {
-      return data.map<BorrowDetailDataProduct>((Map<String, dynamic> e) => BorrowDetailDataProduct.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailDataProduct>((Map<String, dynamic> e) =>
+          BorrowDetailDataProduct.fromJson(e)).toList() as M;
     }
     if (<BorrowDetailDataLoan>[] is M) {
-      return data.map<BorrowDetailDataLoan>((Map<String, dynamic> e) => BorrowDetailDataLoan.fromJson(e)).toList() as M;
+      return data.map<BorrowDetailDataLoan>((Map<String, dynamic> e) =>
+          BorrowDetailDataLoan.fromJson(e)).toList() as M;
     }
     if (<BorrowListEntity>[] is M) {
-      return data.map<BorrowListEntity>((Map<String, dynamic> e) => BorrowListEntity.fromJson(e)).toList() as M;
+      return data.map<BorrowListEntity>((Map<String, dynamic> e) =>
+          BorrowListEntity.fromJson(e)).toList() as M;
     }
     if (<BorrowListData>[] is M) {
-      return data.map<BorrowListData>((Map<String, dynamic> e) => BorrowListData.fromJson(e)).toList() as M;
+      return data.map<BorrowListData>((Map<String, dynamic> e) =>
+          BorrowListData.fromJson(e)).toList() as M;
     }
     if (<BorrowListOther>[] is M) {
-      return data.map<BorrowListOther>((Map<String, dynamic> e) => BorrowListOther.fromJson(e)).toList() as M;
+      return data.map<BorrowListOther>((Map<String, dynamic> e) =>
+          BorrowListOther.fromJson(e)).toList() as M;
     }
     if (<DBorrowSignEntity>[] is M) {
-      return data.map<DBorrowSignEntity>((Map<String, dynamic> e) => DBorrowSignEntity.fromJson(e)).toList() as M;
+      return data.map<DBorrowSignEntity>((Map<String, dynamic> e) =>
+          DBorrowSignEntity.fromJson(e)).toList() as M;
     }
     if (<DBorrowSignData>[] is M) {
-      return data.map<DBorrowSignData>((Map<String, dynamic> e) => DBorrowSignData.fromJson(e)).toList() as M;
+      return data.map<DBorrowSignData>((Map<String, dynamic> e) =>
+          DBorrowSignData.fromJson(e)).toList() as M;
     }
     if (<DBorrowSignDataPreComputeItem>[] is M) {
-      return data.map<DBorrowSignDataPreComputeItem>((Map<String, dynamic> e) => DBorrowSignDataPreComputeItem.fromJson(e)).toList() as M;
+      return data.map<DBorrowSignDataPreComputeItem>((Map<String, dynamic> e) =>
+          DBorrowSignDataPreComputeItem.fromJson(e)).toList() as M;
     }
     if (<DBorrowStoreEntity>[] is M) {
-      return data.map<DBorrowStoreEntity>((Map<String, dynamic> e) => DBorrowStoreEntity.fromJson(e)).toList() as M;
+      return data.map<DBorrowStoreEntity>((Map<String, dynamic> e) =>
+          DBorrowStoreEntity.fromJson(e)).toList() as M;
     }
     if (<DBorrowStoreData>[] is M) {
-      return data.map<DBorrowStoreData>((Map<String, dynamic> e) => DBorrowStoreData.fromJson(e)).toList() as M;
+      return data.map<DBorrowStoreData>((Map<String, dynamic> e) =>
+          DBorrowStoreData.fromJson(e)).toList() as M;
     }
     if (<DeviceInfoEntity>[] is M) {
-      return data.map<DeviceInfoEntity>((Map<String, dynamic> e) => DeviceInfoEntity.fromJson(e)).toList() as M;
+      return data.map<DeviceInfoEntity>((Map<String, dynamic> e) =>
+          DeviceInfoEntity.fromJson(e)).toList() as M;
     }
     if (<GVerifiesShowEntity>[] is M) {
-      return data.map<GVerifiesShowEntity>((Map<String, dynamic> e) => GVerifiesShowEntity.fromJson(e)).toList() as M;
+      return data.map<GVerifiesShowEntity>((Map<String, dynamic> e) =>
+          GVerifiesShowEntity.fromJson(e)).toList() as M;
     }
     if (<GVerifiesShowData>[] is M) {
-      return data.map<GVerifiesShowData>((Map<String, dynamic> e) => GVerifiesShowData.fromJson(e)).toList() as M;
+      return data.map<GVerifiesShowData>((Map<String, dynamic> e) =>
+          GVerifiesShowData.fromJson(e)).toList() as M;
     }
     if (<GVerifyEntity>[] is M) {
-      return data.map<GVerifyEntity>((Map<String, dynamic> e) => GVerifyEntity.fromJson(e)).toList() as M;
+      return data.map<GVerifyEntity>((Map<String, dynamic> e) =>
+          GVerifyEntity.fromJson(e)).toList() as M;
     }
     if (<IndexEntity>[] is M) {
-      return data.map<IndexEntity>((Map<String, dynamic> e) => IndexEntity.fromJson(e)).toList() as M;
+      return data.map<IndexEntity>((Map<String, dynamic> e) =>
+          IndexEntity.fromJson(e)).toList() as M;
     }
     if (<IndexData>[] is M) {
-      return data.map<IndexData>((Map<String, dynamic> e) => IndexData.fromJson(e)).toList() as M;
+      return data.map<IndexData>((Map<String, dynamic> e) =>
+          IndexData.fromJson(e)).toList() as M;
     }
     if (<IndexDataAUser>[] is M) {
-      return data.map<IndexDataAUser>((Map<String, dynamic> e) => IndexDataAUser.fromJson(e)).toList() as M;
+      return data.map<IndexDataAUser>((Map<String, dynamic> e) =>
+          IndexDataAUser.fromJson(e)).toList() as M;
     }
     if (<IndexDataBProducts>[] is M) {
-      return data.map<IndexDataBProducts>((Map<String, dynamic> e) => IndexDataBProducts.fromJson(e)).toList() as M;
+      return data.map<IndexDataBProducts>((Map<String, dynamic> e) =>
+          IndexDataBProducts.fromJson(e)).toList() as M;
     }
     if (<IndexDataBCProductFeatures>[] is M) {
-      return data.map<IndexDataBCProductFeatures>((Map<String, dynamic> e) => IndexDataBCProductFeatures.fromJson(e)).toList() as M;
+      return data.map<IndexDataBCProductFeatures>((Map<String, dynamic> e) =>
+          IndexDataBCProductFeatures.fromJson(e)).toList() as M;
     }
     if (<IndexDataDBorrows>[] is M) {
-      return data.map<IndexDataDBorrows>((Map<String, dynamic> e) => IndexDataDBorrows.fromJson(e)).toList() as M;
+      return data.map<IndexDataDBorrows>((Map<String, dynamic> e) =>
+          IndexDataDBorrows.fromJson(e)).toList() as M;
     }
     if (<IndexDataRFNotifications>[] is M) {
-      return data.map<IndexDataRFNotifications>((Map<String, dynamic> e) => IndexDataRFNotifications.fromJson(e)).toList() as M;
+      return data.map<IndexDataRFNotifications>((Map<String, dynamic> e) =>
+          IndexDataRFNotifications.fromJson(e)).toList() as M;
     }
     if (<IndexDataQDBanners>[] is M) {
-      return data.map<IndexDataQDBanners>((Map<String, dynamic> e) => IndexDataQDBanners.fromJson(e)).toList() as M;
+      return data.map<IndexDataQDBanners>((Map<String, dynamic> e) =>
+          IndexDataQDBanners.fromJson(e)).toList() as M;
     }
     if (<IndexDataRemind>[] is M) {
-      return data.map<IndexDataRemind>((Map<String, dynamic> e) => IndexDataRemind.fromJson(e)).toList() as M;
+      return data.map<IndexDataRemind>((Map<String, dynamic> e) =>
+          IndexDataRemind.fromJson(e)).toList() as M;
     }
     if (<IndexDataBackTips>[] is M) {
-      return data.map<IndexDataBackTips>((Map<String, dynamic> e) => IndexDataBackTips.fromJson(e)).toList() as M;
+      return data.map<IndexDataBackTips>((Map<String, dynamic> e) =>
+          IndexDataBackTips.fromJson(e)).toList() as M;
+    }
+    if (<IndexDataLoginPageInfo>[] is M) {
+      return data.map<IndexDataLoginPageInfo>((Map<String, dynamic> e) =>
+          IndexDataLoginPageInfo.fromJson(e)).toList() as M;
     }
     if (<IndexFirstEntity>[] is M) {
-      return data.map<IndexFirstEntity>((Map<String, dynamic> e) => IndexFirstEntity.fromJson(e)).toList() as M;
+      return data.map<IndexFirstEntity>((Map<String, dynamic> e) =>
+          IndexFirstEntity.fromJson(e)).toList() as M;
     }
     if (<IndexFirstData>[] is M) {
-      return data.map<IndexFirstData>((Map<String, dynamic> e) => IndexFirstData.fromJson(e)).toList() as M;
+      return data.map<IndexFirstData>((Map<String, dynamic> e) =>
+          IndexFirstData.fromJson(e)).toList() as M;
     }
     if (<IndexNoEntity>[] is M) {
-      return data.map<IndexNoEntity>((Map<String, dynamic> e) => IndexNoEntity.fromJson(e)).toList() as M;
+      return data.map<IndexNoEntity>((Map<String, dynamic> e) =>
+          IndexNoEntity.fromJson(e)).toList() as M;
     }
     if (<IndexNoData>[] is M) {
-      return data.map<IndexNoData>((Map<String, dynamic> e) => IndexNoData.fromJson(e)).toList() as M;
+      return data.map<IndexNoData>((Map<String, dynamic> e) =>
+          IndexNoData.fromJson(e)).toList() as M;
     }
     if (<NUserProfileEntity>[] is M) {
-      return data.map<NUserProfileEntity>((Map<String, dynamic> e) => NUserProfileEntity.fromJson(e)).toList() as M;
+      return data.map<NUserProfileEntity>((Map<String, dynamic> e) =>
+          NUserProfileEntity.fromJson(e)).toList() as M;
     }
     if (<NUserProfileData>[] is M) {
-      return data.map<NUserProfileData>((Map<String, dynamic> e) => NUserProfileData.fromJson(e)).toList() as M;
+      return data.map<NUserProfileData>((Map<String, dynamic> e) =>
+          NUserProfileData.fromJson(e)).toList() as M;
     }
     if (<NUserProfileOther>[] is M) {
-      return data.map<NUserProfileOther>((Map<String, dynamic> e) => NUserProfileOther.fromJson(e)).toList() as M;
+      return data.map<NUserProfileOther>((Map<String, dynamic> e) =>
+          NUserProfileOther.fromJson(e)).toList() as M;
     }
     if (<QAOcrEntity>[] is M) {
-      return data.map<QAOcrEntity>((Map<String, dynamic> e) => QAOcrEntity.fromJson(e)).toList() as M;
+      return data.map<QAOcrEntity>((Map<String, dynamic> e) =>
+          QAOcrEntity.fromJson(e)).toList() as M;
     }
     if (<QAOcrData>[] is M) {
-      return data.map<QAOcrData>((Map<String, dynamic> e) => QAOcrData.fromJson(e)).toList() as M;
+      return data.map<QAOcrData>((Map<String, dynamic> e) =>
+          QAOcrData.fromJson(e)).toList() as M;
     }
     if (<QAOcrDataOcrResult>[] is M) {
-      return data.map<QAOcrDataOcrResult>((Map<String, dynamic> e) => QAOcrDataOcrResult.fromJson(e)).toList() as M;
+      return data.map<QAOcrDataOcrResult>((Map<String, dynamic> e) =>
+          QAOcrDataOcrResult.fromJson(e)).toList() as M;
     }
     if (<QVerifyItemEntity>[] is M) {
-      return data.map<QVerifyItemEntity>((Map<String, dynamic> e) => QVerifyItemEntity.fromJson(e)).toList() as M;
+      return data.map<QVerifyItemEntity>((Map<String, dynamic> e) =>
+          QVerifyItemEntity.fromJson(e)).toList() as M;
     }
     if (<SyncEntity>[] is M) {
-      return data.map<SyncEntity>((Map<String, dynamic> e) => SyncEntity.fromJson(e)).toList() as M;
+      return data.map<SyncEntity>((Map<String, dynamic> e) =>
+          SyncEntity.fromJson(e)).toList() as M;
     }
     if (<VerifyItemStoreEntity>[] is M) {
-      return data.map<VerifyItemStoreEntity>((Map<String, dynamic> e) => VerifyItemStoreEntity.fromJson(e)).toList() as M;
+      return data.map<VerifyItemStoreEntity>((Map<String, dynamic> e) =>
+          VerifyItemStoreEntity.fromJson(e)).toList() as M;
     }
     if (<VerifyItemStoreData>[] is M) {
-      return data.map<VerifyItemStoreData>((Map<String, dynamic> e) => VerifyItemStoreData.fromJson(e)).toList() as M;
+      return data.map<VerifyItemStoreData>((Map<String, dynamic> e) =>
+          VerifyItemStoreData.fromJson(e)).toList() as M;
     }
 
     debugPrint("$M not found");
@@ -325,7 +394,8 @@ class JsonConvert {
       return json;
     }
     if (json is List) {
-      return _getListChildType<M>(json.map((dynamic e) => e as Map<String, dynamic>).toList());
+      return _getListChildType<M>(
+          json.map((dynamic e) => e as Map<String, dynamic>).toList());
     } else {
       return jsonConvert.convert<M>(json);
     }
@@ -344,7 +414,8 @@ class JsonConvertClassCollection {
     (VerificationCodeEntity).toString(): VerificationCodeEntity.fromJson,
     (AUserEntity).toString(): AUserEntity.fromJson,
     (AuthorizationsStoreEntity).toString(): AuthorizationsStoreEntity.fromJson,
-    (AuthorizationsStorePassport).toString(): AuthorizationsStorePassport.fromJson,
+    (AuthorizationsStorePassport).toString(): AuthorizationsStorePassport
+        .fromJson,
     (BProductEntity).toString(): BProductEntity.fromJson,
     (BorrowDetailEntity).toString(): BorrowDetailEntity.fromJson,
     (BorrowDetailData).toString(): BorrowDetailData.fromJson,
@@ -357,7 +428,8 @@ class JsonConvertClassCollection {
     (BorrowListOther).toString(): BorrowListOther.fromJson,
     (DBorrowSignEntity).toString(): DBorrowSignEntity.fromJson,
     (DBorrowSignData).toString(): DBorrowSignData.fromJson,
-    (DBorrowSignDataPreComputeItem).toString(): DBorrowSignDataPreComputeItem.fromJson,
+    (DBorrowSignDataPreComputeItem).toString(): DBorrowSignDataPreComputeItem
+        .fromJson,
     (DBorrowStoreEntity).toString(): DBorrowStoreEntity.fromJson,
     (DBorrowStoreData).toString(): DBorrowStoreData.fromJson,
     (DeviceInfoEntity).toString(): DeviceInfoEntity.fromJson,
@@ -368,12 +440,14 @@ class JsonConvertClassCollection {
     (IndexData).toString(): IndexData.fromJson,
     (IndexDataAUser).toString(): IndexDataAUser.fromJson,
     (IndexDataBProducts).toString(): IndexDataBProducts.fromJson,
-    (IndexDataBCProductFeatures).toString(): IndexDataBCProductFeatures.fromJson,
+    (IndexDataBCProductFeatures).toString(): IndexDataBCProductFeatures
+        .fromJson,
     (IndexDataDBorrows).toString(): IndexDataDBorrows.fromJson,
     (IndexDataRFNotifications).toString(): IndexDataRFNotifications.fromJson,
     (IndexDataQDBanners).toString(): IndexDataQDBanners.fromJson,
     (IndexDataRemind).toString(): IndexDataRemind.fromJson,
     (IndexDataBackTips).toString(): IndexDataBackTips.fromJson,
+    (IndexDataLoginPageInfo).toString(): IndexDataLoginPageInfo.fromJson,
     (IndexFirstEntity).toString(): IndexFirstEntity.fromJson,
     (IndexFirstData).toString(): IndexFirstData.fromJson,
     (IndexNoEntity).toString(): IndexNoEntity.fromJson,
