@@ -13,7 +13,7 @@ class LocaleProvider extends ChangeNotifier {
       case 'en':
         return const Locale('en', 'US');
       default:
-        return null;
+        return const Locale('en', 'US');
     }
   }
 

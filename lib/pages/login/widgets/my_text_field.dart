@@ -17,6 +17,8 @@ class MyTextField extends StatefulWidget {
       this.autoFocus = false,
       this.keyboardType = TextInputType.text,
       this.hintText = '',
+      this.labelText = '',
+      this.prefixIcon,
       this.focusNode,
       this.isInputPwd = false,
       this.getVCode,
@@ -30,6 +32,8 @@ class MyTextField extends StatefulWidget {
   final bool autoFocus;
   final TextInputType keyboardType;
   final String hintText;
+  final Widget? prefixIcon;
+  final String labelText;
   final FocusNode? focusNode;
   final bool isInputPwd;
   final Future<bool> Function()? getVCode;
@@ -116,19 +120,24 @@ class _MyTextFieldState extends State<MyTextField> {
       inputFormatters: (widget.keyboardType == TextInputType.number || widget.keyboardType == TextInputType.phone)
           ? [FilteringTextInputFormatter.allow(RegExp('[0-9]'))]
           : [FilteringTextInputFormatter.deny(RegExp('[\u4e00-\u9fa5]'))],
+      style: TextStyle(
+        fontSize: 18.0, // 设置输入文本的字体大小
+      ),
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+        labelText: widget.labelText,
         hintText: widget.hintText,
         counterText: '',
+        prefixIcon:widget.prefixIcon,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: themeData.primaryColor,
+            color: Colors.transparent,
             width: 0.8,
           ),
         ),
         enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).dividerTheme.color!,
+            color: Colors.transparent,
             width: 0.8,
           ),
         ),

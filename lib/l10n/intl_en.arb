@@ -1,255 +1,71 @@
 {
-  "@@last_modified": "2020-05-29T16:55:56.054100",
   "title": "myapp9",
-  "@title": {
-    "description": "Title for the application",
-    "type": "text",
-    "placeholders": {}
-  },
-  "verificationCodeLogin": "Verification Code Login",
-  "@verificationCodeLogin": {
-    "description": "Title for the Login page",
-    "type": "text",
-    "placeholders": {}
-  },
+  "verificationCodeLogin": "OTP Login",
   "passwordLogin": "Password Login",
-  "@passwordLogin": {
-    "description": "Password Login",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "login": "Login",
-  "@login": {
-    "description": "Login",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "forgotPasswordLink": "Forgot Password",
-  "@forgotPasswordLink": {
-    "description": "Forgot Password",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "inputPasswordHint": "Please enter the password",
-  "@inputPasswordHint": {
-    "description": "Please enter the password",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "inputUsernameHint": "Please input username",
-  "@inputUsernameHint": {
-    "description": "Please input username",
-    "type": "text",
-    "placeholders": {}
-  },
-  "noAccountRegisterLink": "No account yet? Register now",
-  "@noAccountRegisterLink": {
-    "description": "No account yet? Register now",
-    "type": "text",
-    "placeholders": {}
-  },
+
+  "registerPolicy": "Please read and agree to the \"Registration Agreement.\"",
+
   "register": "Register",
-  "@register": {
-    "description": "Register",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "openYourAccount": "Open your account",
-  "@openYourAccount": {
-    "description": "Open your account",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "inputPhoneHint": "Please enter phone number",
-  "@inputPhoneHint": {
-    "description": "Please enter phone number",
-    "type": "text",
-    "placeholders": {}
-  },
-  "inputVerificationCodeHint": "Please enter verification code",
-  "@inputVerificationCodeHint": {
-    "description": "Please enter verification code",
-    "type": "text",
-    "placeholders": {}
-  },
+
+  "inputVerificationCodeHint": "Please enter OTP",
+
   "inputCaptchaHint": "Please enter captcha code",
-    "@inputCaptchaHint": {
-      "description": "Please enter captcha code",
-      "type": "text",
-      "placeholders": {}
-    },
+
   "inputCaptchaInvalid": "Please enter valid captcha code",
-    "@inputCaptchaInvalid": {
-      "description": "Please enter valid captcha code",
-      "type": "text",
-      "placeholders": {}
-    },
+
   "inputPrivacy": "Please read privacy and agree",
-    "@inputPrivacy": {
-      "description": "Please read privacy and agree",
-      "type": "text",
-      "placeholders": {}
-    },
-  "notSendCode": "Please get verification code",
-    "@inputPrivacy": {
-      "description": "Please get verification code",
-      "type": "text",
-      "placeholders": {}
-    },
+
+  "notSendCode": "Please get OTP",
+
   "phoneLengthError": "Please input correct phone",
-    "@inputPrivacy": {
-      "description": "Please input correct phone",
-      "type": "text",
-      "placeholders": {}
-    },
-  "otpLengthError": "Please input verification code",
-    "@inputPrivacy": {
-      "description": "Please input verification code",
-      "type": "text",
-      "placeholders": {}
-    },
+
+  "otpLengthError": "Please input OTP",
+
   "privacy": "Privacy",
-    "@privacy": {
-      "description": "Privacy",
-      "type": "text",
-      "placeholders": {}
-    },
+
   "agree": "agree",
-    "@agree": {
-      "description": "agree",
-      "type": "text",
-      "placeholders": {}
-    },
+
   "disagree": "disagree",
-    "@disagree": {
-      "description": "disagree",
-      "type": "text",
-      "placeholders": {}
-    },
+
   "inputPhoneInvalid": "Please input valid mobile phone number",
-  "@inputPhoneInvalid": {
-    "description": "Please input valid mobile phone number",
-    "type": "text",
-    "placeholders": {}
-  },
+
   "verificationButton": "Not really sent, just log in!",
-  "@verificationButton": {
-    "description": "Not really sent, just log in!",
-    "type": "text",
-    "placeholders": {}
-  },
-  "getVerificationCode": "Get verification code",
-  "@getVerificationCode": {
-    "description": "Get verification code",
-    "type": "text",
-    "placeholders": {}
-  },
+
+  "getVerificationCode": "Get OTP",
   "confirm": "Confirm",
-  "@confirm": {
-    "type": "text",
-    "placeholders": {}
-  },
   "resetLoginPassword": "Reset Login Password",
-  "@resetLoginPassword": {
-    "description": "Reset login password",
-    "type": "text",
-    "placeholders": {}
-  },
   "otpSented": "otpSented",
-  "@otpSented": {
-    "description": "otpSented",
-    "type": "text",
-    "placeholders": {}
-  },
   "registeredTips": "Unregistered mobile phone number, please ",
-  "@registeredTips": {
-    "description": "Registered Tips",
-    "type": "text",
-    "placeholders": {}
-  },
   "smsPermissionTitle": "Enable Sms Access",
-      "@smsPermissionTitle": {
-        "description": "Enable Sms Access",
-        "type": "text",
-        "placeholders": {}
-      },
   "smsPermissionContent": "It looks like you denied access to your sms. To fully enjoy the features of our app, we need access to your sms.",
-      "@smsPermissionContent": {
-        "description": "It looks like you denied access to your sms. To fully enjoy the features of our app, we need access to your sms.",
-        "type": "text",
-        "placeholders": {}
-      },
   "locationPermissionTitle": "Enable Location Access",
-      "@locationPermissionTitle": {
-        "description": "Enable Location Access",
-        "type": "text",
-        "placeholders": {}
-      },
   "locationPermissionContent": "It looks like you denied access to your Location. To fully enjoy the features of our app, we need access to your Location.",
-      "@locationPermissionContent": {
-        "description": "It looks like you denied access to your Location. To fully enjoy the features of our app, we need access to your Location.",
-        "type": "text",
-        "placeholders": {}
-      },
   "photosPermissionTitle": "Enable Photos Access",
-      "@photosPermissionTitle": {
-        "description": "Enable Photos Access",
-        "type": "text",
-        "placeholders": {}
-      },
   "photosPermissionContent": "It looks like you denied access to your Photos. To fully enjoy the features of our app, we need access to your Photos.",
-      "@photosPermissionContent": {
-        "description": "It looks like you denied access to your Photos. To fully enjoy the features of our app, we need access to your Photos.",
-        "type": "text",
-        "placeholders": {}
-      },
   "storagePermissionTitle": "Enable Storage Access",
-      "@storagePermissionTitle": {
-        "description": "Enable Storage Access",
-        "type": "text",
-        "placeholders": {}
-      },
   "storagePermissionContent": "It looks like you denied access to your Storage. To fully enjoy the features of our app, we need access to your Storage.",
-      "@storagePermissionContent": {
-        "description": "It looks like you denied access to your Storage. To fully enjoy the features of our app, we need access to your Storage.",
-        "type": "text",
-        "placeholders": {}
-      },
   "contactsPermissionTitle": "Enable Contacts Access",
-      "@contactsPermissionTitle": {
-        "description": "Enable Contacts Access",
-        "type": "text",
-        "placeholders": {}
-      },
   "contactsPermissionContent": "It looks like you denied access to your Contacts. To fully enjoy the features of our app, we need access to your Contacts.",
-      "@contactsPermissionContent": {
-        "description": "It looks like you denied access to your Contacts. To fully enjoy the features of our app, we need access to your Contacts.",
-        "type": "text",
-        "placeholders": {}
-      },
   "verifyBtnTip": "Ensure the information you entered is real and effective.",
-    "@verifyBtnTip": {
-      "description": "Ensure the information you entered is real and effective.",
-      "type": "text",
-      "placeholders": {}
-    },
   "apply": "Apply Now",
-    "@apply": {
-      "description": "Apply Now",
-      "type": "text",
-      "placeholders": {}
-    },
   "loading": "Loading...",
-      "@loading": {
-        "description": "Loading...",
-        "type": "text",
-        "placeholders": {}
-      },
   "next": "Next",
-    "@next": {
-      "description": "Next",
-      "type": "text",
-      "placeholders": {}
-    }
+  "cantLogin": "Unable to log in? Contact ",
+  "or": " or ",
+  "inputVerificationCode": "OTP",
+  "inputCaptcha": "Captcha",
+  "inputPhone": "Phone"
 
 }

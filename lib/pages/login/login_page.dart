@@ -19,7 +19,9 @@ import 'package:myapp9/widgets/my_button.dart';
 import 'package:myapp9/widgets/my_scroll_view.dart';
 import 'package:sp_util/sp_util.dart';
 
+import '../../models/index_entity.dart';
 import '../../util/toast_utils.dart';
+import '../../widgets/load_image.dart';
 import '../privacy/router/privacy_router.dart';
 
 /// design/1注册登录/index.html
@@ -48,6 +50,7 @@ class _LoginPageState extends State<LoginPage>
   bool _isSendCode = false;
   bool _phoneCorrect = false;
   bool _otpLengthCorrect = false;
+  IndexDataLoginPageInfo? _loginPageInfo;
   late LoginPagePresenter _loginPagePresenter;
   Image _image = Image.memory(Uint8List(0));
 
@@ -76,6 +79,13 @@ class _LoginPageState extends State<LoginPage>
   LoginPagePresenter createPresenter() {
     _loginPagePresenter = LoginPagePresenter();
     return _loginPagePresenter;
+  }
+
+  @override
+  void setLoginPageInfo(IndexDataLoginPageInfo info){
+    setState(() {
+      _loginPageInfo = info;
+    });
   }
 
   ///获取验证码成功
@@ -120,7 +130,13 @@ class _LoginPageState extends State<LoginPage>
     } else {
       codeClickable = true;
       phoneCorrect = true;
-      FocusScope.of(context).requestFocus(_nodeText2);
+      if(_loginPageInfo!.captchaShowCount! == 0){
+        _captcha();
+        FocusScope.of(context).requestFocus(_nodeText3);
+      }else{
+        FocusScope.of(context).requestFocus(_nodeText2);
+
+      }
     }
     if (password.isEmpty || password.length < 4) {
       clickable = false;
@@ -184,7 +200,7 @@ class _LoginPageState extends State<LoginPage>
       appBar: MyAppBar(
         isBack: false,
         // actionName: Myapp9Localizations.of(context)!.verificationCodeLogin,
-        actionName: "",
+        actionName: _loginPageInfo?.appName ?? '',
         onPressed: () {
           // NavigatorUtils.push(context, LoginRouter.smsLoginPage);
         },
@@ -200,54 +216,89 @@ class _LoginPageState extends State<LoginPage>
   List<Widget> get _buildBody =>
       <Widget>[
         Text(
-          Myapp9Localizations.of(context)!.passwordLogin,
-          style: TextStyles.textBold26,
+          _loginPageInfo?.firstTip ?? '',
+          style: const TextStyle(color: Colors.black, fontSize: 26.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
         ),
-        Gaps.vGap16,
-        MyTextField(
-          key: const Key('phone'),
-          focusNode: _nodeText1,
-          controller: _phoneController,
-          maxLength: 11,
-          keyboardType: TextInputType.phone,
-          hintText: Myapp9Localizations.of(context)!.inputUsernameHint,
+        Gaps.vGap8,
+        Text(
+          _loginPageInfo?.secondTip ?? '',
+          style: const TextStyle(color: Colors.black, fontSize: 26.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
         ),
-        Visibility(
-          visible: _captchaVisable,
+        Gaps.vGap24,
+        Container(
+          padding: const EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.shade50,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
           child: MyTextField(
-            focusNode: _nodeText3,
-            controller: _captchaController,
-            maxLength: 6,
-            hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
-            image: _image,
-            getCaptcha: () {
-              if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
-                Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
-                return Future<bool>.value(false);
-              } else {
-                return _captcha();
-              }
-            },
+            key: const Key('phone'),
+            focusNode: _nodeText1,
+            controller: _phoneController,
+            maxLength: 11,
+            keyboardType: TextInputType.phone,
+            hintText: Myapp9Localizations.of(context)!.inputUsernameHint,
+            labelText: Myapp9Localizations.of(context)!.inputPhone,
+            prefixIcon:Icon(Icons.phone_android)
+          ),
+        ),
+
+        Visibility(visible: _captchaVisable,child: Gaps.vGap8),
+        Opacity(
+          opacity: _captchaVisable ? 1 : 0,
+          child: Container(
+            padding: const EdgeInsets.only(right: 10),
+            height: _captchaVisable ? 68 : 1,
+            decoration: BoxDecoration(
+              color: Colors.blueGrey.shade50,
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            child: MyTextField(
+              focusNode: _nodeText3,
+              controller: _captchaController,
+              maxLength: 6,
+              hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
+              labelText: Myapp9Localizations.of(context)!.inputCaptcha,
+              prefixIcon:Icon(Icons.image_aspect_ratio_sharp),
+              image: _image,
+              getCaptcha: () {
+                if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
+                  Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
+                  return Future<bool>.value(false);
+                } else {
+                  return _captcha();
+                }
+              },
+            ),
           ),
         ),
         Gaps.vGap8,
-        MyTextField(
-          focusNode: _nodeText2,
-          controller: _vCodeController,
-          maxLength: 4,
-          keyboardType: TextInputType.number,
-          hintText: Myapp9Localizations.of(context)!.inputVerificationCodeHint,
-          getVCode: () {
-            if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
-              Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
-              return Future<bool>.value(false);
-            } else if (_captchaVisable && (_captchaController.text.isEmpty || _captchaController.text.length < 4)) {
-              Toast.show(Myapp9Localizations.of(context)!.inputCaptchaInvalid);
-              return Future<bool>.value(false);
-            } else {
-              return _verificationCodes();
-            }
-          },
+        Container(
+          padding: const EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.shade50,
+            borderRadius: BorderRadius.circular(6.0),
+          ),
+          child: MyTextField(
+            focusNode: _nodeText2,
+            controller: _vCodeController,
+            maxLength: 4,
+            keyboardType: TextInputType.number,
+            hintText: Myapp9Localizations.of(context)!.inputVerificationCodeHint,
+            labelText: Myapp9Localizations.of(context)!.inputVerificationCode,
+            prefixIcon:Icon(Icons.lock_open_outlined),
+            getVCode: () {
+              if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
+                Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
+                return Future<bool>.value(false);
+              } else if (_captchaVisable && (_captchaController.text.isEmpty || _captchaController.text.length < 4)) {
+                Toast.show(Myapp9Localizations.of(context)!.inputCaptchaInvalid);
+                return Future<bool>.value(false);
+              } else {
+                return _verificationCodes();
+              }
+            },
+          ),
         ),
         Gaps.vGap24,
         MyButton(
@@ -272,28 +323,61 @@ class _LoginPageState extends State<LoginPage>
         ),
         Container(
           height: 40.0,
-          alignment: Alignment.centerRight,
-          child: GestureDetector(
-            child: Text(
-              Myapp9Localizations.of(context)!.forgotPasswordLink,
-              key: const Key('forgotPassword'),
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            // onTap: () => NavigatorUtils.push(context, LoginRouter.resetPasswordPage),
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                Myapp9Localizations.of(context)!.cantLogin,
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              Visibility(
+                visible: _loginPageInfo?.showContactPhone ?? true,
+                child: GestureDetector(
+                  onTap: () => Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                  child: Text(
+                    _loginPageInfo?.contactPhone ?? '',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: _loginPageInfo?.showContactPhone != false && _loginPageInfo?.showContactWa != false ? true : false,
+                child: Text(
+                  Myapp9Localizations.of(context)!.or,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              Visibility(
+                visible: _loginPageInfo?.showContactWa ?? true,
+                child: GestureDetector(
+                  onTap: () => Utils.launchWhatsAppURL(_loginPageInfo?.contactWa ?? ''),
+                  child: Text(
+                    'WhatsApp',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
+
         Gaps.vGap16,
         Container(
             alignment: Alignment.center,
             child: GestureDetector(
               child: Text(
-                Myapp9Localizations.of(context)!.noAccountRegisterLink,
-                key: const Key('noAccountRegister'),
+                Myapp9Localizations.of(context)!.registerPolicy,
+                key: const Key('registerPolicy'),
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               onTap: () {
-                showToast("string");
-                // NavigatorUtils.push(context, PrivacyRouter.privacyPage, clearStack: false);
                 NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
                   setState(() {
                     final bool privacyAgreement = result as bool;
@@ -301,7 +385,8 @@ class _LoginPageState extends State<LoginPage>
                   });
                 });
               },
-              // onTap: () => NavigatorUtils.push(context, LoginRouter.registerPage),
-            ))
+            )),
+        Gaps.vGap24,
+        const LoadAssetImage('login/login_bg'),
       ];
 }

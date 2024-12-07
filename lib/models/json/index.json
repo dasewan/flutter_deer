@@ -175,7 +175,17 @@
         "a_type": "",
         "b_content": ""
       }
-    ]
+    ],
+    "login_page_info": {
+      "app_name": "",
+      "first_tip": "",
+      "second_tip": "",
+      "show_contact_phone": true,
+      "contact_phone": "",
+      "show_contact_wa": true,
+      "contact_wa": "",
+      "captcha_show_count": 4
+    }
   },
   "other": [],
   "message": "messages.retrieved"
