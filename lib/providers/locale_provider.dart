@@ -9,7 +9,7 @@ class LocaleProvider extends ChangeNotifier {
     final String locale = SpUtil.getString(Constant.locale) ?? '';
     switch(locale) {
       case 'zh':
-        return const Locale('zh', 'CN');
+        return const Locale('zh_CN', 'CN');
       case 'en':
         return const Locale('en', 'US');
       default:

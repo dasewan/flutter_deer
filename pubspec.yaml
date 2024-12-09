@@ -89,6 +89,10 @@ dependencies:
   flutter_native_contact_picker: ^0.0.9
   android_id: ^0.4.0
   network_info_plus: ^6.1.1
+  flutter_simple_country_picker: ^0.2.1
+  advance_country_picker:
+    git: git@gitee.com:dasewan/advance_country_picker_fork.git
+  pinput: ^5.0.0
 #  photo_manager: ^3.0.0-dev.2
   #  -liveness_detection_flutter_plugin:
   #    git: git@gitee.com:dasewan/liveness.git

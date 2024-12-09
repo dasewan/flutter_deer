@@ -7,7 +7,7 @@ import 'package:myapp9/routers/not_found_page.dart';
 
 import 'package:myapp9/pages/home/home_page.dart';
 import 'package:myapp9/pages/liveness/router/liveness_router.dart';
-import 'package:myapp9/pages/login/router/login_router.dart';
+import 'package:myapp9/pages/login2/router/login_router.dart';
 import 'package:myapp9/pages/repay/router/repay_router.dart';
 import 'package:myapp9/pages/sign/router/sign_router.dart';
 import 'package:myapp9/pages/verify/router/verify_router.dart';
