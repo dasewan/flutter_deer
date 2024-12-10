@@ -36,10 +36,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage>
-    with ChangeNotifierMixin<LoginPage>, BasePageMixin<LoginPage, LoginPagePresenter>, AutomaticKeepAliveClientMixin<LoginPage>
+    with
+        ChangeNotifierMixin<LoginPage>,
+        BasePageMixin<LoginPage, LoginPagePresenter>,
+        AutomaticKeepAliveClientMixin<LoginPage>
     implements LoginIMvpView {
-
   bool _clickable = false;
+  String _sortName = '';
 
   bool _privacyAgreement = false;
 
@@ -47,18 +50,16 @@ class _LoginPageState extends State<LoginPage>
   late LoginPagePresenter _loginPagePresenter;
 
   @override
-  Map<ChangeNotifier, List<VoidCallback>?>? changeNotifier() {
-
-  }
+  Map<ChangeNotifier, List<VoidCallback>?>? changeNotifier() {}
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       /// 显示状态栏和导航栏
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     });
-
   }
 
   @override
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage>
   }
 
   @override
-  void setLoginPageInfo(IndexDataLoginPageInfo info){
+  void setLoginPageInfo(IndexDataLoginPageInfo info) {
     setState(() {
       _loginPageInfo = info;
     });
@@ -76,24 +77,96 @@ class _LoginPageState extends State<LoginPage>
 
   ///获取验证码成功
   @override
-  void verificationCodesSuccess(String verificationKey) {
-  }
+  void verificationCodesSuccess(String verificationKey) {}
 
   ///登录成功
   @override
-  void loginSuccess(AUserEntity userEntity) {
-  }
+  void loginSuccess(AUserEntity userEntity) {}
 
   @override
-  void showCaptcha(String captchaKey, String captchaImageContent) {
-
-  }
+  void showCaptcha(String captchaKey, String captchaImageContent) {}
 
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+
+    final Map<String, String> _sortNameMap = {
+      'en': 'Choose Language',
+      'id': 'Pilih Bahasa',
+      'fr': 'Choisir la langue',
+      'es': 'Elegir idioma',
+      'pt': 'Escolher idioma',
+      'ru': 'Выбрать язык',
+      'vi': 'Chọn ngôn ngữ',
+      'ja': '言語を選択する',
+      'zh_CN': '选择语言',
+    };
+    final List<String> _list = [
+      '${Myapp9Localizations.of(context)!.en} (English)',
+      '${Myapp9Localizations.of(context)!.id} (Indonesia)',
+      '${Myapp9Localizations.of(context)!.fr} (Français)',
+      '${Myapp9Localizations.of(context)!.es} (español)',
+      '${Myapp9Localizations.of(context)!.pt} (Português)',
+      '${Myapp9Localizations.of(context)!.ru} (Русский)',
+      '${Myapp9Localizations.of(context)!.vi} (Tiếng Việt)',
+      '${Myapp9Localizations.of(context)!.ja} (日本語)',
+      '${Myapp9Localizations.of(context)!.zh_CN} (简体中文)',
+    ];
+    final List<String> _list2 = [
+      'English',
+      'Indonesia',
+      'Français',
+      'Español',
+      'Português',
+      'Русский',
+      'Tiếng Việt',
+      '日本語',
+      '简体中文',
+    ];
+    final List<String> _listLanguange = ['en', 'id', 'fr', 'es', 'pt', 'ru', 'vi', 'ja', 'zh_CN'];
+
+    void _showBottomSheet() {
+      showModalBottomSheet<void>(
+        context: context,
+        builder: (BuildContext context) {
+          // 可滑动ListView关闭BottomSheet
+          return DraggableScrollableSheet(
+            key: const Key('goods_sort'),
+            initialChildSize: 0.7,
+            minChildSize: 0.65,
+            expand: false,
+            builder: (_, scrollController) {
+              return ListView.builder(
+                controller: scrollController,
+                itemExtent: 48.0,
+                itemBuilder: (_, index) {
+                  return InkWell(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      alignment: Alignment.centerLeft,
+                      child: Text(_list[index]),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        _sortName = _list2[index];
+                      });
+                      context
+                          .read<LocaleProvider>()
+                          .setLocale(_listLanguange[index]);
+                      NavigatorUtils.goBack(context);
+                    },
+                  );
+                },
+                itemCount: _list.length,
+              );
+            },
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: MyAppBar(
         isBack: false,
@@ -105,155 +178,138 @@ class _LoginPageState extends State<LoginPage>
       ),
       body: MyScrollView(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
-        children: _buildBody,
+        children: [
+          Gaps.vGap50,
+          const LoadAssetImage('login/login_bg2'),
+          Container(
+            alignment: Alignment.center,
+            child: Text(
+              'Welcome to ${_loginPageInfo?.appName ?? ''}',
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 26.0,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          Gaps.vGap24,
+          Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Read our ',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall,
+                    ),
+                    GestureDetector(
+                      onTap: () =>
+                          Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                      child: Text(
+                        'Privacy Policy',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '. Tap "Agree and continue" to',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'accept the',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall,
+                    ),
+                    GestureDetector(
+                      onTap: () =>
+                          Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                      child: Text(
+                        'Terms of Service',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '.',
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .titleSmall,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Gaps.vGap24,
+          MyButton(
+            key: const Key('login'),
+            onPressed: () {
+              NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+              // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
+            },
+            text: "Agree and Continue",
+          ),
+          Gaps.vGap16,
+          Gaps.vGap16,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                child: Container(
+                  alignment: Alignment.centerRight,
+                  height: 40.0,
+                  width: 180,
+                  decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(34.0),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(
+                        Icons.language,
+                        color: Colours.app_main,
+                      ),
+                      Text(_sortName != '' ? _sortName : Myapp9Localizations.of(
+                          context)!.chooseLanguage),
+                      Icon(
+                        Icons.arrow_drop_down_sharp,
+                        color: Colours.app_main,
+                        size: 42,
+                      ),
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  _showBottomSheet();
+                },
+              ),
+            ],
+          ),
+          Gaps.vGap24,
+        ],
       ),
     );
   }
 
-  List<Widget> get _buildBody =>
-      <Widget>[
-        Gaps.vGap50,
-        const LoadAssetImage('login/login_bg2'),
-        Container(
-          alignment: Alignment.center,
-          child: Text(
-            'Welcome to ${_loginPageInfo?.appName ?? ''}',
-            style: const TextStyle(color: Colors.black, fontSize: 26.0, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Gaps.vGap24,
-        Container(
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Read our ',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  GestureDetector(
-                    onTap: () => Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
-                    child: Text(
-                      'Privacy Policy',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '. Tap "Agree and continue" to',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'accept the',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  GestureDetector(
-                    onTap: () => Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
-                    child: Text(
-                      'Terms of Service',
-                      style: TextStyle(
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    '.',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Gaps.vGap24,
-        MyButton(
-          key: const Key('login'),
-          onPressed: () {
-            NavigatorUtils.push(context, LoginRouter.loginPhonePage);
-            // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
-          },
-          text: "Agree and Continue",
-        ),
 
-        Gaps.vGap16,
-        Gaps.vGap16,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GestureDetector(
-              child: Container(
-                alignment: Alignment.centerRight,
-                height: 40.0,
-                width: 160,
-                decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
-                  borderRadius: BorderRadius.circular(34.0),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                  Icon(Icons.language,color: Colours.app_main,),
-                    Text(_sortName),
-                    Icon(Icons.arrow_drop_down_sharp,color: Colours.app_main,size: 42,),
-                ],),
-              ),
-              onTap: () {
-                _showBottomSheet();
-              },
-            ),
-          ],
-        ),
-        Gaps.vGap24,
 
-      ];
 
-  String _sortName = '选择语言';
-  final List<String> _list = ['English', '简体中文', 'Français', 'español', 'Русский'];
-  final List<String> _listLanguange = ['en', 'zh', 'fr', 'es', 'ru'];
-
-  void _showBottomSheet() {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (BuildContext context) {
-        // 可滑动ListView关闭BottomSheet
-        return DraggableScrollableSheet(
-          key: const Key('goods_sort'),
-          initialChildSize: 0.7,
-          minChildSize: 0.65,
-          expand: false,
-          builder: (_, scrollController) {
-            return ListView.builder(
-              controller: scrollController,
-              itemExtent: 48.0,
-              itemBuilder: (_, index) {
-                return InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    alignment: Alignment.centerLeft,
-                    child: Text(_list[index]),
-                  ),
-                  onTap: () {
-                    setState(() {
-                      _sortName = _list[index];
-                    });
-                    context.read<LocaleProvider>().setLocale(_listLanguange[index]);
-                    NavigatorUtils.goBack(context);
-                  },
-                );
-              },
-              itemCount: _list.length,
-            );
-          },
-        );
-      },
-    );
-  }
 }

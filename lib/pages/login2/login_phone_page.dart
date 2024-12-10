@@ -311,7 +311,12 @@ class _LoginPageState extends State<LoginPhonePage>
               ),
             ),
             onTap: () async {
-              country = await AdvanceCountryPicker().showCountryPickerSheet(context, local: context.read<LocaleProvider>().locale!.languageCode);
+              String local = context.read<LocaleProvider>().locale!.languageCode;
+              if(local == 'zh'){
+                local = 'zh_CN';
+              }
+              country = await AdvanceCountryPicker().showCountryPickerSheet(context, local: local, filteredCountries:['229', '55', '225', '56', '237', '86', '57', '20', '233', '852', '62', '91', '254'
+                , '52', '234', '63', '48', '221', '255', '256', '84', '27', '260', '998', '10', '90', '66','992', '252', '40', '48', '51', '92', '60', '254', '226', '259', '55', '880', '54']);
               setState(() {
                 country = country;
               });

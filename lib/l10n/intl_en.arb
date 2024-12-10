@@ -66,6 +66,16 @@
   "or": " or ",
   "inputVerificationCode": "OTP",
   "inputCaptcha": "Captcha",
-  "inputPhone": "Phone"
+  "inputPhone": "Phone",
+  "chooseLanguage": "Choose Language",
+"en": "English",
+"id": "Indonesian",
+"fr": "French",
+"es": "Spanish",
+"pt": "Portuguese",
+"ru": "Russian",
+"vi": "Vietnamese",
+"ja": "Japanese",
+"zh_CN": "Simplified Chinese"
 
 }
