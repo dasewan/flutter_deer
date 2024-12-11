@@ -55,5 +55,7 @@
   "ru": "ロシア語",
   "vi": "ベトナム語",
   "ja": "日本語",
-  "zh_CN": "簡体字中国語"
+  "zh_CN": "簡体字中国語",
+                   "chooseCountry": "Choose country",
+                   "searchCountry": "Search country name, code"
 }

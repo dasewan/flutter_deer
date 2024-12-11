@@ -55,5 +55,7 @@
   "ru": "Ruso",
   "vi": "Vietnamita",
   "ja": "Japonés",
-  "zh_CN": "Chino simplificado"
+  "zh_CN": "Chino simplificado",
+                               "chooseCountry": "Choose country",
+                               "searchCountry": "Search country name, code"
 }

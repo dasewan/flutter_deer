@@ -218,43 +218,78 @@ class _LoginPageState extends State<LoginPinPage>
       context: context,
       builder: (BuildContext context) {
         const OutlinedBorder buttonShape = RoundedRectangleBorder();
-
         final Widget content = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              '账号类型',
-              style: TextStyles.textBold18,
-            ),
-            Gaps.vGap16,
-            Gaps.line,
-            GestureDetector(
-              onTap: () => _dialogSelect(),
-              child: Expanded(
-                child: const Text('微信'),
+            Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
+            Gaps.vGap24,
+            Container(
+              width: double.infinity,
+              child: Row(
+                children: [
+                  image,
+                  Gaps.hGap16,
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.refresh,
+                          color:Colours.app_main,
+                          size: 18,
+                        ),
+                        Text('Refresh', style: TextStyle(color: Colours.app_main)),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            Gaps.line,
-            Expanded(
-              child: Container(
-                height: _captchaVisable ? 28 : 0,
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.grey)),
-                child: MyTextField(
-                  focusNode: _nodeText3,
-                  controller: _captchaController,
-                  maxLength: 6,
-                  hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
-                  image: image,
-                  getCaptcha: () {
-                    return _captcha();
-                  },
+            Gaps.vGap12,
+            Row(
+              children: [
+                Container(
+                  width: 300,
+                  child: TextField(
+                    focusNode: _nodeText3,
+                    maxLength: 6,
+                    autofocus: true,
+                    controller: _captchaController,
+                    textInputAction: TextInputAction.done,
+                    style: TextStyle(
+                      fontSize: 18.0, // 设置输入文本的字体大小
+                    ),
+                    decoration: InputDecoration(
+                      // contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+                      // labelText: '输入' ,
+                      hintText: 'Type the word above' ,
+                      counterText: '',
+                      // focusedBorder: UnderlineInputBorder(
+                      //   borderSide: BorderSide(
+                      //     color: Colors.transparent,
+                      //     width: 0.8,
+                      //   ),
+                      // ),
+                      // enabledBorder: UnderlineInputBorder(
+                      //   borderSide: BorderSide(
+                      //     color: Colors.transparent,
+                      //     width: 0.8,
+                      //   ),
+                      // ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-            Gaps.line,
-
+            Gaps.vGap24,
+            MyButton(
+              key: const Key('login'),
+              onPressed: () {
+                // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+                // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
+              },
+              text: "Submit",
+            ),
           ],
         );
 
@@ -263,9 +298,9 @@ class _LoginPageState extends State<LoginPinPage>
             color: context.dialogBackgroundColor,
             borderRadius: BorderRadius.circular(8.0),
           ),
-          width: 270.0,
-          height: 190.0,
-          padding: const EdgeInsets.only(top: 24.0),
+          width: 340.0,
+          height: 330.0,
+          padding: const EdgeInsets.only(top: 68,bottom: 18, left: 16, right: 16),
           child: TextButtonTheme(
             data: TextButtonThemeData(
               style: TextButton.styleFrom(
@@ -283,7 +318,8 @@ class _LoginPageState extends State<LoginPinPage>
 
         return Material(
           type: MaterialType.transparency,
-          child: Center(
+          child: Align(
+            alignment: Alignment(0.0, -0.56),
             child: decoration,
           ),
         );

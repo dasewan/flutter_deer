@@ -37,14 +37,14 @@ class LoginPhonePage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPhonePage>
-    with ChangeNotifierMixin<LoginPhonePage>, BasePageMixin<LoginPhonePage, LoginPagePresenter>, AutomaticKeepAliveClientMixin<LoginPhonePage>
+    with
+        ChangeNotifierMixin<LoginPhonePage>,
+        BasePageMixin<LoginPhonePage, LoginPagePresenter>,
+        AutomaticKeepAliveClientMixin<LoginPhonePage>
     implements LoginIMvpView {
-
   final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _vCodeController = TextEditingController();
   final TextEditingController _captchaController = TextEditingController();
   final FocusNode _nodeText1 = FocusNode();
-  final FocusNode _nodeText2 = FocusNode();
   final FocusNode _nodeText3 = FocusNode();
   bool _clickable = false;
   bool _codeClickable = false;
@@ -60,8 +60,6 @@ class _LoginPageState extends State<LoginPhonePage>
   Image _image = Image.memory(Uint8List(0));
   Country? country;
 
-
-
   @override
   Map<ChangeNotifier, List<VoidCallback>?>? changeNotifier() {
     final List<VoidCallback> callbacks = <VoidCallback>[_verify];
@@ -76,10 +74,10 @@ class _LoginPageState extends State<LoginPhonePage>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       /// 显示状态栏和导航栏
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     });
     _phoneController.text = SpUtil.getString(Constant.phone).nullSafe;
-
   }
 
   @override
@@ -89,7 +87,7 @@ class _LoginPageState extends State<LoginPhonePage>
   }
 
   @override
-  void setLoginPageInfo(IndexDataLoginPageInfo info){
+  void setLoginPageInfo(IndexDataLoginPageInfo info) {
     setState(() {
       _loginPageInfo = info;
     });
@@ -126,32 +124,19 @@ class _LoginPageState extends State<LoginPhonePage>
   ///验证表单输入格式是否正确
   void _verify() {
     final String name = _phoneController.text;
-    final String password = _vCodeController.text;
-    bool clickable = true;
     bool codeClickable = false;
     bool phoneCorrect = false;
     bool otpLengthCorrect = false;
     if (name.isEmpty || name.length < 11) {
-      clickable = false;
       phoneCorrect = false;
     } else {
       codeClickable = true;
       phoneCorrect = true;
-      if(_loginPageInfo!.captchaShowCount! == 0){
+      if (_loginPageInfo!.captchaShowCount! == 0) {
         _captcha();
         FocusScope.of(context).requestFocus(_nodeText3);
-      }else{
-        FocusScope.of(context).requestFocus(_nodeText2);
-
       }
     }
-    if (password.isEmpty || password.length < 4) {
-      clickable = false;
-      otpLengthCorrect = false;
-    } else {
-      otpLengthCorrect = true;
-    }
-
     if (phoneCorrect != _phoneCorrect) {
       setState(() {
         _phoneCorrect = phoneCorrect;
@@ -162,13 +147,6 @@ class _LoginPageState extends State<LoginPhonePage>
         _otpLengthCorrect = otpLengthCorrect;
       });
     }
-    //状态不一样再刷新，避免不必要的setState
-/*    if (clickable != _clickable) {
-      setState(() {
-        _clickable = clickable;
-      });
-    }*/
-
     //发送otp是否可以点击
     if (codeClickable != _codeClickable) {
       setState(() {
@@ -176,29 +154,14 @@ class _LoginPageState extends State<LoginPhonePage>
       });
     }
   }
-
-  ///发送验证码
-  Future<bool> _verificationCodes() async {
-    final String phone = _phoneController.text;
-    final String captchaCode = _captchaController.text;
-    _isSendCode = await _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
-    return _isSendCode;
-  }
-
   ///发送图片验证码
   Future<bool> _captcha() async {
     final String phone = _phoneController.text;
     return await _loginPagePresenter.captchas(phone, false);
   }
 
-  ///登录
-  void _login() {
-    SpUtil.putString(Constant.phone, _phoneController.text);
-    final String name = _phoneController.text;
-    SpUtil.putString(Constant.phone, name);
-  }
-
-  void _showCallPhoneDialog(BuildContext context, String phone, String dialCode) {
+  void _showCallPhoneDialog(
+      BuildContext context, String phone, String dialCode) {
     showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -210,11 +173,21 @@ class _LoginPageState extends State<LoginPhonePage>
             mainAxisSize: MainAxisSize.min,
             children: [
               Gaps.vGap12,
-              const Text('We will be verifying the phone number:', style: TextStyle(fontSize: 16.0),),
+              const Text(
+                'We will be verifying the phone number:',
+                style: TextStyle(fontSize: 16.0),
+              ),
               Gaps.vGap12,
-              Text('(${country?.dialCode != null ? country!.dialCode : ''})  $phone', style: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w600),),
+              Text(
+                '(${country?.dialCode != null ? country!.dialCode : ''})  $phone',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w600),
+              ),
               Gaps.vGap12,
-              const Text('Is this OK, or would you like to edit the number?', style: TextStyle(fontSize: 16.0)),
+              const Text('Is this OK, or would you like to edit the number?',
+                  style: TextStyle(fontSize: 16.0)),
             ],
           ),
           actions: <Widget>[
@@ -224,20 +197,25 @@ class _LoginPageState extends State<LoginPhonePage>
             ),
             TextButton(
               onPressed: () {
-                NavigatorUtils.push(context, '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}', replace: true);
+                NavigatorUtils.push(context,
+                    '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}',
+                    replace: true);
               },
               style: ButtonStyle(
                 // 按下高亮颜色
-                overlayColor: MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.error.withOpacity(0.2)),
+                overlayColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.error.withOpacity(0.2)),
               ),
-              child: Text('OK', style: TextStyle(color: Theme.of(context).colorScheme.error),),
+              child: Text(
+                'OK',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
             ),
           ],
         );
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -256,22 +234,36 @@ class _LoginPageState extends State<LoginPhonePage>
           Gaps.vGap8,
           Text(
             _loginPageInfo?.firstTip ?? '',
-            style: const TextStyle(color: Colors.black, fontSize: 26.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 26.0,
+                fontWeight: FontWeight.w900,
+                fontFamily: 'RobotoThin'),
           ),
           Gaps.vGap8,
           Text(
             _loginPageInfo?.secondTip ?? '',
-            style: const TextStyle(color: Colors.black, fontSize: 26.0, fontWeight: FontWeight.w900, fontFamily: 'RobotoThin'),
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 26.0,
+                fontWeight: FontWeight.w900,
+                fontFamily: 'RobotoThin'),
           ),
           Gaps.vGap24,
           Text(
             '${_loginPageInfo?.appName ?? ''} will send an SMS message to verify your phone number.',
-            style: TextStyle(color: Colors.grey, fontSize: 12.0,),
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12.0,
+            ),
           ),
           Gaps.vGap4,
           const Text(
             'Enter your country code and phone number to continue',
-            style: TextStyle(color: Colors.grey, fontSize: 12.0,),
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 12.0,
+            ),
           ),
           Gaps.vGap24,
           GestureDetector(
@@ -286,37 +278,113 @@ class _LoginPageState extends State<LoginPhonePage>
                   Container(
                     width: 40,
                     alignment: Alignment.center,
-                    child: country?.flag != null ? Image.asset(
-                       country!.flag,
-                      package: countryCodePackageName,
-                      width: 32,
-                      height: 32,
-                    ) : null,
+                    child: country?.flag != null
+                        ? Image.asset(
+                            country!.flag,
+                            package: countryCodePackageName,
+                            width: 32,
+                            height: 32,
+                          )
+                        : null,
                   ),
                   Gaps.hGap12,
                   Container(
                     width: 1,
                     height: 30,
-                    color:  Colors.grey,
+                    color: Colors.grey,
                     margin: const EdgeInsets.symmetric(horizontal: 5),
                   ),
                   Gaps.hGap12,
                   Expanded(
-                    child: Text(country?.name != null ? country!.isoShortNameByLocale[context.read<LocaleProvider>().locale!.languageCode]! : 'Choose a country'),
+                    child: Text(country?.name != null
+                        ? country!.isoShortNameByLocale[context
+                            .read<LocaleProvider>()
+                            .locale!
+                            .languageCode == 'zh' ? 'zh_CN': context
+                        .read<LocaleProvider>()
+                        .locale!
+                        .languageCode]!
+                        : 'Choose a country'),
                   ),
                   Gaps.hGap12,
-                  Icon(Icons.arrow_drop_down_sharp,color: country?.name != null ? Colors.grey : Colours.app_main,size: 42,),
+                  Icon(
+                    Icons.arrow_drop_down_sharp,
+                    color:
+                        country?.name != null ? Colors.grey : Colours.app_main,
+                    size: 42,
+                  ),
                   Gaps.hGap12,
                 ],
               ),
             ),
             onTap: () async {
-              String local = context.read<LocaleProvider>().locale!.languageCode;
-              if(local == 'zh'){
+              String local =
+                  context.read<LocaleProvider>().locale!.languageCode;
+              if (local == 'zh') {
                 local = 'zh_CN';
               }
-              country = await AdvanceCountryPicker().showCountryPickerSheet(context, local: local, filteredCountries: ['229', '55', '225', '56', '237', '86', '57', '20', '233', '852', '62', '91', '254'
-                , '52', '234', '63', '48', '221', '255', '256', '84', '27', '260', '998',  '66','992', '252', '40', '48', '51', '92', '60', '254', '226',  '55', '880', '54']);
+              country = await AdvanceCountryPicker().showCountryPickerSheet(
+                  context,
+                  title: Myapp9Localizations.of(context)!.chooseCountry,
+                  searchHintText: Myapp9Localizations.of(context)!.searchCountry,
+                  local: local,
+                  filteredCountries: [
+                    '229',
+                    '55',
+                    '225',
+                    '56',
+                    '237',
+                    '86',
+                    '57',
+                    '20',
+                    '233',
+                    '852',
+                    '62',
+                    '91',
+                    '254',
+                    '52',
+                    '234',
+                    '63',
+                    '48',
+                    '221',
+                    '255',
+                    '256',
+                    '84',
+                    '27',
+                    '260',
+                    '998',
+                    '66',
+                    '992',
+                    '252',
+                    '40',
+                    '48',
+                    '51',
+                    '92',
+                    '60',
+                    '254',
+                    '226',
+                    '55',
+                    '880',
+                    '54',
+                    '994',
+                    '962',
+                    '1',
+                    '30',
+                    '216',
+                    '224',
+                    '263',
+                    '855',
+                    '593',
+                    '56',
+                    '94',
+                    '977',
+                    '244',
+                    '212',
+                    '213',
+                    '54',
+                    '95',
+                    '880'
+                  ]);
               setState(() {
                 country = country;
               });
@@ -336,25 +404,27 @@ class _LoginPageState extends State<LoginPhonePage>
                   alignment: Alignment.center,
                   child: Text(
                     country?.dialCode != null ? country!.dialCode : '',
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.w500),
                   ),
                 ),
                 Gaps.hGap12,
                 Container(
                   width: 1,
                   height: 30,
-                  color:  Colors.grey,
+                  color: Colors.grey,
                   margin: const EdgeInsets.symmetric(horizontal: 5),
                 ),
                 Gaps.hGap12,
                 Expanded(
                   child: MyTextField(
-                      key: const Key('phone'),
-                      focusNode: _nodeText1,
-                      controller: _phoneController,
-                      maxLength: 11,
-                      keyboardType: TextInputType.phone,
-                      hintText: Myapp9Localizations.of(context)!.inputUsernameHint,
+                    key: const Key('phone'),
+                    focusNode: _nodeText1,
+                    controller: _phoneController,
+                    maxLength: 11,
+                    keyboardType: TextInputType.phone,
+                    hintText:
+                        Myapp9Localizations.of(context)!.inputUsernameHint,
                   ),
                 ),
                 Gaps.hGap12,
@@ -362,7 +432,7 @@ class _LoginPageState extends State<LoginPhonePage>
               ],
             ),
           ),
-          Visibility(visible: _captchaVisable,child: Gaps.vGap16),
+          Visibility(visible: _captchaVisable, child: Gaps.vGap16),
           Opacity(
             opacity: _captchaVisable ? 1 : 0,
             child: Container(
@@ -378,8 +448,10 @@ class _LoginPageState extends State<LoginPhonePage>
                 hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
                 image: _image,
                 getCaptcha: () {
-                  if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
-                    Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
+                  if (_phoneController.text.isEmpty ||
+                      _phoneController.text.length < 11) {
+                    Toast.show(
+                        Myapp9Localizations.of(context)!.inputPhoneInvalid);
                     return Future<bool>.value(false);
                   } else {
                     return _captcha();
@@ -392,14 +464,17 @@ class _LoginPageState extends State<LoginPhonePage>
           MyButton(
             key: const Key('login'),
             onPressed: () {
-              if (_phoneController.text.isEmpty || _phoneController.text.length < 11) {
+              if (_phoneController.text.isEmpty ||
+                  _phoneController.text.length < 11) {
                 Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
-              } else if (_captchaVisable && (_captchaController.text.isEmpty || _captchaController.text.length < 4)) {
-                Toast.show(Myapp9Localizations.of(context)!.inputCaptchaInvalid);
+              } else if (_captchaVisable &&
+                  (_captchaController.text.isEmpty ||
+                      _captchaController.text.length < 4)) {
+                Toast.show(
+                    Myapp9Localizations.of(context)!.inputCaptchaInvalid);
               } else {
-
-                _showCallPhoneDialog(context, _phoneController.text, country!.dialCode);
-
+                _showCallPhoneDialog(
+                    context, _phoneController.text, country!.dialCode);
               }
               // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
               // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
@@ -420,7 +495,8 @@ class _LoginPageState extends State<LoginPhonePage>
                 Visibility(
                   visible: _loginPageInfo?.showContactPhone ?? true,
                   child: GestureDetector(
-                    onTap: () => Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                    onTap: () =>
+                        Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
                     child: Text(
                       _loginPageInfo?.contactPhone ?? '',
                       style: TextStyle(
@@ -431,7 +507,10 @@ class _LoginPageState extends State<LoginPhonePage>
                   ),
                 ),
                 Visibility(
-                  visible: _loginPageInfo?.showContactPhone != false && _loginPageInfo?.showContactWa != false ? true : false,
+                  visible: _loginPageInfo?.showContactPhone != false &&
+                          _loginPageInfo?.showContactWa != false
+                      ? true
+                      : false,
                   child: Text(
                     Myapp9Localizations.of(context)!.or,
                     style: Theme.of(context).textTheme.titleSmall,
@@ -440,7 +519,8 @@ class _LoginPageState extends State<LoginPhonePage>
                 Visibility(
                   visible: _loginPageInfo?.showContactWa ?? true,
                   child: GestureDetector(
-                    onTap: () => Utils.launchWhatsAppURL(_loginPageInfo?.contactWa ?? ''),
+                    onTap: () => Utils.launchWhatsAppURL(
+                        _loginPageInfo?.contactWa ?? ''),
                     child: Text(
                       'WhatsApp',
                       style: TextStyle(
@@ -453,13 +533,8 @@ class _LoginPageState extends State<LoginPhonePage>
               ],
             ),
           ),
-
         ],
       ),
     );
   }
-
-
-
-
 }

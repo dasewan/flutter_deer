@@ -76,6 +76,8 @@
 "ru": "Russian",
 "vi": "Vietnamese",
 "ja": "Japanese",
-"zh_CN": "Simplified Chinese"
+"zh_CN": "Simplified Chinese",
+"chooseCountry": "Choose country",
+"searchCountry": "Search country name, code"
 
 }

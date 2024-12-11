@@ -55,5 +55,7 @@
   "ru": "الروسية",
   "vi": "الفيتنامية",
   "ja": "اليابانية",
-  "zh_CN": "الصينية المبسطة"
+  "zh_CN": "الصينية المبسطة",
+                            "chooseCountry": "Choose country",
+                            "searchCountry": "Search country name, code"
 }

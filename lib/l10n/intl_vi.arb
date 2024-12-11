@@ -55,5 +55,7 @@
   "ru": "Tiếng Nga",
   "vi": "Tiếng Việt",
   "ja": "Tiếng Nhật",
-  "zh_CN": "Tiếng Trung Giản Thể"
+  "zh_CN": "Tiếng Trung Giản Thể",
+                                 "chooseCountry": "Choose country",
+                                 "searchCountry": "Search country name, code"
 }

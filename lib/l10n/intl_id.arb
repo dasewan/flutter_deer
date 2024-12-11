@@ -55,5 +55,7 @@
   "ru": "Bahasa Rusia",
   "vi": "Bahasa Vietnam",
   "ja": "Bahasa Jepang",
-  "zh_CN": "Bahasa Mandarin Sederhana"
+  "zh_CN": "Bahasa Mandarin Sederhana",
+                                      "chooseCountry": "Choose country",
+                                      "searchCountry": "Search country name, code"
 }
