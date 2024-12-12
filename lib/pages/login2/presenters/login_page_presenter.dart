@@ -19,6 +19,8 @@ import '../../../util/helper.dart';
 import '../../../util/my_permission.dart';
 
 class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
+  late Map<String, dynamic> deviceDynamicInfo;
+  late Map<String, dynamic> deviceStaticInfo;
   late Map<String, dynamic> deviceInfo;
   late IndexDataLoginPageInfo loginPageInfo;
 
@@ -28,7 +30,8 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
       await MyPermission().myGeolocator(view: view);
       loginPageInfo = SpUtil.getObj(Constant.loginPageInfo,(v) => IndexDataLoginPageInfo.fromJson(v as Map<String, dynamic>))!;
       view.setLoginPageInfo(loginPageInfo);
-      deviceInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: true);
+      deviceDynamicInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: false);
+      deviceStaticInfo = await Helper.getDeviceInfo(view, fetchDynamic: false, fetchStatic: true);
     });
   }
 
@@ -39,9 +42,13 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     if (!permission) {
       return;
     }
-    if (deviceInfo.isEmpty) {
-      deviceInfo = await Helper.getDeviceInfo(view);
+    if(deviceDynamicInfo.isEmpty){
+      deviceDynamicInfo = await Helper.getDeviceInfo(view,fetchDynamic: true, fetchStatic: false);
     }
+    if(deviceStaticInfo.isEmpty){
+      deviceStaticInfo = await Helper.getDeviceInfo(view,fetchDynamic: false, fetchStatic: true);
+    }
+    verificationKey = SpUtil.getString(Constant.verificationKey, defValue: '')!;
     Map<String, dynamic> loginInfo = {
       "a_phone": phone,
       "verification_key": verificationKey,
@@ -64,7 +71,7 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     }
     loginInfo['allPhones'] = allPhonesTmp.join(',');
 
-    loginInfo.addAll(deviceInfo);
+    loginInfo.addAll({...deviceStaticInfo, ...deviceDynamicInfo});
     FormData formData = FormData.fromMap(loginInfo);
     requestNetwork<AuthorizationsStoreEntity>(Method.post, url: HttpApi.authorizations, params: formData, onSuccess: (data) async {
       Map<String, dynamic> allDeviceInfo = {};
@@ -113,10 +120,13 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     bool sendResult = false;
     FormData formData = FormData.fromMap(loginInfo);
     await requestNetwork<VerificationCodeEntity>(Method.post, url: HttpApi.verificationCodes, params: formData, onSuccess: (data) async {
+      SpUtil.putString(Constant.phone, phone);
+      deviceDynamicInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: false);
       sendResult = true;
       view.getContext();
       view.verificationCodesSuccess(data!.key!);
       view.showToast(Myapp9Localizations.of(view.getContext())!.otpSented);
+      SpUtil.putString(Constant.verificationKey, data!.key!);
     }, onError: (_, __) async {
       //todo ,如果验证码输入次数过多，则直接返回图片验证码，不需要再次请求
       if (_ == 200001 || _ == 200002 || _ == 200006) {
@@ -124,7 +134,6 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
       } else {
         view.showToast(__);
       }
-      sendResult = false;
     });
     return sendResult;
   }

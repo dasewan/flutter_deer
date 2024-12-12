@@ -20,9 +20,11 @@ class LoginRouter implements IRouterProvider {
     router.define(loginPinPage, handler: Handler(handlerFunc: (_, params) {
       final String? phone = params['phone']?.first;
       final String? dialCode = params['dialCode']?.first;
+      final String? verificationKey = params['verificationKey']?.first;
       return LoginPinPage(
         phone: phone!,
         dialCode: dialCode!,
+        verificationKey: verificationKey!,
       );
     }));
     router.define(updatePasswordPage, handler: Handler(handlerFunc: (_, __) => const UpdatePasswordPage()));

@@ -189,34 +189,35 @@ class Helper {
   }
 
   static Future<Map<String, dynamic>> getDeviceInfo(IMvpView view, {bool fetchStatic = false, bool fetchDynamic = true, bool showProgress = true}) async {
-    Map<String, dynamic> allDeviceInfo = {};
+    Map<String, dynamic> staticInfo = {};
     Map<String, dynamic> dynamicInfo = {};
     if (showProgress) {
       view.showProgress();
     }
-    int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    int lastFetchAt = SpUtil.getInt(Constant.lastDeviceInfoFetchAt, defValue: 0)!;
-    if (lastFetchAt == 0 || currentTimeInSeconds - lastFetchAt > 60 * 60 * 24) {
-      if (fetchStatic) {
-        allDeviceInfo = await Device().getAllDeviceInfo();
-        SpUtil.putObject(Constant.allDeviceInfo, allDeviceInfo);
+    final int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    final int lastDeviceDynamicInfoFetchAt = SpUtil.getInt(Constant.lastDeviceDynamicInfoFetchAt, defValue: 0)!;
+    final int lastDeviceStaticInfoFetchAt = SpUtil.getInt(Constant.lastDeviceStaticInfoFetchAt, defValue: 0)!;
+    if (fetchStatic) {
+      if(lastDeviceStaticInfoFetchAt == 0 || currentTimeInSeconds - lastDeviceStaticInfoFetchAt > 60 * 60 * 1){
+        staticInfo = await Device().getAllDeviceInfo();
+        SpUtil.putObject(Constant.staticInfo, staticInfo);
+        SpUtil.putInt(Constant.lastDeviceStaticInfoFetchAt, currentTimeInSeconds);
+      }else{
+        staticInfo = SpUtil.getObject(Constant.staticInfo)! as Map<String, dynamic>;
       }
-      if (fetchDynamic) {
+    }
+    if (fetchDynamic) {
+      if(lastDeviceDynamicInfoFetchAt == 0 || currentTimeInSeconds - lastDeviceDynamicInfoFetchAt > 60 * 60 * 1){
         dynamicInfo = await Device().getDeviceDynamicInfo('1');
         SpUtil.putObject(Constant.dynamicInfo, dynamicInfo);
-      }
-      SpUtil.putInt(Constant.lastDeviceInfoFetchAt, currentTimeInSeconds);
-    } else {
-      if (fetchStatic) {
-        allDeviceInfo = SpUtil.getObject(Constant.allDeviceInfo) as Map<String, dynamic> ?? {};
-      }
-      if (fetchDynamic) {
-        dynamicInfo = SpUtil.getObject(Constant.dynamicInfo) as Map<String, dynamic> ?? {};
+        SpUtil.putInt(Constant.lastDeviceDynamicInfoFetchAt, currentTimeInSeconds);
+      }else{
+        dynamicInfo = SpUtil.getObject(Constant.dynamicInfo)! as Map<String, dynamic>;
       }
     }
     if (showProgress) {
       view.closeProgress();
     }
-    return {...allDeviceInfo, ...dynamicInfo};
+    return {...staticInfo, ...dynamicInfo};
   }
 }

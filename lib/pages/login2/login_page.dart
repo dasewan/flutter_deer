@@ -34,16 +34,13 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage>
     with
         ChangeNotifierMixin<LoginPage>,
         BasePageMixin<LoginPage, LoginPagePresenter>,
         AutomaticKeepAliveClientMixin<LoginPage>
     implements LoginIMvpView {
-  bool _clickable = false;
   String _sortName = '';
-
   bool _privacyAgreement = false;
 
   IndexDataLoginPageInfo? _loginPageInfo;
@@ -91,19 +88,8 @@ class _LoginPageState extends State<LoginPage>
 
   @override
   Widget build(BuildContext context) {
-
-    final Map<String, String> _sortNameMap = {
-      'en': 'Choose Language',
-      'id': 'Pilih Bahasa',
-      'fr': 'Choisir la langue',
-      'es': 'Elegir idioma',
-      'pt': 'Escolher idioma',
-      'ru': 'Выбрать язык',
-      'vi': 'Chọn ngôn ngữ',
-      'ja': '言語を選択する',
-      'zh_CN': '选择语言',
-    };
-    final List<String> _list = [
+    super.build(context);
+    final List<String> list = [
       '${Myapp9Localizations.of(context)!.en} (English)',
       '${Myapp9Localizations.of(context)!.id} (Indonesia)',
       '${Myapp9Localizations.of(context)!.fr} (Français)',
@@ -114,7 +100,7 @@ class _LoginPageState extends State<LoginPage>
       '${Myapp9Localizations.of(context)!.ja} (日本語)',
       '${Myapp9Localizations.of(context)!.zh_CN} (简体中文)',
     ];
-    final List<String> _list2 = [
+    final List<String> list2 = [
       'English',
       'Indonesia',
       'Français',
@@ -125,10 +111,13 @@ class _LoginPageState extends State<LoginPage>
       '日本語',
       '简体中文',
     ];
-    final List<String> _listLanguange = ['en', 'id', 'fr', 'es', 'pt', 'ru', 'vi', 'ja', 'zh_CN'];
+    final List<String> listLanguange = ['en', 'id', 'fr', 'es', 'pt', 'ru', 'vi', 'ja', 'zh_CN'];
 
-    void _showBottomSheet() {
+    void showBottomSheet() {
       showModalBottomSheet<void>(
+        shape:const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+        ),
         context: context,
         builder: (BuildContext context) {
           // 可滑动ListView关闭BottomSheet
@@ -146,20 +135,20 @@ class _LoginPageState extends State<LoginPage>
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       alignment: Alignment.centerLeft,
-                      child: Text(_list[index]),
+                      child: Text(list[index]),
                     ),
                     onTap: () {
                       setState(() {
-                        _sortName = _list2[index];
+                        _sortName = list2[index];
                       });
                       context
                           .read<LocaleProvider>()
-                          .setLocale(_listLanguange[index]);
+                          .setLocale(listLanguange[index]);
                       NavigatorUtils.goBack(context);
                     },
                   );
                 },
-                itemCount: _list.length,
+                itemCount: list.length,
               );
             },
           );
@@ -207,8 +196,14 @@ class _LoginPageState extends State<LoginPage>
                           .titleSmall,
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                      onTap: (){
+                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                          setState(() {
+                            final bool privacyAgreement = result as bool;
+                            _privacyAgreement = privacyAgreement;
+                          });
+                        });
+                      },
                       child: Text(
                         'Privacy Policy',
                         style: TextStyle(
@@ -236,8 +231,14 @@ class _LoginPageState extends State<LoginPage>
                           .titleSmall,
                     ),
                     GestureDetector(
-                      onTap: () =>
-                          Utils.launchTelURL(_loginPageInfo?.contactPhone ?? ''),
+                      onTap: () {
+                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                          setState(() {
+                            final bool privacyAgreement = result as bool;
+                            _privacyAgreement = privacyAgreement;
+                          });
+                        });
+                      },
                       child: Text(
                         'Terms of Service',
                         style: TextStyle(
@@ -261,7 +262,16 @@ class _LoginPageState extends State<LoginPage>
           MyButton(
             key: const Key('login'),
             onPressed: () {
-              NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+              if(_privacyAgreement){
+                NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+              }else{
+                NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                  setState(() {
+                    final bool privacyAgreement = result as bool;
+                    _privacyAgreement = privacyAgreement;
+                  });
+                });
+              }
               // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
             },
             text: "Agree and Continue",
@@ -298,7 +308,7 @@ class _LoginPageState extends State<LoginPage>
                   ),
                 ),
                 onTap: () {
-                  _showBottomSheet();
+                  showBottomSheet();
                 },
               ),
             ],

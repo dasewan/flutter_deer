@@ -23,6 +23,8 @@ class Constant {
 
   /// 设备信息
   static const String dynamicInfo = 'dynamicInfo';
+  /// 设备信息
+  static const String staticInfo = 'staticInfo';
 
   static const String allPhones = 'allPhones';
 
@@ -90,6 +92,12 @@ class Constant {
   /// 上次获取设备信息时间
   static const String lastDeviceInfoFetchAt = 'lastDeviceInfoFetchAt';
 
+  /// 上次获取设备动态信息时间
+  static const String lastDeviceDynamicInfoFetchAt = 'lastDeviceDynamicInfoFetchAt';
+
+  /// 上次获取设备静态信息时间
+  static const String lastDeviceStaticInfoFetchAt = 'lastDeviceStaticInfoFetchAt';
+
   /// 订单最新更新时间
   static const String dBorrowsNewestUpdatedAt = '_dBorrowsNewestUpdatedAt';
 
@@ -133,6 +141,7 @@ class Constant {
   static const String deviceId = 'deviceId';
   static const String phoneList = 'phoneList';
   static const String accessToken = 'accessToken';
+  static const String verificationKey = 'verificationKey';
   static const String refreshToken = 'refreshToken';
 
   static const String borrowSortCount = 'borrowSortCount';

@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPhonePage>
   bool _otpLengthCorrect = false;
   IndexDataLoginPageInfo? _loginPageInfo;
   late LoginPagePresenter _loginPagePresenter;
-  Image _image = Image.memory(Uint8List(0));
+  late Image _image = Image.asset("assets/images/back.png");
   Country? country;
 
   @override
@@ -96,7 +96,12 @@ class _LoginPageState extends State<LoginPhonePage>
   ///获取验证码成功
   @override
   void verificationCodesSuccess(String verificationKey) {
-    _verificationKey = verificationKey;
+    setState(() {
+      _verificationKey = verificationKey;
+    });
+    NavigatorUtils.push(context,
+        '${LoginRouter.loginPinPage}?phone=${_phoneController.text}&dialCode=${country!.dialCode}&verificationKey=123',
+        replace: true);
   }
 
   ///登录成功
@@ -109,13 +114,15 @@ class _LoginPageState extends State<LoginPhonePage>
 
   @override
   void showCaptcha(String captchaKey, String captchaImageContent) {
+    _captchaKey = captchaKey;
+    final List<int> imageBytes = base64Decode(captchaImageContent.split(",").last);
+    final Uint8List uint8List = Uint8List.fromList(imageBytes);
+    _image = Image.memory(uint8List);
     setState(() {
       _captchaVisable = true;
+      _image = _image;
     });
-    _captchaKey = captchaKey;
-    List<int> imageBytes = base64Decode(captchaImageContent.split(",").last);
-    Uint8List uint8List = Uint8List.fromList(imageBytes);
-    _image = Image.memory(uint8List);
+    _showSelectAccountTypeDialog(context, _image, _phoneController.text,_captchaKey);
   }
 
   @override
@@ -160,6 +167,116 @@ class _LoginPageState extends State<LoginPhonePage>
     return await _loginPagePresenter.captchas(phone, false);
   }
 
+  ///发送验证码
+  Future<bool> _verificationCodes() async {
+    final String phone = _phoneController.text;
+    final String captchaCode = _captchaController.text;
+    return _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
+
+  }
+  ///展示图片验证码
+  void _showSelectAccountTypeDialog(
+      BuildContext context, Image image, String phone, String captchaKey) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
+              Gaps.vGap24,
+              Container(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    image,
+                    Gaps.hGap16,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: (){
+                          _captchaController.clear();
+                          NavigatorUtils.goBack(context);
+                          _captcha();
+                          },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.refresh,
+                              color:Colours.app_main,
+                              size: 18,
+                            ),
+                            Text('Refresh', style: TextStyle(color: Colours.app_main)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gaps.vGap12,
+              Row(
+                children: [
+                  SizedBox(
+                    width: 300,
+                    child: TextField(
+                      focusNode: _nodeText3,
+                      maxLength: 6,
+                      autofocus: true,
+                      controller: _captchaController,
+                      textInputAction: TextInputAction.done,
+                      style: const TextStyle(
+                        fontSize: 18.0, // 设置输入文本的字体大小
+                      ),
+                      decoration: const InputDecoration(
+                        hintText: 'Type the word above' ,
+                        counterText: '',
+
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Gaps.vGap24,
+              MyButton(
+                key: const Key('login'),
+                onPressed: () async {
+                  final String captchaCode = _captchaController.text;
+                  _captchaController.clear();
+                  NavigatorUtils.goBack(context);
+                  await _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
+                },
+                text: "Submit",
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => NavigatorUtils.goBack(context),
+              child: const Text('Edit'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await _verificationCodes();
+
+              },
+              style: ButtonStyle(
+                // 按下高亮颜色
+                overlayColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.error.withOpacity(0.2)),
+              ),
+              child: Text(
+                'OK',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
   void _showCallPhoneDialog(
       BuildContext context, String phone, String dialCode) {
     showDialog<void>(
@@ -196,10 +313,18 @@ class _LoginPageState extends State<LoginPhonePage>
               child: const Text('Edit'),
             ),
             TextButton(
-              onPressed: () {
-                NavigatorUtils.push(context,
-                    '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}',
-                    replace: true);
+              onPressed: () async {
+
+                // await _verificationCodes();
+                // NavigatorUtils.push(context,
+                //     '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}&verificationKey=123',
+                //     replace: true);
+                _isSendCode = await _verificationCodes();
+                if(_isSendCode){
+                  NavigatorUtils.push(context,
+                      '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}&verificationKey=123',
+                      replace: true);
+                }
               },
               style: ButtonStyle(
                 // 按下高亮颜色
@@ -323,6 +448,7 @@ class _LoginPageState extends State<LoginPhonePage>
               if (local == 'zh') {
                 local = 'zh_CN';
               }
+              //todo 支持的国家由后台返回
               country = await AdvanceCountryPicker().showCountryPickerSheet(
                   context,
                   title: Myapp9Localizations.of(context)!.chooseCountry,
@@ -420,8 +546,8 @@ class _LoginPageState extends State<LoginPhonePage>
                   child: MyTextField(
                     key: const Key('phone'),
                     focusNode: _nodeText1,
+                    maxLength:country?.nationalNumberLengths.last ?? 11,
                     controller: _phoneController,
-                    maxLength: 11,
                     keyboardType: TextInputType.phone,
                     hintText:
                         Myapp9Localizations.of(context)!.inputUsernameHint,
@@ -432,47 +558,46 @@ class _LoginPageState extends State<LoginPhonePage>
               ],
             ),
           ),
-          Visibility(visible: _captchaVisable, child: Gaps.vGap16),
-          Opacity(
-            opacity: _captchaVisable ? 1 : 0,
-            child: Container(
-              height: _captchaVisable ? 28 : 0,
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey)),
-              child: MyTextField(
-                focusNode: _nodeText3,
-                controller: _captchaController,
-                maxLength: 6,
-                hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
-                image: _image,
-                getCaptcha: () {
-                  if (_phoneController.text.isEmpty ||
-                      _phoneController.text.length < 11) {
-                    Toast.show(
-                        Myapp9Localizations.of(context)!.inputPhoneInvalid);
-                    return Future<bool>.value(false);
-                  } else {
-                    return _captcha();
-                  }
-                },
-              ),
-            ),
-          ),
+          // Visibility(visible: _captchaVisable, child: Gaps.vGap16),
+          // Opacity(
+          //   opacity: _captchaVisable ? 1 : 0,
+          //   child: Container(
+          //     height: _captchaVisable ? 28 : 0,
+          //     padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(8),
+          //         border: Border.all(color: Colors.grey)),
+          //     child: MyTextField(
+          //       focusNode: _nodeText3,
+          //       controller: _captchaController,
+          //       maxLength: 6,
+          //       hintText: Myapp9Localizations.of(context)!.inputCaptchaHint,
+          //       image: _image,
+          //       getCaptcha: () {
+          //         if (_phoneController.text.isEmpty ||
+          //             _phoneController.text.length < 11) {
+          //           Toast.show(
+          //               Myapp9Localizations.of(context)!.inputPhoneInvalid);
+          //           return Future<bool>.value(false);
+          //         } else {
+          //           return _captcha();
+          //         }
+          //       },
+          //     ),
+          //   ),
+          // ),
           Gaps.vGap24,
           MyButton(
             key: const Key('login'),
             onPressed: () {
-              if (_phoneController.text.isEmpty ||
-                  _phoneController.text.length < 11) {
+              if(country == null){
+                Toast.show('请选择您所在的国家');
+                return;
+              }
+              if (_phoneController.text.isEmpty || _phoneController.text.length < country!.nationalNumberLengths.first || _phoneController.text.length > country!.nationalNumberLengths.last) {
                 Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
-              } else if (_captchaVisable &&
-                  (_captchaController.text.isEmpty ||
-                      _captchaController.text.length < 4)) {
-                Toast.show(
-                    Myapp9Localizations.of(context)!.inputCaptchaInvalid);
-              } else {
+                return;
+              }else {
                 _showCallPhoneDialog(
                     context, _phoneController.text, country!.dialCode);
               }

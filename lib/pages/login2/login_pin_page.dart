@@ -33,9 +33,10 @@ import 'package:myapp9/util/theme_utils.dart';
 
 /// design/1注册登录/index.html
 class LoginPinPage extends StatefulWidget {
-  const LoginPinPage({Key? key, this.phone, this.dialCode}) : super(key: key);
-  final String? phone;
-  final String? dialCode;
+  const LoginPinPage({Key? key, required this.phone, required this.dialCode, required this.verificationKey}) : super(key: key);
+  final String phone;
+  final String dialCode;
+  final String verificationKey;
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -87,6 +88,9 @@ class _LoginPageState extends State<LoginPinPage>
       /// 显示状态栏和导航栏
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
     });
+    setState(() {
+      _verificationKey = widget.verificationKey;
+    });
     _phoneController.text = SpUtil.getString(Constant.phone).nullSafe;
 
   }
@@ -129,6 +133,8 @@ class _LoginPageState extends State<LoginPinPage>
       _captchaVisable = true;
       _image = _image;
     });
+    _showSelectAccountTypeDialog(context, _image);
+
   }
 
   @override
@@ -192,8 +198,7 @@ class _LoginPageState extends State<LoginPinPage>
   Future<bool> _verificationCodes() async {
     final String phone = _phoneController.text;
     final String captchaCode = _captchaController.text;
-    _isSendCode = await _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
-    return _isSendCode;
+    return _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
   }
 
   ///发送图片验证码
@@ -202,16 +207,130 @@ class _LoginPageState extends State<LoginPinPage>
   }
 
   ///登录
-  void _login() {
-    SpUtil.putString(Constant.phone, _phoneController.text);
-    final String name = _phoneController.text;
-    SpUtil.putString(Constant.phone, name);
+  void _login(String otp, String verificationKey) {
+    String phone = SpUtil.getString(Constant.phone)!;
+    _loginPagePresenter.login(phone, verificationKey, otp, false);
   }
   void _dialogSelect() {
 
     NavigatorUtils.goBack(context);
   }
-  void _showSelectAccountTypeDialog(Image image) {
+
+  void _showSelectAccountTypeDialog(
+      BuildContext context, Image image) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: const Text('We will be verifying the phone number:'),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
+              Gaps.vGap24,
+              Container(
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    image,
+                    Gaps.hGap16,
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: ()=>_captcha(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.refresh,
+                              color:Colours.app_main,
+                              size: 18,
+                            ),
+                            Text('Refresh', style: TextStyle(color: Colours.app_main)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gaps.vGap12,
+              Row(
+                children: [
+                  Container(
+                    width: 300,
+                    child: TextField(
+                      focusNode: _nodeText3,
+                      maxLength: 6,
+                      autofocus: true,
+                      controller: _captchaController,
+                      textInputAction: TextInputAction.done,
+                      style: TextStyle(
+                        fontSize: 18.0, // 设置输入文本的字体大小
+                      ),
+                      decoration: InputDecoration(
+                        // contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
+                        // labelText: '输入' ,
+                        hintText: 'Type the word above' ,
+                        counterText: '',
+                        // focusedBorder: UnderlineInputBorder(
+                        //   borderSide: BorderSide(
+                        //     color: Colors.transparent,
+                        //     width: 0.8,
+                        //   ),
+                        // ),
+                        // enabledBorder: UnderlineInputBorder(
+                        //   borderSide: BorderSide(
+                        //     color: Colors.transparent,
+                        //     width: 0.8,
+                        //   ),
+                        // ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Gaps.vGap24,
+              MyButton(
+                key: const Key('login'),
+                onPressed: () {
+                  // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+                  // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
+                },
+                text: "Submit",
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => NavigatorUtils.goBack(context),
+              child: const Text('Edit'),
+            ),
+            TextButton(
+              onPressed: () async {
+                await _verificationCodes();
+
+              },
+              style: ButtonStyle(
+                // 按下高亮颜色
+                overlayColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).colorScheme.error.withOpacity(0.2)),
+              ),
+              child: Text(
+                'OK',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSelectAccountTypeDialog2(Image image) {
+    setState(() {
+      _captchaVisable = true;
+    });
     /// 关闭输入法，避免弹出
     FocusManager.instance.primaryFocus?.unfocus();
     showElasticDialog<void>(
@@ -230,16 +349,19 @@ class _LoginPageState extends State<LoginPinPage>
                   image,
                   Gaps.hGap16,
                   Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.refresh,
-                          color:Colours.app_main,
-                          size: 18,
-                        ),
-                        Text('Refresh', style: TextStyle(color: Colours.app_main)),
-                      ],
+                    child: GestureDetector(
+                      onTap: ()=>_captcha(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.refresh,
+                            color:Colours.app_main,
+                            size: 18,
+                          ),
+                          Text('Refresh', style: TextStyle(color: Colours.app_main)),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -399,7 +521,7 @@ class _LoginPageState extends State<LoginPinPage>
                       focusNode: focusNode,
                       defaultPinTheme: defaultPinTheme,
                       validator: (value) {
-                        return value == '2222' ? null : 'Pin is incorrect';
+                        _login(value?? '', _verificationKey);
                       },
                       hapticFeedbackType: HapticFeedbackType.lightImpact,
                       onCompleted: (pin) {
@@ -451,8 +573,9 @@ class _LoginPageState extends State<LoginPinPage>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await _captcha();
-                    _showSelectAccountTypeDialog(_image);
+                    pinController.clear();
+                    FocusScope.of(context).requestFocus(focusNode);
+                    await _verificationCodes();
                   },
                   child: Text(
                     'Resend',
