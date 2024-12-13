@@ -124,17 +124,17 @@ class _LoginPageState extends State<LoginPinPage>
 
   @override
   void showCaptcha(String captchaKey, String captchaImageContent) {
-
     _captchaKey = captchaKey;
-    List<int> imageBytes = base64Decode(captchaImageContent.split(",").last);
-    Uint8List uint8List = Uint8List.fromList(imageBytes);
+    final List<int> imageBytes =
+    base64Decode(captchaImageContent.split(",").last);
+    final Uint8List uint8List = Uint8List.fromList(imageBytes);
     _image = Image.memory(uint8List);
     setState(() {
       _captchaVisable = true;
       _image = _image;
     });
-    _showSelectAccountTypeDialog(context, _image);
-
+    _showCaptchaDialog(
+        context, _image, _phoneController.text, _captchaKey);
   }
 
   @override
@@ -216,112 +216,124 @@ class _LoginPageState extends State<LoginPinPage>
     NavigatorUtils.goBack(context);
   }
 
-  void _showSelectAccountTypeDialog(
-      BuildContext context, Image image) {
+  void _showCaptchaDialog(
+      BuildContext context, Image image, String phone, String captchaKey) {
     showDialog<void>(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
-          // title: const Text('We will be verifying the phone number:'),
+          insetPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 16),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
-              Gaps.vGap24,
               Container(
-                width: double.infinity,
-                child: Row(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.grey.shade200,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'To continue, type the characters you see in the picture.',
+                          style: Theme.of(context).textTheme.titleSmall),
+                      Gaps.vGap4,
+                      Text(
+                          'Sorry, we just need to make sure you\'re not a  robot.',
+                          style: Theme.of(context).textTheme.titleSmall),
+                    ],
+                  )),
+              Gaps.vGap12,
+              Container(
+                padding: EdgeInsets.all(10),
+                color: Colors.grey.shade200,
+                child: Column(
                   children: [
                     image,
-                    Gaps.hGap16,
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: ()=>_captcha(),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.refresh,
-                              color:Colours.app_main,
-                              size: 18,
-                            ),
-                            Text('Refresh', style: TextStyle(color: Colours.app_main)),
-                          ],
+                    Gaps.vGap4,
+                    Row(
+                      children: [
+                        const Expanded(child: Gaps.hGap16),
+                        GestureDetector(
+                          onTap: () {
+                            _captchaController.clear();
+                            NavigatorUtils.goBack(context);
+                            _captcha();
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.refresh,
+                                color: Colours.app_main,
+                                size: 18,
+                              ),
+                              Text('Try different image',
+                                  style: TextStyle(color: Colours.app_main)),
+                            ],
+                          ),
                         ),
+                      ],
+                    ),
+                    Gaps.vGap4,
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 270,
+                          child: TextField(
+                            focusNode: _nodeText3,
+                            maxLength: 6,
+                            autofocus: true,
+                            controller: _captchaController,
+                            textInputAction: TextInputAction.done,
+                            style: const TextStyle(
+                              fontSize: 18.0, // 设置输入文本的字体大小
+                            ),
+                            decoration: const InputDecoration(
+                              hintText: 'Type the word above',
+                              counterText: '',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gaps.vGap24,
+                    MyButton(
+                      key: const Key('login'),
+                      onPressed: () async {
+                        if (_captchaController.text.isEmpty ||
+                            _captchaController.text.length != 5) {
+                          Toast.show('请输入五位字符');
+                          return;
+                        }
+                        final String captchaCode = _captchaController.text;
+                        _captchaController.clear();
+                        NavigatorUtils.goBack(context);
+                        await _loginPagePresenter.verificationCodes(
+                            phone, false,
+                            captchaKey: _captchaKey, captchaCode: captchaCode);
+                      },
+                      text: 'Submit',
+                    ),
+                    Gaps.vGap10,
+                    GestureDetector(
+                      onTap: () {
+                        _captchaController.clear();
+                        NavigatorUtils.goBack(context);
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Cancel',
+                              style: TextStyle(color: Colours.app_main)),
+                        ],
                       ),
                     ),
+                    Gaps.vGap4,
                   ],
                 ),
               ),
-              Gaps.vGap12,
-              Row(
-                children: [
-                  Container(
-                    width: 300,
-                    child: TextField(
-                      focusNode: _nodeText3,
-                      maxLength: 6,
-                      autofocus: true,
-                      controller: _captchaController,
-                      textInputAction: TextInputAction.done,
-                      style: TextStyle(
-                        fontSize: 18.0, // 设置输入文本的字体大小
-                      ),
-                      decoration: InputDecoration(
-                        // contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
-                        // labelText: '输入' ,
-                        hintText: 'Type the word above' ,
-                        counterText: '',
-                        // focusedBorder: UnderlineInputBorder(
-                        //   borderSide: BorderSide(
-                        //     color: Colors.transparent,
-                        //     width: 0.8,
-                        //   ),
-                        // ),
-                        // enabledBorder: UnderlineInputBorder(
-                        //   borderSide: BorderSide(
-                        //     color: Colors.transparent,
-                        //     width: 0.8,
-                        //   ),
-                        // ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Gaps.vGap24,
-              MyButton(
-                key: const Key('login'),
-                onPressed: () {
-                  // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
-                  // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
-                },
-                text: "Submit",
-              ),
             ],
           ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => NavigatorUtils.goBack(context),
-              child: const Text('Edit'),
-            ),
-            TextButton(
-              onPressed: () async {
-                await _verificationCodes();
-
-              },
-              style: ButtonStyle(
-                // 按下高亮颜色
-                overlayColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).colorScheme.error.withOpacity(0.2)),
-              ),
-              child: Text(
-                'OK',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
-            ),
-          ],
         );
       },
     );
@@ -499,7 +511,7 @@ class _LoginPageState extends State<LoginPinPage>
                 style: Theme.of(context).textTheme.titleSmall!.merge(TextStyle( fontSize: 14.0)),
               ),
               GestureDetector(
-                onTap: () => Utils.launchWhatsAppURL(_loginPageInfo?.contactWa ?? ''),
+                onTap: () => NavigatorUtils.goBack(context),
                 child: Text(
                   ' Wrong number?',
                   style: Theme.of(context).textTheme.titleSmall!.merge(const TextStyle( fontSize: 14.0,decoration: TextDecoration.underline,color: Colours.app_main)),

@@ -115,14 +115,16 @@ class _LoginPageState extends State<LoginPhonePage>
   @override
   void showCaptcha(String captchaKey, String captchaImageContent) {
     _captchaKey = captchaKey;
-    final List<int> imageBytes = base64Decode(captchaImageContent.split(",").last);
+    final List<int> imageBytes =
+        base64Decode(captchaImageContent.split(",").last);
     final Uint8List uint8List = Uint8List.fromList(imageBytes);
     _image = Image.memory(uint8List);
     setState(() {
       _captchaVisable = true;
       _image = _image;
     });
-    _showSelectAccountTypeDialog(context, _image, _phoneController.text,_captchaKey);
+    _showCaptchaDialog(
+        context, _image, _phoneController.text, _captchaKey);
   }
 
   @override
@@ -161,6 +163,7 @@ class _LoginPageState extends State<LoginPhonePage>
       });
     }
   }
+
   ///发送图片验证码
   Future<bool> _captcha() async {
     final String phone = _phoneController.text;
@@ -171,112 +174,134 @@ class _LoginPageState extends State<LoginPhonePage>
   Future<bool> _verificationCodes() async {
     final String phone = _phoneController.text;
     final String captchaCode = _captchaController.text;
-    return _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
-
+    return _loginPagePresenter.verificationCodes(phone, false,
+        captchaKey: _captchaKey, captchaCode: captchaCode);
   }
+
   ///展示图片验证码
-  void _showSelectAccountTypeDialog(
+  void _showCaptchaDialog(
       BuildContext context, Image image, String phone, String captchaKey) {
     showDialog<void>(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 16),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
-              Gaps.vGap24,
               Container(
-                width: double.infinity,
-                child: Row(
+                  padding: EdgeInsets.all(10),
+                  color: Colors.grey.shade200,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          'To continue, type the characters you see in the picture.',
+                          style: Theme.of(context).textTheme.titleSmall),
+                      Gaps.vGap4,
+                      Text(
+                          'Sorry, we just need to make sure you\'re not a  robot.',
+                          style: Theme.of(context).textTheme.titleSmall),
+                    ],
+                  )),
+              Gaps.vGap12,
+              Container(
+                padding: EdgeInsets.all(10),
+                color: Colors.grey.shade200,
+                child: Column(
                   children: [
                     image,
-                    Gaps.hGap16,
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: (){
-                          _captchaController.clear();
-                          NavigatorUtils.goBack(context);
-                          _captcha();
+                    Gaps.vGap4,
+                    Row(
+                      children: [
+                        const Expanded(child: Gaps.hGap16),
+                        GestureDetector(
+                          onTap: () {
+                            _captchaController.clear();
+                            NavigatorUtils.goBack(context);
+                            _captcha();
                           },
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.refresh,
-                              color:Colours.app_main,
-                              size: 18,
-                            ),
-                            Text('Refresh', style: TextStyle(color: Colours.app_main)),
-                          ],
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.refresh,
+                                color: Colours.app_main,
+                                size: 18,
+                              ),
+                              Text('Try different image',
+                                  style: TextStyle(color: Colours.app_main)),
+                            ],
+                          ),
                         ),
+                      ],
+                    ),
+                    Gaps.vGap4,
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 270,
+                          child: TextField(
+                            focusNode: _nodeText3,
+                            maxLength: 6,
+                            autofocus: true,
+                            controller: _captchaController,
+                            textInputAction: TextInputAction.done,
+                            style: const TextStyle(
+                              fontSize: 18.0, // 设置输入文本的字体大小
+                            ),
+                            decoration: const InputDecoration(
+                              hintText: 'Type the word above',
+                              counterText: '',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gaps.vGap24,
+                    MyButton(
+                      key: const Key('login'),
+                      onPressed: () async {
+                        if (_captchaController.text.isEmpty ||
+                            _captchaController.text.length != 5) {
+                          Toast.show('请输入五位字符');
+                          return;
+                        }
+                        final String captchaCode = _captchaController.text;
+                        _captchaController.clear();
+                        NavigatorUtils.goBack(context);
+                        await _loginPagePresenter.verificationCodes(
+                            phone, false,
+                            captchaKey: _captchaKey, captchaCode: captchaCode);
+                      },
+                      text: 'Submit',
+                    ),
+                    Gaps.vGap10,
+                    GestureDetector(
+                      onTap: () {
+                        _captchaController.clear();
+                        NavigatorUtils.goBack(context);
+                      },
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Cancel',
+                              style: TextStyle(color: Colours.app_main)),
+                        ],
                       ),
                     ),
+                    Gaps.vGap4,
                   ],
                 ),
               ),
-              Gaps.vGap12,
-              Row(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: TextField(
-                      focusNode: _nodeText3,
-                      maxLength: 6,
-                      autofocus: true,
-                      controller: _captchaController,
-                      textInputAction: TextInputAction.done,
-                      style: const TextStyle(
-                        fontSize: 18.0, // 设置输入文本的字体大小
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: 'Type the word above' ,
-                        counterText: '',
-
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Gaps.vGap24,
-              MyButton(
-                key: const Key('login'),
-                onPressed: () async {
-                  final String captchaCode = _captchaController.text;
-                  _captchaController.clear();
-                  NavigatorUtils.goBack(context);
-                  await _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
-                },
-                text: "Submit",
-              ),
             ],
           ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => NavigatorUtils.goBack(context),
-              child: const Text('Edit'),
-            ),
-            TextButton(
-              onPressed: () async {
-                await _verificationCodes();
-
-              },
-              style: ButtonStyle(
-                // 按下高亮颜色
-                overlayColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).colorScheme.error.withOpacity(0.2)),
-              ),
-              child: Text(
-                'OK',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
-            ),
-          ],
         );
       },
     );
   }
+
   void _showCallPhoneDialog(
       BuildContext context, String phone, String dialCode) {
     showDialog<void>(
@@ -314,13 +339,12 @@ class _LoginPageState extends State<LoginPhonePage>
             ),
             TextButton(
               onPressed: () async {
-
                 // await _verificationCodes();
                 // NavigatorUtils.push(context,
                 //     '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}&verificationKey=123',
                 //     replace: true);
                 _isSendCode = await _verificationCodes();
-                if(_isSendCode){
+                if (_isSendCode) {
                   NavigatorUtils.push(context,
                       '${LoginRouter.loginPinPage}?phone=$phone&dialCode=${country!.dialCode}&verificationKey=123',
                       replace: true);
@@ -423,12 +447,15 @@ class _LoginPageState extends State<LoginPhonePage>
                   Expanded(
                     child: Text(country?.name != null
                         ? country!.isoShortNameByLocale[context
-                            .read<LocaleProvider>()
-                            .locale!
-                            .languageCode == 'zh' ? 'zh_CN': context
-                        .read<LocaleProvider>()
-                        .locale!
-                        .languageCode]!
+                                    .read<LocaleProvider>()
+                                    .locale!
+                                    .languageCode ==
+                                'zh'
+                            ? 'zh_CN'
+                            : context
+                                .read<LocaleProvider>()
+                                .locale!
+                                .languageCode]!
                         : 'Choose a country'),
                   ),
                   Gaps.hGap12,
@@ -452,7 +479,8 @@ class _LoginPageState extends State<LoginPhonePage>
               country = await AdvanceCountryPicker().showCountryPickerSheet(
                   context,
                   title: Myapp9Localizations.of(context)!.chooseCountry,
-                  searchHintText: Myapp9Localizations.of(context)!.searchCountry,
+                  searchHintText:
+                      Myapp9Localizations.of(context)!.searchCountry,
                   local: local,
                   filteredCountries: [
                     '229',
@@ -546,7 +574,7 @@ class _LoginPageState extends State<LoginPhonePage>
                   child: MyTextField(
                     key: const Key('phone'),
                     focusNode: _nodeText1,
-                    maxLength:country?.nationalNumberLengths.last ?? 11,
+                    maxLength: country?.nationalNumberLengths.last ?? 11,
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
                     hintText:
@@ -590,14 +618,18 @@ class _LoginPageState extends State<LoginPhonePage>
           MyButton(
             key: const Key('login'),
             onPressed: () {
-              if(country == null){
+              if (country == null) {
                 Toast.show('请选择您所在的国家');
                 return;
               }
-              if (_phoneController.text.isEmpty || _phoneController.text.length < country!.nationalNumberLengths.first || _phoneController.text.length > country!.nationalNumberLengths.last) {
+              if (_phoneController.text.isEmpty ||
+                  _phoneController.text.length <
+                      country!.nationalNumberLengths.first ||
+                  _phoneController.text.length >
+                      country!.nationalNumberLengths.last) {
                 Toast.show(Myapp9Localizations.of(context)!.inputPhoneInvalid);
                 return;
-              }else {
+              } else {
                 _showCallPhoneDialog(
                     context, _phoneController.text, country!.dialCode);
               }
