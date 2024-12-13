@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPinPage>
   void loginSuccess(AUserEntity userEntity) {
     SpUtil.putString(Constant.phone, _phoneController.text);
     // showToast("登录成功");
-    NavigatorUtils.push(context, Routes.home, replace: true);
+    NavigatorUtils.push(context, Routes.home, clearStack: true);
   }
 
   @override
@@ -472,7 +472,7 @@ class _LoginPageState extends State<LoginPinPage>
                 const SizedBox(height: 44),
                 Text(
                   'Didn’t receive code?',
-                  style: Theme.of(context).textTheme.titleSmall!.merge(const TextStyle( fontSize: 15.0)),
+                  style: Theme.of(context).textTheme.titleSmall!.merge(const TextStyle( fontSize: 15.0, fontWeight: FontWeight.w500)),
                 ),
                 GestureDetector(
                   onTap: () async {
@@ -493,15 +493,6 @@ class _LoginPageState extends State<LoginPinPage>
             ),
           ),
           Gaps.vGap24,
-          MyButton(
-            key: const Key('login'),
-            onPressed: () {
-              formKey.currentState!.validate();
-              // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
-              // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
-            },
-            text: "Validate",
-          ),
           // Gaps.vGap12,
           Container(
             height: 40.0,
