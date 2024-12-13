@@ -166,6 +166,7 @@ class _LoginPageState extends State<LoginPhonePage>
 
   ///发送图片验证码
   Future<bool> _captcha() async {
+    //todo 如果发送短信的时候发现需要验证码，则直接返回图片验证码，无需再单独请求
     final String phone = _phoneController.text;
     return await _loginPagePresenter.captchas(phone, false);
   }
@@ -321,7 +322,7 @@ class _LoginPageState extends State<LoginPhonePage>
               ),
               Gaps.vGap12,
               Text(
-                '(${country?.dialCode != null ? country!.dialCode : ''})  $phone',
+                '(${country?.dialCode != null ? country!.dialCode : ''})  ${Utils.formatPhoneNumber(phone)}',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 20.0,

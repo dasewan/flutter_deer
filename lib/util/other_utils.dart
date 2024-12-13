@@ -12,6 +12,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
 
+  static String formatPhoneNumber(String phoneNumber) {
+    return '${phoneNumber.substring(0, 3)}-${phoneNumber.substring(3, 7)}-${phoneNumber.substring(7)}';
+  }
+
   /// 打开链接
   static Future<void> launchWebURL(String url) async {
     final Uri uri = Uri.parse(url);
@@ -121,3 +125,5 @@ Widget _buildDialogTransitions(BuildContext context, Animation<double> animation
 extension StringExtension on String? {
   String get nullSafe => this ?? '';
 }
+
+

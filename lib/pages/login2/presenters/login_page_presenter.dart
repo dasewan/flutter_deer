@@ -74,17 +74,17 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     loginInfo.addAll({...deviceStaticInfo, ...deviceDynamicInfo});
     FormData formData = FormData.fromMap(loginInfo);
     requestNetwork<AuthorizationsStoreEntity>(Method.post, url: HttpApi.authorizations, params: formData, onSuccess: (data) async {
-      Map<String, dynamic> allDeviceInfo = {};
-      Map<String, dynamic> dynamicInfo = {};
+      // Map<String, dynamic> allDeviceInfo = {};
+      // Map<String, dynamic> dynamicInfo = {};
       if (data != null) {
         int lastFetchAt = SpUtil.getInt(Constant.lastDeviceInfoFetchAt, defValue: 0)!;
-        allDeviceInfo = SpUtil.getObject(Constant.allDeviceInfo) as Map<String, dynamic> ?? {};
-        dynamicInfo = SpUtil.getObject(Constant.dynamicInfo) as Map<String, dynamic> ?? {};
+        // allDeviceInfo = SpUtil.getObject(Constant.allDeviceInfo) as Map<String, dynamic> ?? {};
+        // dynamicInfo = SpUtil.getObject(Constant.dynamicInfo) as Map<String, dynamic> ?? {};
 
         SpUtil.clear();
         SpUtil.putInt(Constant.lastDeviceInfoFetchAt, lastFetchAt);
-        SpUtil.putObject(Constant.allDeviceInfo, allDeviceInfo);
-        SpUtil.putObject(Constant.dynamicInfo, dynamicInfo);
+        // SpUtil.putObject(Constant.allDeviceInfo, allDeviceInfo);
+        // SpUtil.putObject(Constant.dynamicInfo, dynamicInfo);
         SpUtil.putString(Constant.accessToken, data.passport!.accessToken!);
         SpUtil.putString(Constant.refreshToken, data.passport!.refreshToken!);
         SpUtil.putString(Constant.phone, data.data!.aPhone!);
