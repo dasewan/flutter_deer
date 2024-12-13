@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:advance_country_picker/advance_country_picker.dart';
@@ -55,13 +56,9 @@ class _LoginPageState extends State<LoginPinPage>
   final FocusNode _nodeText1 = FocusNode();
   final FocusNode _nodeText2 = FocusNode();
   final FocusNode _nodeText3 = FocusNode();
-  bool _clickable = false;
   bool _codeClickable = false;
   String _verificationKey = '';
   String _captchaKey = '';
-  bool _captchaVisable = false;
-  bool _privacyAgreement = false;
-  bool _isSendCode = false;
   bool _phoneCorrect = false;
   bool _otpLengthCorrect = false;
   IndexDataLoginPageInfo? _loginPageInfo;
@@ -69,6 +66,10 @@ class _LoginPageState extends State<LoginPinPage>
   Image _image = Image.memory(Uint8List(0));
   Country? country;
   bool showError = false;
+  final int _second = 59;
+  late int _currentSecond = 59;
+  StreamSubscription? _subscription;
+  bool _clickable = false;
 
 
 
@@ -93,6 +94,16 @@ class _LoginPageState extends State<LoginPinPage>
     });
     _phoneController.text = SpUtil.getString(Constant.phone).nullSafe;
 
+    setState(() {
+      _currentSecond = _second;
+      _clickable = false;
+    });
+    _subscription = Stream.periodic(const Duration(seconds: 1), (int i) => i).take(_second).listen((int i) {
+      setState(() {
+        _currentSecond = _second - i - 1;
+        _clickable = _currentSecond < 1;
+      });
+    });
   }
 
   @override
@@ -112,6 +123,16 @@ class _LoginPageState extends State<LoginPinPage>
   @override
   void verificationCodesSuccess(String verificationKey) {
     _verificationKey = verificationKey;
+    setState(() {
+      _currentSecond = _second;
+      _clickable = false;
+    });
+    _subscription = Stream.periodic(const Duration(seconds: 1), (int i) => i).take(_second).listen((int i) {
+      setState(() {
+        _currentSecond = _second - i - 1;
+        _clickable = _currentSecond < 1;
+      });
+    });
   }
 
   ///登录成功
@@ -130,7 +151,6 @@ class _LoginPageState extends State<LoginPinPage>
     final Uint8List uint8List = Uint8List.fromList(imageBytes);
     _image = Image.memory(uint8List);
     setState(() {
-      _captchaVisable = true;
       _image = _image;
     });
     _showCaptchaDialog(
@@ -179,13 +199,6 @@ class _LoginPageState extends State<LoginPinPage>
         _otpLengthCorrect = otpLengthCorrect;
       });
     }
-    //状态不一样再刷新，避免不必要的setState
-/*    if (clickable != _clickable) {
-      setState(() {
-        _clickable = clickable;
-      });
-    }*/
-
     //发送otp是否可以点击
     if (codeClickable != _codeClickable) {
       setState(() {
@@ -339,131 +352,9 @@ class _LoginPageState extends State<LoginPinPage>
     );
   }
 
-  void _showSelectAccountTypeDialog2(Image image) {
-    setState(() {
-      _captchaVisable = true;
-    });
-    /// 关闭输入法，避免弹出
-    FocusManager.instance.primaryFocus?.unfocus();
-    showElasticDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        const OutlinedBorder buttonShape = RoundedRectangleBorder();
-        final Widget content = Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('To continue, type the characters you see in the picture.', style: Theme.of(context).textTheme.titleSmall),
-            Gaps.vGap24,
-            Container(
-              width: double.infinity,
-              child: Row(
-                children: [
-                  image,
-                  Gaps.hGap16,
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: ()=>_captcha(),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.refresh,
-                            color:Colours.app_main,
-                            size: 18,
-                          ),
-                          Text('Refresh', style: TextStyle(color: Colours.app_main)),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Gaps.vGap12,
-            Row(
-              children: [
-                Container(
-                  width: 300,
-                  child: TextField(
-                    focusNode: _nodeText3,
-                    maxLength: 6,
-                    autofocus: true,
-                    controller: _captchaController,
-                    textInputAction: TextInputAction.done,
-                    style: TextStyle(
-                      fontSize: 18.0, // 设置输入文本的字体大小
-                    ),
-                    decoration: InputDecoration(
-                      // contentPadding: const EdgeInsets.symmetric(vertical: 16.0),
-                      // labelText: '输入' ,
-                      hintText: 'Type the word above' ,
-                      counterText: '',
-                      // focusedBorder: UnderlineInputBorder(
-                      //   borderSide: BorderSide(
-                      //     color: Colors.transparent,
-                      //     width: 0.8,
-                      //   ),
-                      // ),
-                      // enabledBorder: UnderlineInputBorder(
-                      //   borderSide: BorderSide(
-                      //     color: Colors.transparent,
-                      //     width: 0.8,
-                      //   ),
-                      // ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Gaps.vGap24,
-            MyButton(
-              key: const Key('login'),
-              onPressed: () {
-                // NavigatorUtils.push(context, LoginRouter.loginPhonePage);
-                // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
-              },
-              text: "Submit",
-            ),
-          ],
-        );
-
-        final Widget decoration = Container(
-          decoration: BoxDecoration(
-            color: context.dialogBackgroundColor,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          width: 340.0,
-          height: 330.0,
-          padding: const EdgeInsets.only(top: 68,bottom: 18, left: 16, right: 16),
-          child: TextButtonTheme(
-            data: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                // 文字颜色
-                foregroundColor: Theme.of(context).primaryColor,
-                // 按钮大小
-                minimumSize: Size.infinite,
-                // 修改默认圆角
-                shape: buttonShape,
-              ),
-            ),
-            child: content,
-          ),
-        );
-
-        return Material(
-          type: MaterialType.transparency,
-          child: Align(
-            alignment: Alignment(0.0, -0.56),
-            child: decoration,
-          ),
-        );
-      },
-    );
-  }
-
-
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
     const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
@@ -585,12 +476,16 @@ class _LoginPageState extends State<LoginPinPage>
                 ),
                 GestureDetector(
                   onTap: () async {
+                    if(!_clickable){
+                      Toast.show('$_currentSecond秒后才能重新发送');
+                      return;
+                    }
                     pinController.clear();
                     FocusScope.of(context).requestFocus(focusNode);
                     await _verificationCodes();
                   },
                   child: Text(
-                    'Resend',
+                    _clickable ? 'Resend' : 'You may request a new code in 0:$_currentSecond s',
                     style: Theme.of(context).textTheme.titleSmall!.merge(const TextStyle( fontSize: 15.0,decoration: TextDecoration.underline,color: Colours.app_main)),
                   ),
                 ),
