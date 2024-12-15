@@ -9,6 +9,7 @@ import 'package:myapp9/pages/sign/router/sign_router.dart';
 import 'package:myapp9/pages/sign/widgets/confirm_dialog.dart';
 import 'package:myapp9/pages/sign/widgets/product_widget.dart';
 import 'package:myapp9/providers/sign_provider.dart';
+import 'package:myapp9/res/gaps.dart';
 import 'package:myapp9/routers/fluro_navigator.dart';
 import 'package:myapp9/util/other_utils.dart';
 import 'package:myapp9/widgets/click_item.dart';
@@ -101,16 +102,42 @@ class _SignPageState extends State<SignPage>
           padding: const EdgeInsets.symmetric(vertical: 0.0),
           bottomButton: Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
-            child: MyButton(
-              onPressed: () {
-                showDialog<void>(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (_) => ConfirmDialog(onPressed: (id) {
-                          dBorrowsStore(id);
-                        }));
-              },
-              text: Myapp9Localizations.of(context)!.apply,
+            child: Column(
+              children: [
+                MyButton(
+                  onPressed: () {
+                    showDialog<void>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (_) => ConfirmDialog(onPressed: (id) {
+                              dBorrowsStore(id);
+                            }));
+                  },
+                  text: Myapp9Localizations.of(context)!.apply,
+                ),
+                Gaps.vGap4,
+                Row(
+                  children: [
+                    Expanded(child: Gaps.hGap4),
+                    Text(
+                      'For any questions, contact via ',
+                      style: TextStyle(
+                      ),
+                    ),
+                  //todo 后台分配是个whatsapp账号，根据用户手机号来指定每个用户所属的whatsapp
+                  GestureDetector(
+                    onTap: () => Utils.launchWhatsAppURL('123123'),
+                    child: Text(
+                      'WhatsApp',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                    Expanded(child: Gaps.hGap4),
+                ],)
+              ],
             ),
           ),
           children: <Widget>[
