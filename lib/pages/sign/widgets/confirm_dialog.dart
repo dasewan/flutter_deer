@@ -56,8 +56,8 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
-                height: 120.0,
-                width: 280.0,
+                height: 150.0,
+                width: 320.0,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
                   image: DecorationImage(
@@ -67,7 +67,7 @@ class _ConfirmDialogState extends State<ConfirmDialog> {
                 ),
               ),
               Container(
-                width: 280.0,
+                width: 320.0,
                 decoration: BoxDecoration(
                   color: context.dialogBackgroundColor,
                   borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(8.0), bottomRight: Radius.circular(8.0))
