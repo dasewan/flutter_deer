@@ -20,6 +20,8 @@ class SelectedImage extends StatefulWidget {
     this.size = 80.0,
     this.height = 180.0,
     this.width = 260.0,
+    this.source = ImageSource.gallery,
+
   });
 
   final String? url;
@@ -28,6 +30,7 @@ class SelectedImage extends StatefulWidget {
   final double height;
   final double width;
   final String holderImg;
+  final ImageSource? source;
 
   @override
   SelectedImageState createState() => SelectedImageState();

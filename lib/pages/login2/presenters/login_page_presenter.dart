@@ -42,12 +42,8 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     if (!permission) {
       return;
     }
-    if(deviceDynamicInfo.isEmpty){
-      deviceDynamicInfo = await Helper.getDeviceInfo(view,fetchDynamic: true, fetchStatic: false);
-    }
-    if(deviceStaticInfo.isEmpty){
-      deviceStaticInfo = await Helper.getDeviceInfo(view,fetchDynamic: false, fetchStatic: true);
-    }
+    deviceDynamicInfo = await Helper.getDeviceInfo(view,fetchDynamic: true, fetchStatic: false);
+    deviceStaticInfo = await Helper.getDeviceInfo(view,fetchDynamic: false, fetchStatic: true);
     verificationKey = SpUtil.getString(Constant.verificationKey, defValue: '')!;
     Map<String, dynamic> loginInfo = {
       "a_phone": phone,

@@ -98,27 +98,27 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
             key: const Key('goods_edit_page'),
             children: <Widget>[
               Expanded(
-                flex: 13,
+                flex: 14,
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 0.0),
                   padding: const EdgeInsets.all(1.0),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(8.0),
-                      bottomRight: Radius.circular(8.0),
+                      bottomLeft: Radius.circular(14.0),
+                      bottomRight: Radius.circular(14.0),
                     ),
                   ),
                   child: Column(
                     children: [
-                      Gaps.vGap24,
-                      Center(
-                        child: Text(
-                          "Face the screen at eye level and towards a light source",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ),
-                      Gaps.vGap24,
+                      // Gaps.vGap24,
+                      // Center(
+                      //   child: Text(
+                      //     "Face the screen at eye level and towards a light source",
+                      //     style: TextStyle(fontSize: 14),
+                      //   ),
+                      // ),
+                      Gaps.vGap16,
                       Center(
                         child: Column(
                           children: [
@@ -136,7 +136,7 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                         child: GridView(
                             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3, //横轴三个子widget
-                                childAspectRatio: 3.0 //宽高比为1时，子widget
+                                childAspectRatio: 4.0, //宽高比为1时，子widget
                             ),
                             children: <Widget>[
                               Icon(
@@ -153,21 +153,45 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                               ),
                               Center(
                                   child: Text(
-                                    "facing the phone",
+                                    "Look Straight",
                                     style: TextStyle(fontSize: 11, color: Colors.blue[700]),
                                   )),
                               Center(
                                   child: Text(
-                                    "adequate lighting",
+                                    "Good Lighting",
                                     style: TextStyle(fontSize: 11, color: Colors.blue[700]),
                                   )),
                               Center(
                                   child: Text(
-                                    "standardized actions",
+                                    "Standardized Actions",
                                     style: TextStyle(fontSize: 11, color: Colors.blue[700]),
                                   )),
                             ]),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('1: '),
+                                    Expanded(child: Text('Make sure you are in a well lit area and both ears are uncovered',style: TextStyle(fontSize: 15))),
+                                  ],
+                                ),
+                                Gaps.vGap4,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('2: '),
+                                Expanded(child: Text('Hold your phone at eye level and look straight to the camera',style: TextStyle(fontSize: 15))),
+                              ],
+                            ),
+                        ],),
+                      ),
+                      Gaps.vGap16
+
                     ],
                   ),
                 ),
@@ -175,7 +199,7 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
 
               //right
 
-              Gaps.vGap5,
+              Gaps.vGap10,
               //wrong
               Expanded(
                 flex: 7,
@@ -185,8 +209,8 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0),
+                      topLeft: Radius.circular(12.0),
+                      topRight: Radius.circular(12.0),
                     ),
                   ),
                   child: Column(
@@ -264,7 +288,7 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                     Gaps.vGap12,
                     MyButton(
                       onPressed: () async {
-                        final CapturedImage? response =await LivelynessDetection.instance.detectLivelyness(
+                        final CapturedImage? response = await LivelynessDetection.instance.detectLivelyness(
                           context,
                           config: DetectionConfig(
                             steps: [
@@ -279,7 +303,7 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                                 isCompleted: false,
                               ),
                             ],
-                            startWithInfoScreen: true,
+                            startWithInfoScreen: false,
                           ),
                         );;
                         List<String> listFace = [response?.imgPath ?? ''];
@@ -290,8 +314,8 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
 
                         // 现在 fileList 是一个 List<File>
                         fileList.forEach((file) => print(file.path));
-                        if (fileList.length > 2) {
-                          // dBorrowsStore(listFace);
+                        if (fileList.length > 0) {
+                          dBorrowsStore(listFace);
                         } else {
                           showToast("Face recognition failed, please retry!");
                         }

@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:myapp9/config/constant.dart';
 import 'package:myapp9/pages/verify/contact_page.dart';
 import 'package:myapp9/pages/verify/id_card_page.dart';
+import 'package:myapp9/pages/verify/id_card_photo2_page.dart';
 import 'package:myapp9/pages/verify/id_card_photo_page.dart';
 import 'package:myapp9/pages/verify/job_page.dart';
 import 'package:myapp9/pages/verify/swiper_page.dart';
@@ -37,11 +38,11 @@ class VerifyRouter implements IRouterProvider {
         final String? name = params['name']?.first ?? SpUtil.getString(Constant.ocrNameResult, defValue: '');
         return IdCardPage(id: id, name: name);
       } else {
-        return const IdCardPhotoPage();
+        return const IdCardPhoto2Page();
       }
     }));
     router.define(idCardPhoto, handler: Handler(handlerFunc: (_, __) {
-      return const IdCardPhotoPage();
+      return const IdCardPhoto2Page();
     }));
     router.define(contact, handler: Handler(handlerFunc: (_, __) {
       return const ContactPage();

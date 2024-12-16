@@ -65,7 +65,7 @@ class _SignPageState extends State<SignPage>
   }
 
   void dBorrowsStore(int id){
-    NavigatorUtils.push(context, '${LivenessRouter.liveness}?productId=$id');
+    NavigatorUtils.push(context, '${LivenessRouter.liveness}?productId=$id', replace: true);
     // _signPagePresenter.dBorrowsStore(true, id);
   }
 

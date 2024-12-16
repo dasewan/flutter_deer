@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPinPage>
   late int _currentSecond = 59;
   StreamSubscription? _subscription;
   bool _clickable = false;
+  String _errorMsg = '';
 
 
 
@@ -144,6 +145,14 @@ class _LoginPageState extends State<LoginPinPage>
   }
 
   @override
+  void showToast(String string) {
+    Toast.show(string);
+    setState(() {
+      _errorMsg = string;
+    });
+  }
+
+  @override
   void showCaptcha(String captchaKey, String captchaImageContent) {
     _captchaKey = captchaKey;
     final List<int> imageBytes =
@@ -152,6 +161,7 @@ class _LoginPageState extends State<LoginPinPage>
     _image = Image.memory(uint8List);
     setState(() {
       _image = _image;
+      _errorMsg = '';
     });
     _showCaptchaDialog(
         context, _image, _phoneController.text, _captchaKey);
@@ -209,6 +219,9 @@ class _LoginPageState extends State<LoginPinPage>
 
   ///发送验证码
   Future<bool> _verificationCodes() async {
+    setState(() {
+      _errorMsg = '';
+    });
     final String phone = _phoneController.text;
     final String captchaCode = _captchaController.text;
     return _loginPagePresenter.verificationCodes(phone, false, captchaKey: _captchaKey, captchaCode: captchaCode);
@@ -216,11 +229,18 @@ class _LoginPageState extends State<LoginPinPage>
 
   ///发送图片验证码
   Future<bool> _captcha() async {
+    setState(() {
+      _errorMsg = '';
+    });
+    pinController.clear();
     return await _loginPagePresenter.captchas(widget.phone!, false);
   }
 
   ///登录
   void _login(String otp, String verificationKey) {
+    setState(() {
+      _errorMsg = '';
+    });
     String phone = SpUtil.getString(Constant.phone)!;
     _loginPagePresenter.login(phone, verificationKey, otp, false);
   }
@@ -415,6 +435,7 @@ class _LoginPageState extends State<LoginPinPage>
             child: Form(
               key: formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Directionality(
                     // Specify direction if desired
@@ -462,6 +483,8 @@ class _LoginPageState extends State<LoginPinPage>
                       ),
                     ),
                   ),
+                  Gaps.vGap8,
+                  Text(_errorMsg, style: TextStyle(color:Colours.red, fontSize: 16))
                 ],
               ),
             ),
@@ -469,7 +492,7 @@ class _LoginPageState extends State<LoginPinPage>
           Center(
             child: Column(
               children: [
-                const SizedBox(height: 44),
+                Gaps.vGap24,
                 Text(
                   'Didn’t receive code?',
                   style: Theme.of(context).textTheme.titleSmall!.merge(const TextStyle( fontSize: 15.0, fontWeight: FontWeight.w500)),
