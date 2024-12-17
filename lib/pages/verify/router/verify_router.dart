@@ -10,12 +10,15 @@ import 'package:myapp9/pages/verify/verify_list_page.dart';
 import 'package:myapp9/routers/i_router.dart';
 import 'package:sp_util/sp_util.dart';
 
+import '../id_card_photo3_page.dart';
 import '../loan_bank_page.dart';
 
 class VerifyRouter implements IRouterProvider {
   static String swipper = '/verify/swipper';
   static String verifyList = '/verify/verifyList';
   static String idCardPhoto = '/verify/idCardPhoto';
+  static String handIdCardPhoto = '/verify/handIdCardPhoto';
+
   static String idCard = '/verify/idCard';
   static String contact = '/verify/contact';
   static String loanBank = '/verify/loanBank';
@@ -37,12 +40,17 @@ class VerifyRouter implements IRouterProvider {
         final String? id = params['id']?.first ?? SpUtil.getString(Constant.ocrIdResult, defValue: '');
         final String? name = params['name']?.first ?? SpUtil.getString(Constant.ocrNameResult, defValue: '');
         return IdCardPage(id: id, name: name);
-      } else {
+      }else if (a == VerifyRouter.handIdCardPhoto) {
+        return const IdCardPhoto3Page();
+      }else {
         return const IdCardPhoto2Page();
       }
     }));
     router.define(idCardPhoto, handler: Handler(handlerFunc: (_, __) {
       return const IdCardPhoto2Page();
+    }));
+    router.define(handIdCardPhoto, handler: Handler(handlerFunc: (_, __) {
+      return const IdCardPhoto3Page();
     }));
     router.define(contact, handler: Handler(handlerFunc: (_, __) {
       return const ContactPage();
