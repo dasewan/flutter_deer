@@ -36,7 +36,27 @@ class TextFieldItem extends StatefulWidget {
 }
 
 class _TextFieldItemState extends State<TextFieldItem> {
-  double height = 50;
+  String? error;
+
+  OutlineInputBorder buildFocusedBorder() {
+    if (error == null ) {
+      return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.grey, width: 1.25),
+        borderRadius: BorderRadius.circular(6),
+      );
+    }
+    if (error != '') {
+      return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.red, width: 1.25),
+        borderRadius: BorderRadius.circular(6),
+      );
+    }
+
+    return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.green, width: 1.25),
+        borderRadius: BorderRadius.circular(6));
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +67,7 @@ class _TextFieldItemState extends State<TextFieldItem> {
     final Row child = Row(
       children: <Widget>[
         // Text(title),
-        Gaps.hGap16,
+        // Gaps.hGap16,
         Expanded(
           child: TextFormField(
             focusNode: widget.focusNode,
@@ -60,12 +80,10 @@ class _TextFieldItemState extends State<TextFieldItem> {
                 final String? errorText = validator(value);
                 if (errorText == null) {
                   setState(() {
-                    height = 50;
                   });
 
                 } else {
                   setState(() {
-                    height = 140;
                   });
                   return errorText; // 验证失败，返回提示信息
                 }
@@ -78,28 +96,77 @@ class _TextFieldItemState extends State<TextFieldItem> {
             readOnly: widget.readOnly,
             //style: TextStyles.textDark14,
             decoration: InputDecoration(
-              labelText: widget.title,
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: 18,
+                  horizontal: 12),
+              isDense: true,
               hintText: widget.hintText,
-              border: InputBorder.none, //去掉下划线
-              contentPadding: EdgeInsets.only(top: 14, bottom: 2),
-              //hintStyle: TextStyles.textGrayC14
+              hintStyle: TextStyle(color: Colors.black.withOpacity(.45)),
+              // labelText:
+              // widget.showLabelAboveTextField ? null : widget.labelText,
+              // labelStyle: buildLabelStyle(),
+              // errorText: widget.errorText != null && hasError && hasValidator
+              //     ? widget.errorText
+              //     : null,
+              // floatingLabelBehavior: widget.floatingLabelBehavior,
+              // fillColor: widget.fillColor,
+              // filled: widget.fillColor != null,
+              focusedBorder: buildFocusedBorder(),
+              enabledBorder: buildFocusedBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
+              // prefixIcon: widget.prefixIconData != null
+              //     ? Padding(
+              //   padding: const EdgeInsets.only(left: 12.0, right: 8),
+              //   child: Icon(
+              //     widget.prefixIconData,
+              //     color: hasFocus
+              //         ? widget.accentColor
+              //         : widget.textColor.withOpacity(.6),
+              //     size: 20,
+              //   ),
+              // )
+              //     : null,
+              prefixIconConstraints:
+              const BoxConstraints(minHeight: 24, minWidth: 24),
+              // suffixIcon: buildSuffixIcon(),
             ),
           ),
         ),
-        Gaps.hGap16
+        // Gaps.hGap16
       ],
     );
 
-    return Container(
-      height: height,
-      margin: const EdgeInsets.only(left: 15.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: Divider.createBorderSide(context, width: 0.6),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.title,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            // color: hasFocus ? currentTheme.primaryColor : Colors.grey[700],
+          ),
         ),
-      ),
-      child: child,
+        Container(
+          // height: height,
+          // margin: const EdgeInsets.only(left: 15.0),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: Divider.createBorderSide(context, width: 0.6),
+            ),
+          ),
+          child: child,
+        ),
+        Text(
+          error ?? '',
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.red,
+          ),
+        ),
+      ],
     );
   }
 

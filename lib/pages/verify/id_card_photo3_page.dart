@@ -20,16 +20,16 @@ import 'package:sp_util/sp_util.dart';
 import '../../config/constant.dart';
 
 /// design/6/index.html#artboard2
-class IdCardPhoto2Page extends StatefulWidget {
-  const IdCardPhoto2Page({Key? key}) : super(key: key);
+class IdCardPhoto3Page extends StatefulWidget {
+  const IdCardPhoto3Page({Key? key}) : super(key: key);
 
   @override
   _IdCardPhotoPageState createState() => _IdCardPhotoPageState();
 }
 
-class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
+class _IdCardPhotoPageState extends State<IdCardPhoto3Page>
     with
-        BasePageMixin<IdCardPhoto2Page, IdCardPhotoPagePresenter>,
+        BasePageMixin<IdCardPhoto3Page, IdCardPhotoPagePresenter>,
         SingleTickerProviderStateMixin
     implements IdCardPhotoIMvpView {
   late IdCardPhotoPagePresenter _idCardPhotoPagePresenter;
@@ -88,7 +88,7 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
         isCameraInitialized = false; // 标记初始化状态为 false
       });
       _initCamera(_cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.back,
+        (camera) => camera.lensDirection == CameraLensDirection.front,
       ));
     } else {
       // debugPrint("没有可用的摄像头！");
@@ -136,10 +136,10 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
     // NavigatorUtils.goBack(context);
     showToast(message);
   }
-  void _next(String path) {
-    SpUtil.putString(Constant.idCardPhotoPath, path);
-    SpUtil.putString(Constant.idCardOrPhoto, VerifyRouter.handIdCardPhoto);
-    NavigatorUtils.push(context, '${VerifyRouter.idCard}', replace: true);
+  void _next(XFile file2) {
+    String filePath = SpUtil.getString(Constant.idCardPhotoPath)!;
+    XFile file1 = XFile(filePath);
+    _idCardPhotoPagePresenter.uploadImg2(file1, file2);
   }
 
 
@@ -167,7 +167,7 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
               children: [
                 Gaps.vGap16,
                 MyButton(
-                  onPressed: _imageFile != null ? () => _next(_imageFile!.path) : _startCamera,
+                  onPressed: _imageFile != null ? () => _next(_imageFile!) : _startCamera,
                   text: _imageFile != null ? '下一步' : '开始拍照',
                 ),
                 Gaps.vGap10,
@@ -191,7 +191,7 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
             Container(
               color: Colors.transparent,
               child: Lottie.asset(
-                'assets/images/verify/id/2.json',
+                'assets/images/verify/id/3.json',
                 animate: true,
                 repeat: true,
                 reverse: false,

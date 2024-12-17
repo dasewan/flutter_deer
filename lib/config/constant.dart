@@ -134,6 +134,7 @@ class Constant {
   static const String signConfirmInfo = 'signConfirmInfo:';
   static const String preComputeInfo = 'preComputeInfo:';
   static const String idCardOrPhoto = 'idCardOrPhoto';
+  static const String idCardPhotoPath = 'idCardPhotoPath';
   static const String ocrIdResult = 'ocrIdResult';
   static const String ocrNameResult = 'ocrNameResult';
   static const String deviceInfoMap = 'deviceInfoMap:';

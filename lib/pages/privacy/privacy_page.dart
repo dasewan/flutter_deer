@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
 import 'package:myapp9/routers/fluro_navigator.dart';
 
 import '../../widgets/my_app_bar.dart';
+import '../login2/router/login_router.dart';
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({Key? key}) : super(key: key);
@@ -111,7 +112,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
             ElevatedButton(
               onPressed: _canTap
                   ? () {
-                      NavigatorUtils.goBackWithParams(context, true);
+                NavigatorUtils.push(context, LoginRouter.loginPhonePage, replace: true);
                     }
                   : null,
               child: Text(Myapp9Localizations.of(context)!.agree),

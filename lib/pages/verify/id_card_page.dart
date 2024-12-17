@@ -80,7 +80,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
   void onCreateRefuse(String message) {
     // NavigatorUtils.goBack(context);
     // NavigatorUtils.goBack(context);
-    showToast(message);
+    // showToast(message);
   }
 
   void _showDatePicker(ctx, field, ctx2) {
@@ -325,7 +325,6 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
     }
     return Container(
       padding: const EdgeInsets.only(top: 2.0),
-      height: 74,
       child: tmp3,
     );
   }
