@@ -28,7 +28,7 @@ class TextFieldItem extends StatefulWidget {
   final FocusNode? focusNode;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
-  final FieldValidator<String?> validator;
+  final List<FieldValidator> validator;
   final bool readOnly;
 
   @override
@@ -56,18 +56,22 @@ class _TextFieldItemState extends State<TextFieldItem> {
             controller: widget.controller,
             // initialValue: widget.value,
             validator: (value) {
-              final String? errorText = widget.validator(value);
-              if (errorText == null) {
-                setState(() {
-                  height = 50;
-                });
-                return null; // 验证成功，返回null
-              } else {
-                setState(() {
-                  height = 140;
-                });
-                return errorText; // 验证失败，返回提示信息
+              for(FieldValidator validator in widget.validator ){
+                final String? errorText = validator(value);
+                if (errorText == null) {
+                  setState(() {
+                    height = 50;
+                  });
+
+                } else {
+                  setState(() {
+                    height = 140;
+                  });
+                  return errorText; // 验证失败，返回提示信息
+                }
               }
+              return null; // 验证成功，返回null
+
             },
             onChanged: widget.onChanged,
             onFieldSubmitted: widget.onFieldSubmitted,

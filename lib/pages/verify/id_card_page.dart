@@ -247,7 +247,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
             hintText: field.pHintText.nullSafe,
             controller: _controllers["${field.cCode}"],
             value: value,
-            validator: MultiValidator(validator),
+            validator: validator,
             keyboardType: Constant.textInputTypeMap[field.mTextInputType.nullSafe]!,
             onChanged: (v) {
               _submittedField["${field.cCode}"] = v;
@@ -262,7 +262,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
           hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () {
             showElasticDialog<void>(
               context: context,
@@ -289,7 +289,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
           hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () {
             _showDatePicker(context, field.cCode, ctx2);
           },
@@ -300,7 +300,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
           title: field.bName.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () async {
             Result? a = await CityPickers.showCityPicker(
               context: context,
@@ -317,7 +317,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
             title: field.bName.nullSafe,
             hintText: field.pHintText.nullSafe,
             controller: _controllers["${field.cCode}"],
-            validator: MultiValidator(validator),
+            validator: validator,
             onChanged: (v) {
               _submittedField["${field.cCode}"] = v;
             });

@@ -274,7 +274,7 @@ class _LoanBankPageState extends State<LoanBankPage>
             title: field.bName.nullSafe,
             hintText: field.pHintText.nullSafe,
             controller: _controllers["${field.cCode}"],
-            validator: MultiValidator(validator),
+            validator: validator,
             keyboardType: Constant.textInputTypeMap[field.mTextInputType.nullSafe]!,
             onChanged: (v) {
               _submittedField["${field.cCode}"] = v;
@@ -289,7 +289,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () {
             showElasticDialog<void>(
               context: context,
@@ -316,7 +316,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () {
             // FocusScope.of(context).requestFocus(new FocusNode());
             _showDatePicker(context, field.cCode, ctx2);
@@ -328,7 +328,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           title: field.bName.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () async {
             // FocusScope.of(context).requestFocus(new FocusNode());
             Result? a = await CityPickers.showCityPicker(
@@ -347,7 +347,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           onTap: () async {
             try {
               final FlutterNativeContactPicker _contactPicker = FlutterNativeContactPicker();
@@ -372,7 +372,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           title: field.bName.nullSafe,
           hintText: field.pHintText.nullSafe,
           controller: _controllers["${field.cCode}"],
-          validator: MultiValidator(validator),
+          validator: validator,
           readOnly: true,
           onChanged: (v) {
             _submittedField["${field.sOnSubmitted}"] = v;

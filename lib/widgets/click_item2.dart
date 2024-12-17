@@ -33,7 +33,7 @@ class ClickItem2 extends StatefulWidget {
   final TextEditingController? controller;
   final int status;
   final String? rightChild;
-  final FieldValidator<String?> validator;
+  final List<FieldValidator> validator;
 
   @override
   State<ClickItem2> createState() => _ClickItem2State();
@@ -71,18 +71,22 @@ class _ClickItem2State extends State<ClickItem2> {
             onChanged: widget.onChanged,
             focusNode: AlwaysDisabledFocusNode(),
             validator: (value) {
-              final String? errorText = widget.validator(value);
-              if (errorText == null) {
-                setState(() {
-                  height = 50;
-                });
-                return null; // 验证成功，返回null
-              } else {
-                setState(() {
-                  height = 80;
-                });
-                return errorText; // 验证失败，返回提示信息
+              for(FieldValidator validator in widget.validator ){
+                final String? errorText = validator(value);
+                if (errorText == null) {
+                  setState(() {
+                    height = 50;
+                  });
+
+                } else {
+                  setState(() {
+                    height = 140;
+                  });
+                  return errorText; // 验证失败，返回提示信息
+                }
               }
+              return null; // 验证成功，返回null
+
             },
 
             onTap: widget.onTap,
