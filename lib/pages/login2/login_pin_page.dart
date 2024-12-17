@@ -106,6 +106,11 @@ class _LoginPageState extends State<LoginPinPage>
       });
     });
   }
+  @override
+  void dispose() {
+    _subscription?.cancel(); // 取消订阅
+    super.dispose();
+  }
 
   @override
   LoginPagePresenter createPresenter() {
@@ -184,13 +189,7 @@ class _LoginPageState extends State<LoginPinPage>
     } else {
       codeClickable = true;
       phoneCorrect = true;
-      if(_loginPageInfo!.captchaShowCount! == 0){
-        _captcha();
-        FocusScope.of(context).requestFocus(_nodeText3);
-      }else{
-        FocusScope.of(context).requestFocus(_nodeText2);
 
-      }
     }
     if (password.isEmpty || password.length < 4) {
       clickable = false;
