@@ -334,6 +334,7 @@ class _JobPageState extends State<JobPage> with BasePageMixin<JobPage, JobPagePr
       case "picker":
         tmp3 = ClickItem2(
           title: field.bName.nullSafe,
+          hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
           validator: validator,
@@ -397,7 +398,6 @@ class _JobPageState extends State<JobPage> with BasePageMixin<JobPage, JobPagePr
     }
     return Container(
       padding: const EdgeInsets.only(top: 2.0),
-      height: 74,
       child: tmp3,
     );
   }

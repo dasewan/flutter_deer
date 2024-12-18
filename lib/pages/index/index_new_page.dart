@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
+import 'package:livelyness_detection/index.dart';
 import 'package:myapp9/config/constant.dart';
 import 'package:myapp9/mvp/base_page.dart';
 import 'package:myapp9/pages/index/presenters/index_new_page_presenter.dart';
@@ -37,6 +38,7 @@ class IndexNewPage extends StatefulWidget {
 class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNewPage, IndexNewPagePresenter> implements IndexNewIMvpView {
   late IndexNewPagePresenter _indexNewPagePresenter;
   final ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController2 = ScrollController();
   bool _showTitle = false;
 
   int scrollingTextIndex = 0;
@@ -171,6 +173,8 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
   @override
   void dispose() {
     _scrollController.dispose();
+    _scrollController2.dispose();
+
     super.dispose();
   }
 
@@ -224,6 +228,34 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
   @override
   void goRepay(int productId) {
     NavigatorUtils.push(context, '${RepayRouter.repay}?productId=$productId');
+  }
+
+  /// 滑动一屏的方法
+  void _scrollOnePage() {
+    // 获取当前滚动位置
+    double currentScrollPosition = _scrollController2.position.pixels;
+    // 获取最大滚动距离
+    double maxScrollExtent = _scrollController2.position.maxScrollExtent;
+    // 获取屏幕的高度（viewport 的高度）
+    double viewportHeight = _scrollController2.position.viewportDimension;
+
+    // 判断是否到底部
+    if (currentScrollPosition >= maxScrollExtent) {
+      // 如果到底部，向上滑动一屏
+      _scrollController2.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      // 如果未到底部，向下滑动一屏
+      double targetScrollPosition = currentScrollPosition + viewportHeight;
+      _scrollController2.animateTo(
+        targetScrollPosition > maxScrollExtent ? maxScrollExtent : targetScrollPosition,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   final Widget front = AspectRatio(
@@ -437,6 +469,7 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
             body: Builder(builder: (context) {
               return CustomScrollView(
                 key: const PageStorageKey<String>("hello2"),
+                controller: _scrollController2,
                 slivers: <Widget>[
                   SliverOverlapInjector(handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context)),
                   Selector<IndexNewProvider, String>(
@@ -518,7 +551,20 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
           ),
         ],
       ),
-    ));
+    ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white70,
+        onPressed: _scrollOnePage,
+        child: Lottie.asset(
+          'assets/lottie/scroll.json',
+          animate: true,
+          repeat: true,
+          reverse: false,
+          // fit: BoxFit.contain,
+        ),
+      ),
+
+    );
   }
 }
 

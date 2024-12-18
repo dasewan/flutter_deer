@@ -37,25 +37,38 @@ class TextFieldItem extends StatefulWidget {
 
 class _TextFieldItemState extends State<TextFieldItem> {
   String? error;
+  double borderRadius = 6;
+
+
 
   OutlineInputBorder buildFocusedBorder() {
     if (error == null ) {
       return OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.grey, width: 1.25),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(borderRadius),
       );
     }
     if (error != '') {
       return OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.red, width: 1.25),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(borderRadius),
       );
     }
 
     return OutlineInputBorder(
         borderSide: const BorderSide(color: Colors.green, width: 1.25),
-        borderRadius: BorderRadius.circular(6));
+        borderRadius: BorderRadius.circular(borderRadius));
 
+  }
+
+  Icon? buildSuffixIcon() {
+    if (error == null ) {
+      return null;
+    }
+    if (error != '') {
+      return const Icon(Icons.error, color: Colors.red);
+    }
+    return const Icon(Icons.check, color: Colors.green);
   }
 
   @override
@@ -80,12 +93,15 @@ class _TextFieldItemState extends State<TextFieldItem> {
                 final String? errorText = validator(value);
                 if (errorText == null) {
                   setState(() {
+                    error = '';
                   });
 
                 } else {
                   setState(() {
+                    error = errorText;
                   });
-                  return errorText; // 验证失败，返回提示信息
+                  return null;
+
                 }
               }
               return null; // 验证成功，返回null
@@ -114,7 +130,7 @@ class _TextFieldItemState extends State<TextFieldItem> {
               focusedBorder: buildFocusedBorder(),
               enabledBorder: buildFocusedBorder(),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(borderRadius),
               ),
               // prefixIcon: widget.prefixIconData != null
               //     ? Padding(
@@ -130,7 +146,7 @@ class _TextFieldItemState extends State<TextFieldItem> {
               //     : null,
               prefixIconConstraints:
               const BoxConstraints(minHeight: 24, minWidth: 24),
-              // suffixIcon: buildSuffixIcon(),
+              suffixIcon: buildSuffixIcon(),
             ),
           ),
         ),
@@ -141,13 +157,19 @@ class _TextFieldItemState extends State<TextFieldItem> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.title,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            // color: hasFocus ? currentTheme.primaryColor : Colors.grey[700],
-          ),
+        Row(
+          children: [
+            Gaps.hGap4,
+            Text(
+              widget.title,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
         ),
+        Gaps.vGap4,
         Container(
           // height: height,
           // margin: const EdgeInsets.only(left: 15.0),
@@ -159,13 +181,20 @@ class _TextFieldItemState extends State<TextFieldItem> {
           ),
           child: child,
         ),
-        Text(
-          error ?? '',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: Colors.red,
-          ),
+        Row(
+          children: [
+            Gaps.hGap4,
+            Text(
+              error ?? '',
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                color: Colors.red,
+              ),
+            ),
+          ],
         ),
+        if (error != null && error != '') Gaps.vGap8 else Gaps.empty,
       ],
     );
   }

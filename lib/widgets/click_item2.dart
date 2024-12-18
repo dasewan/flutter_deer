@@ -40,30 +40,48 @@ class ClickItem2 extends StatefulWidget {
 }
 
 class _ClickItem2State extends State<ClickItem2> {
-  double height = 50;
+  String? error;
+  double borderRadius = 6;
+
+
+
+
+  OutlineInputBorder buildFocusedBorder() {
+    if (error == null ) {
+      return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.grey, width: 1.25),
+        borderRadius: BorderRadius.circular(borderRadius),
+      );
+    }
+    if (error != '') {
+      return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.red, width: 1.25),
+        borderRadius: BorderRadius.circular(borderRadius),
+      );
+    }
+
+    return OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.green, width: 1.25),
+        borderRadius: BorderRadius.circular(borderRadius));
+
+  }
+
+  Icon? buildSuffixIcon() {
+    if (error == null ) {
+      return const Icon(Icons.arrow_forward_ios_sharp, color: Colors.grey);
+    }
+    if (error != '') {
+      return const Icon(Icons.error, color: Colors.red);
+    }
+    return const Icon(Icons.check, color: Colors.green);
+  }
 
   @override
   Widget build(BuildContext context) {
     Map<int, Color> statusColor = {10: Colors.white10, 20: Colors.green, 30: Colors.red};
     Widget child = Row(
       //为了数字类文字居中
-      crossAxisAlignment: widget.maxLines == 1 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: <Widget>[
-        // Text(title),
-        // const Spacer(),
-        // Gaps.hGap16,
-        // Expanded(
-        //   flex: 4,
-        //   child: Text(
-        //     content,
-        //     maxLines: maxLines,
-        //     textAlign: maxLines == 1 ? TextAlign.right : textAlign,
-        //     overflow: TextOverflow.ellipsis,
-        //     style: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: Dimens.font_sp14),
-        //   ),
-        // ),
-        // Text(title),
-        Gaps.hGap16,
         Expanded(
           child: TextFormField(
             keyboardType: widget.keyboardType,
@@ -75,14 +93,13 @@ class _ClickItem2State extends State<ClickItem2> {
                 final String? errorText = validator(value);
                 if (errorText == null) {
                   setState(() {
-                    height = 50;
+                    error = '';
                   });
-
                 } else {
                   setState(() {
-                    height = 140;
+                    error = errorText;
                   });
-                  return errorText; // 验证失败，返回提示信息
+                  return errorText;
                 }
               }
               return null; // 验证成功，返回null
@@ -90,52 +107,109 @@ class _ClickItem2State extends State<ClickItem2> {
             },
 
             onTap: widget.onTap,
-            //style: TextStyles.textDark14,
             decoration: InputDecoration(
-              labelText: widget.title,
+              contentPadding: EdgeInsets.symmetric(
+                  vertical: 18,
+                  horizontal: 12),
+              isDense: true,
               hintText: widget.hintText,
-              border: InputBorder.none, //去掉下划线
-              //hintStyle: TextStyles.textGrayC14
+              hintStyle: TextStyle(color: Colors.black.withOpacity(.45)),
+              // labelText:
+              // widget.showLabelAboveTextField ? null : widget.labelText,
+              // labelStyle: buildLabelStyle(),
+              // errorText: widget.errorText != null && hasError && hasValidator
+              //     ? widget.errorText
+              //     : null,
+              // floatingLabelBehavior: widget.floatingLabelBehavior,
+              // fillColor: widget.fillColor,
+              // filled: widget.fillColor != null,
+              focusedBorder: buildFocusedBorder(),
+              enabledBorder: buildFocusedBorder(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(borderRadius),
+              ),
+              // prefixIcon: widget.prefixIconData != null
+              //     ? Padding(
+              //   padding: const EdgeInsets.only(left: 12.0, right: 8),
+              //   child: Icon(
+              //     widget.prefixIconData,
+              //     color: hasFocus
+              //         ? widget.accentColor
+              //         : widget.textColor.withOpacity(.6),
+              //     size: 20,
+              //   ),
+              // )
+              //     : null,
+              prefixIconConstraints:
+              const BoxConstraints(minHeight: 24, minWidth: 24),
+              suffixIcon: buildSuffixIcon(),
             ),
           ),
         ),
-        Gaps.hGap8,
-        Opacity(
-          // 无点击事件时，隐藏箭头图标
-          opacity: widget.onTap == null ? 0 : 1,
-          child: Padding(
-            padding: EdgeInsets.only(top: widget.maxLines == 1 ? 0.0 : 2.0),
-            child: Images.arrowRight,
-          ),
-        ),
-        Opacity(
-          // 无点击事件时，隐藏箭头图标
-          opacity: widget.rightChild == null ? 0 : 1,
-          child: Padding(
-            padding: EdgeInsets.only(top: widget.maxLines == 1 ? 0.0 : 2.0),
-            child: Text(widget.rightChild.nullSafe),
-          ),
-        )
+        // Gaps.hGap8,
+        // Opacity(
+        //   // 无点击事件时，隐藏箭头图标
+        //   opacity: widget.onTap == null ? 0 : 1,
+        //   child: Padding(
+        //     padding: EdgeInsets.only(top: widget.maxLines == 1 ? 0.0 : 2.0),
+        //     child: Images.arrowRight,
+        //   ),
+        // ),
+        // Opacity(
+        //   // 无点击事件时，隐藏箭头图标
+        //   opacity: widget.rightChild == null ? 0 : 1,
+        //   child: Padding(
+        //     padding: EdgeInsets.only(top: widget.maxLines == 1 ? 0.0 : 2.0),
+        //     child: Text(widget.rightChild.nullSafe),
+        //   ),
+        // )
       ],
     );
 
     /// 分隔线
-    child = Container(
-      margin: const EdgeInsets.only(left: 15.0),
-      padding: const EdgeInsets.fromLTRB(0, 0.0, 0.0, 0.0),
-      height: height,
-      // constraints: const BoxConstraints(
-      //   maxHeight: double.infinity,
-      //   minHeight: 50.0,
-      // ),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: statusColor[widget.status],
-        border: Border(
-          bottom: Divider.createBorderSide(context, width: 0.6),
+    child = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Gaps.hGap4,
+            Text(
+              widget.title,
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.grey[700],
+              ),
+            ),
+          ],
         ),
-      ),
-      child: child,
+        Gaps.vGap4,
+        Container(
+          // margin: const EdgeInsets.only(left: 15.0),
+          padding: const EdgeInsets.fromLTRB(0, 0.0, 0.0, 0.0),
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: statusColor[widget.status],
+            border: Border(
+              bottom: Divider.createBorderSide(context, width: 0.6),
+            ),
+          ),
+          child: child,
+        ),
+        Row(
+          children: [
+            Gaps.hGap4,
+            Text(
+              error ?? '',
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ),
+        if (error != null && error != '') Gaps.vGap8 else Gaps.empty,
+      ],
     );
 
     return InkWell(

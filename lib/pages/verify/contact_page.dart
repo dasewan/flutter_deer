@@ -430,7 +430,6 @@ class _ContactPageState extends State<ContactPage>
     }
     return Container(
       padding: const EdgeInsets.only(top: 2.0),
-      height: 74,
       child: tmp3,
     );
   }

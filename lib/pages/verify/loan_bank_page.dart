@@ -389,7 +389,6 @@ class _LoanBankPageState extends State<LoanBankPage>
     }
     return Container(
       padding: const EdgeInsets.only(top: 2.0),
-      height: 74,
       child: tmp3,
     );
   }

@@ -249,6 +249,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
             value: value,
             validator: validator,
             keyboardType: Constant.textInputTypeMap[field.mTextInputType.nullSafe]!,
+            focusNode: FocusNode(),
             onChanged: (v) {
               _submittedField["${field.cCode}"] = v;
             });
@@ -263,6 +264,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
           content: '2',
           controller: _controllers["${field.cCode}"],
           validator: validator,
+          focusNode: FocusNode(),
           onTap: () {
             showElasticDialog<void>(
               context: context,
@@ -290,6 +292,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
           content: '2',
           controller: _controllers["${field.cCode}"],
           validator: validator,
+          focusNode: FocusNode(),
           onTap: () {
             _showDatePicker(context, field.cCode, ctx2);
           },
@@ -298,9 +301,11 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
       case "picker":
         tmp3 = ClickItem2(
           title: field.bName.nullSafe,
+          hintText: field.pHintText.nullSafe,
           content: '2',
           controller: _controllers["${field.cCode}"],
           validator: validator,
+          focusNode: FocusNode(),
           onTap: () async {
             Result? a = await CityPickers.showCityPicker(
               context: context,
