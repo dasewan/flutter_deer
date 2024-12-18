@@ -38,6 +38,7 @@ class TextFieldItem extends StatefulWidget {
 class _TextFieldItemState extends State<TextFieldItem> {
   String? error;
   double borderRadius = 6;
+  double bottomMargin = 0;
 
 
 
@@ -94,13 +95,16 @@ class _TextFieldItemState extends State<TextFieldItem> {
                 if (errorText == null) {
                   setState(() {
                     error = '';
+                    bottomMargin = 0;
                   });
+
 
                 } else {
                   setState(() {
                     error = errorText;
+                    bottomMargin = -19;
                   });
-                  return null;
+                  return errorText;
 
                 }
               }
@@ -118,6 +122,7 @@ class _TextFieldItemState extends State<TextFieldItem> {
               isDense: true,
               hintText: widget.hintText,
               hintStyle: TextStyle(color: Colors.black.withOpacity(.45)),
+              errorStyle: TextStyle(fontSize: 6,color: Colors.transparent, ),
               // labelText:
               // widget.showLabelAboveTextField ? null : widget.labelText,
               // labelStyle: buildLabelStyle(),
@@ -169,10 +174,9 @@ class _TextFieldItemState extends State<TextFieldItem> {
             ),
           ],
         ),
-        Gaps.vGap4,
+        SizedBox(height: 2),
         Container(
           // height: height,
-          // margin: const EdgeInsets.only(left: 15.0),
           width: double.infinity,
           decoration: BoxDecoration(
             border: Border(
@@ -181,20 +185,23 @@ class _TextFieldItemState extends State<TextFieldItem> {
           ),
           child: child,
         ),
-        Row(
-          children: [
-            Gaps.hGap4,
-            Text(
-              error ?? '',
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: Colors.red,
+        Gaps.vGap4,
+        if (error != null && error != '') Container(
+          transform: Matrix4.translationValues(0, bottomMargin, 0),
+          child: Row(
+            children: [
+              Gaps.hGap4,
+              Text(
+                error!,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
               ),
-            ),
-          ],
-        ),
-        if (error != null && error != '') Gaps.vGap8 else Gaps.empty,
+            ],
+          ),
+        ) else Gaps.empty,
       ],
     );
   }
