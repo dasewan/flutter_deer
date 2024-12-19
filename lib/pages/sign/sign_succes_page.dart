@@ -39,12 +39,12 @@ class _SignSuccessPageState extends State<SignSuccessPage> {
             Gaps.vGap12,
             Text(
               widget.tip1,
-              style: TextStyles.textSize16,
+              style: TextStyle(fontSize: 20),
             ),
-            Gaps.vGap8,
+            Gaps.vGap16,
             Text(
               widget.tip2,
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             Gaps.vGap8,
             Text(
