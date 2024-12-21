@@ -69,11 +69,13 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
     String btnText = "DETAIL";
     bool btnClickable = true;
     Color btnBackgroundColor = Colours.app_main;
+    Color btnBackgroundColor2 = Colors.blue[50]!;
     List<String> tags = [];
     Color tagColor = Colors.blue;
     Color tagBackgroundColor = Colors.blue[50]!;
     String amountLabel = "Max Loan Amount";
-    String tips = "Contact us";
+    String tips = "Apply now for funds in as fast as 10 minutes.";
+    double tipFontSize = 10;
     String rightLabel = "Loan Terms";
     String backTips = '';
     String productBackground = 'product_reviewing.png';
@@ -119,7 +121,8 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         btnText = "Under Review";
         btnClickable = false;
         btnBackgroundColor = Colors.teal[200]!;
-        tips = 'We will complete the review of your application by $reviewTime, please be patient.';
+        btnBackgroundColor2 = Colors.teal[50]!;
+        tips = 'Your application review will be done by $reviewTime. Please be patient.';
         backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'reviewing').bContent!;
       } else if (Constant.yijujue.contains(widget.dBorrow!.kSubStatus!)) {
         /// 订单已拒绝
@@ -147,14 +150,16 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
           btnText = "Detail";
           btnClickable = false;
           btnBackgroundColor = Colors.grey[500]!;
+          btnBackgroundColor2 = Colors.grey[100]!;
           backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'locked').bContent!;
           productBackground = 'product_locked.png';
         } else {
           btnText = "Application Rejected";
           btnBackgroundColor = Colors.grey[500]!;
+          btnBackgroundColor2 = Colors.grey[100]!;
           btnClickable = false;
           tips =
-              'Application for this product has been rejected. Please reapply after ${DateFormat('yyyy-MM-dd').format(DateTime.parse(widget.dBorrow!.aUStatusTime!))}.';
+              'Your application for this product is rejected. Reapply after ${DateFormat('yyyy-MM-dd').format(DateTime.parse(widget.dBorrow!.aUStatusTime!))}.';
           backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'rejected').bContent!;
           productBackground = 'product_rejected.png';
         }
@@ -167,8 +172,9 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         }
         btnText = "Funds On The Way";
         btnBackgroundColor = Colors.teal;
+        btnBackgroundColor2 = Colors.teal[50]!;
         btnClickable = false;
-        tips = 'Your loan is currently in the process of being disbursed, please be patient.';
+        tips = 'Your loan is being disbursed. Please be patient.';
         backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'disturbing').bContent!;
         productBackground = 'product_disturbing.png';
       } else if (widget.dBorrow!.jStatus == Constant.borrow_outstanding) {
@@ -203,6 +209,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         btnText = "Repay";
         action = 'repay';
         btnBackgroundColor = Colours.red;
+        btnBackgroundColor2 = Colors.red[50]!;
         tags = ['You are ${widget.dBorrow?.aIOverdueDays} days overdue '];
         tagColor = Colors.red;
         tagBackgroundColor = Colors.red[50]!;
@@ -288,6 +295,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
             backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'max_processing').bContent!;
             productBackground = 'product_max_processing.png';
             btnBackgroundColor = Colors.grey[500]!;
+            btnBackgroundColor2 = Colors.grey[100]!;
             btnClickable = false;
           }
         } else {
@@ -295,6 +303,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
           backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'locked').bContent!;
           productBackground = 'product_locked.png';
           btnBackgroundColor = Colors.grey[500]!;
+          btnBackgroundColor2 = Colors.grey[100]!;
           btnClickable = false;
         }
       }
@@ -306,10 +315,10 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
       aspectRatio: 1.37,
       child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 0.0),
-          padding: const EdgeInsets.all(1.0),
+          // padding: const EdgeInsets.all(1.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(8.0),
           ),
           child: Selector<IndexNewProvider, int?>(selector: (_, provider) {
             return provider.indexAction;
@@ -400,7 +409,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
                     textColor: Colors.white,
                     backgroundColor: btnBackgroundColor,
                     radius: 23.0,
-                    minWidth: 260,
+                    minWidth: 300,
                     onPressed: () {
                       if (!btnClickable && _animationStatus == AnimationStatus.dismissed) {
                         _animationController.forward();
@@ -412,7 +421,16 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
                     text: btnText,
                   ),
                 ),
-                Text(tips, style: const TextStyle(color: Colors.grey, fontSize: 8.0)),
+                Gaps.vGap4,
+                Expanded(child: Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: btnBackgroundColor2,
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(8.0), bottomRight: Radius.circular(8.0)),
+                    ),
+                    child: Text(tips, style: TextStyle(color: btnBackgroundColor, fontSize: tipFontSize, fontWeight: FontWeight.w500)))),
               ],
             );
           })),
@@ -435,7 +453,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
               padding: const EdgeInsets.all(1.0),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(4.0),
+                borderRadius: BorderRadius.circular(8.0),
                 image: DecorationImage(
                   image: AssetImage('assets/images/index/$productBackground'), // 替换为你的背景图路径
                   fit: BoxFit.fitHeight, // 调整图片适应容器大小
