@@ -24,7 +24,7 @@ class ProgressDialog extends Dialog {
               brightness: Brightness.dark, // 局部指定夜间模式，加载圈颜色会设置为白色
             ),
           ),
-          child: const CupertinoActivityIndicator(radius: 14.0),
+          child: const CupertinoActivityIndicator(radius: 14.0, color: Colors.white,),
         ),
         Gaps.vGap8,
         Text(hintText, style: const TextStyle(color: Colors.white),)
