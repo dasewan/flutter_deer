@@ -188,7 +188,7 @@ class PeriodItem extends StatelessWidget {
               ),
             ],
           ),
-        if (period.lOverdueDays! == 0)
+        if (period.lOverdueDays! <= 0)
           Gaps.empty
         else
           Column(
