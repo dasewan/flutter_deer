@@ -118,7 +118,7 @@ class _VerifiListPageState extends State<VerifiListPage> with BasePageMixin<Veri
                   Gaps.hGap5,
                   Expanded(
                     child: Text(
-                      "During the authentication process, the address book ,SMS, and locationpermissions will be requested. Please allow authorization, otherwise the authentication cannot be passed",
+                      "During authentication, access to your contacts, SMS, and location will be required. Please grant the necessary permissions; otherwise, authentication cannot be completed.",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: FitnessAppTheme.fontName,
@@ -145,7 +145,7 @@ class _VerifiListPageState extends State<VerifiListPage> with BasePageMixin<Veri
                   Gaps.hGap5,
                   Expanded(
                     child: Text(
-                      "Please fill in real information, false information will affect your credit evaluation and credit amount",
+                      "Please provide accurate information, as false details may impact your credit evaluation and loan amount.",
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontFamily: FitnessAppTheme.fontName,
