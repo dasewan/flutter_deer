@@ -300,9 +300,9 @@ class _LoginPageState extends State<LoginPage>
                       Text(_sortName != '' ? _sortName : Myapp9Localizations.of(
                           context)!.chooseLanguage),
                       Icon(
-                        Icons.arrow_drop_down_sharp,
+                        Icons.keyboard_arrow_down,
                         color: Colours.app_main,
-                        size: 42,
+                        size: 30,
                       ),
                     ],
                   ),
