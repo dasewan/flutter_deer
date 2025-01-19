@@ -43,7 +43,7 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
   XFile? _imageFile;
   List<CameraDescription> _cameras = [];
   bool isCameraInitialized = false; // 标记摄像头是否初始化完成
-  bool isCameraStarted = false; // 是否已进入摄像头界面
+  bool isCameraStarted = false; // 是否已Next摄像头界面
   bool isRearCameraSelected = true; // 默认后置摄像头
 
   @override
@@ -168,10 +168,10 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
                 Gaps.vGap16,
                 MyButton(
                   onPressed: _imageFile != null ? () => _next(_imageFile!.path) : _startCamera,
-                  text: _imageFile != null ? '下一步' : '开始拍照',
+                  text: _imageFile != null ? 'Next' : 'Start taking photos',
                 ),
                 Gaps.vGap10,
-                _imageFile != null ?  GestureDetector(onTap: _startCamera, child: Text('重新拍照', style: const TextStyle(fontSize: 14.0))) : Gaps.vGap10,
+                _imageFile != null ?  GestureDetector(onTap: _startCamera, child: Text('Retake the photo', style: const TextStyle(fontSize: 14.0))) : Gaps.vGap10,
                 Gaps.vGap10,
               ],
             ),

@@ -285,7 +285,7 @@ class _LoginPageState extends State<LoginPage>
                 child: Container(
                   alignment: Alignment.centerRight,
                   height: 40.0,
-                  width: 180,
+                  width: 220,
                   decoration: BoxDecoration(
                     color: Colors.blue.shade50,
                     borderRadius: BorderRadius.circular(34.0),

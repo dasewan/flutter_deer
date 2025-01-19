@@ -40,7 +40,7 @@ void main() {
 
     test('审核结果页测试',() async {
       await delayed();
-      await driver.tap(find.text('进入'));
+      await driver.tap(find.text('Next'));
       await delayed();
     });
   });

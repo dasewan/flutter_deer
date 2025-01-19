@@ -113,7 +113,7 @@ class DioUtils {
       return BaseEntity<T>.fromJson(map);
     } catch(e) {
       debugPrint(e.toString());
-      return BaseEntity<T>(ExceptionHandle.parse_error, '数据解析错误！', null);
+      return BaseEntity<T>(ExceptionHandle.parse_error, 'Data parsing error.！', null);
     }
   }
 

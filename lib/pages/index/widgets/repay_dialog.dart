@@ -112,7 +112,7 @@ class _RepayDialogState extends State<RepayDialog> {
           width: 110.0,
           height: 36.0,
           child: MyButton(
-            text: '继续浏览',
+            text: 'Cancel',
             fontSize: Dimens.font_sp16,
             textColor: primaryColor,
             disabledTextColor: Colors.white,

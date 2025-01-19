@@ -56,7 +56,7 @@ class _SignSuccessPageState extends State<SignSuccessPage> {
               onPressed: () {
                 NavigatorUtils.push(context, Routes.home, clearStack: true);
               },
-              text: '进入',
+              text: 'Next',
             )
           ],
         ),

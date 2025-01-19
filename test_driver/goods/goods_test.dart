@@ -36,7 +36,7 @@ void main() {
       await delayed();
       await driver.tap(find.text('休闲食品'));
       await delayed();
-      //进入搜索页
+      //Next搜索页
       await driver.tap(find.byValueKey('search'));
       await delayed();
       await driver.tap(find.byValueKey('search_back'));

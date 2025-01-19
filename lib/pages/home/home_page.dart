@@ -22,7 +22,7 @@ class _HomeState extends State<Home> with RestorationMixin {
   static const double _imageSize = 25.0;
 
   late List<Widget> _pageList;
-  final List<String> _appBarTitles = ['首页', '个人中心'];
+  final List<String> _appBarTitles = ['Home', 'Account'];
   final PageController _pageController = PageController();
 
   List<BottomNavigationBarItem>? _list;
@@ -79,10 +79,20 @@ class _HomeState extends State<Home> with RestorationMixin {
           ),
         ],
       ];
+      const _tabImages2 = [
+        [
+          Icon(Icons.home_outlined, color: Colours.unselected_item_color,size: 24),
+          Icon(Icons.home_outlined, color: Colours.app_main,size: 24),
+        ],
+        [
+          Icon(Icons.account_circle_outlined, color: Colours.unselected_item_color,size: 24),
+          Icon(Icons.account_circle_outlined, color: Colours.app_main,size: 24),
+        ],
+      ];
       _list = List.generate(_tabImages.length, (i) {
         return BottomNavigationBarItem(
-          icon: _tabImages[i][0],
-          activeIcon: _tabImages[i][1],
+          icon: _tabImages2[i][0],
+          activeIcon: _tabImages2[i][1],
           label: _appBarTitles[i],
         );
       });

@@ -125,7 +125,7 @@ void main() {
       await delayed();
       await driver.tap(find.byTooltip('Back'));
       await delayed();
-      /// 进入设置页，便于执行设置模块测试操作
+      /// Next设置页，便于执行设置模块测试操作
       await driver.tap(find.byValueKey('setting'));
       await delayed();
     });
