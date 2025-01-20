@@ -83,7 +83,8 @@ class _OrderPageState extends State<OrderPage> with SingleTickerProviderStateMix
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Gaps.vGap12,
-            GestureDetector(
+            //todo  remove
+            /*GestureDetector(
               key: _buttonKey,
 
               /// 使用Selector避免同provider数据变化导致此处不必要的刷新
@@ -114,7 +115,7 @@ class _OrderPageState extends State<OrderPage> with SingleTickerProviderStateMix
                 },
               ),
               onTap: () => _showSortMenu(),
-            ),
+            ),*/
             Gaps.vGap24,
 /*            Container(
               // 隐藏点击效果

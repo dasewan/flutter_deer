@@ -133,7 +133,7 @@ class _OrderListTabPageState extends State<OrderListTabPage>
                     });
                   },
                   onTapOperation: () {
-                    Toast.show('下架');
+                    Toast.show('');
                   },
                 );
               });

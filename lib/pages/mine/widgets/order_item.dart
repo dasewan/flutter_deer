@@ -71,38 +71,38 @@ class OrderItem extends StatelessWidget {
       Constant.borrow_closed: Colors.blueGrey,
     };
     Map<int, String> statusText = {
-      Constant.borrow_verify: "待认证",
-      Constant.borrow_sign: "待签约",
-      Constant.borrow_machine: "审核中",
-      Constant.borrow_review: "审核中",
-      Constant.borrow_loan: "审核中",
-      Constant.borrow_outstanding: "待还款",
-      Constant.borrow_cleared: "已结清",
-      Constant.borrow_overdue: "逾期",
-      Constant.borrow_closed: "已关闭",
-      //审核中 1
-      Constant.MACHINE_WAIT: "审核中",
-      Constant.MACHINE_ING: "审核中",
-      Constant.MACHINE_SUCCESS: "审核中",
-      Constant.REVIEW_WAIT: "审核中",
-      Constant.REVIEW_SUCCESS: "审核中",
-      Constant.REVIEW_ING: "审核中",
-      Constant.LOAN_WAIT: "审核中",
-      Constant.LOAN_ING: "审核中",
-      Constant.LOAN_FAIL: "审核中",
-      Constant.LOAN_REFUSE: "审核中",
-      Constant.LOAN_INTERCEPT: "审核中",
-      //已拒绝 2
-      Constant.MACHINE_REFUSE: "已拒绝",
-      Constant.REVIEW_REFUSE: "已拒绝",
-      // 待还款3
-      Constant.REPAY_WAIT: "待还款",
-      Constant.REPAY_ING: "待还款",
-      Constant.REPAY_FAIL: "待还款",
-      // 逾期 4
-      Constant.OVERDUE_SLIGHT: "逾期",
-      Constant.OVERDUE_MEDIUM: "逾期",
-      Constant.OVERDUE_SERIOUS: "逾期",
+      Constant.borrow_verify: "Pending Certification",
+      Constant.borrow_sign: "Pending Signing",
+      Constant.borrow_machine: "Under Review",
+      Constant.borrow_review: "Under Review",
+      Constant.borrow_loan: "Under Review",
+      Constant.borrow_outstanding: "Pending Repayment",
+      Constant.borrow_cleared: "Settled",
+      Constant.borrow_overdue: "Overdue",
+      Constant.borrow_closed: "Closed",
+      // Under Review 1
+      Constant.MACHINE_WAIT: "Under Review",
+      Constant.MACHINE_ING: "Under Review",
+      Constant.MACHINE_SUCCESS: "Under Review",
+      Constant.REVIEW_WAIT: "Under Review",
+      Constant.REVIEW_SUCCESS: "Under Review",
+      Constant.REVIEW_ING: "Under Review",
+      Constant.LOAN_WAIT: "Under Review",
+      Constant.LOAN_ING: "Under Review",
+      Constant.LOAN_FAIL: "Under Review",
+      Constant.LOAN_REFUSE: "Under Review",
+      Constant.LOAN_INTERCEPT: "Under Review",
+      // Rejected 2
+      Constant.MACHINE_REFUSE: "Rejected",
+      Constant.REVIEW_REFUSE: "Rejected",
+      // Pending Repayment 3
+      Constant.REPAY_WAIT: "Pending Repayment",
+      Constant.REPAY_ING: "Pending Repayment",
+      Constant.REPAY_FAIL: "Pending Repayment",
+      // Overdue 4
+      Constant.OVERDUE_SLIGHT: "Overdue",
+      Constant.OVERDUE_MEDIUM: "Overdue",
+      Constant.OVERDUE_SERIOUS: "Overdue",
     };
     final Row child = Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,9 +122,9 @@ class OrderItem extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    width: 70,
+                    // width: 120,
                     child: Text(
-                      '订单号：',
+                      'SN：',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: textTextStyle3,
@@ -141,9 +141,9 @@ class OrderItem extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    width: 70,
+                    // width: 120,
                     child: Text(
-                      '订单金额：',
+                      'Loan Amount：',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: textTextStyle3,
@@ -156,9 +156,9 @@ class OrderItem extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(
-                    width: 70,
+                    // width: 120,
                     child: Text(
-                      '下单时间：',
+                      'Application Date：',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: textTextStyle3,
@@ -174,9 +174,9 @@ class OrderItem extends StatelessWidget {
                   ? Row(
                       children: [
                         SizedBox(
-                          width: 70,
+                          // width: 120,
                           child: Text(
-                            '结清时间：',
+                            'Settled Time：',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: textTextStyle3,
@@ -192,9 +192,9 @@ class OrderItem extends StatelessWidget {
                   ? Row(
                       children: [
                         SizedBox(
-                          width: 70,
+                          // width: 120,
                           child: Text(
-                            '应还时间：',
+                            'Due Day：',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: textTextStyle3,
