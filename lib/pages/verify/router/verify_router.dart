@@ -12,6 +12,7 @@ import 'package:sp_util/sp_util.dart';
 
 import '../id_card_photo3_page.dart';
 import '../loan_bank_page.dart';
+import '../widgets/city_select_page.dart';
 
 class VerifyRouter implements IRouterProvider {
   static String swipper = '/verify/swipper';
@@ -25,6 +26,7 @@ class VerifyRouter implements IRouterProvider {
   static String repayBank = '/verify/repayBank';
   static String job = '/verify/job';
   static String liveness = '/verify/liveness';
+  static String citySelectPage = '/verify/citySelect';
 
   @override
   void initRouter(FluroRouter router) {
@@ -61,6 +63,7 @@ class VerifyRouter implements IRouterProvider {
     router.define(loanBank, handler: Handler(handlerFunc: (_, __) {
       return const LoanBankPage();
     }));
+    router.define(citySelectPage, handler: Handler(handlerFunc: (_, __) => const CitySelectPage()));
 
     // router.define(idCard, handler: Handler(handlerFunc: (_, __) {
     //   return IdCardPage();

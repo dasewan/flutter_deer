@@ -10,6 +10,7 @@ import 'package:myapp9/models/q_verify_item_entity.dart';
 import 'package:myapp9/mvp/base_page.dart';
 import 'package:myapp9/pages/verify/presenters/loan_bank_page_presenter.dart';
 import 'package:myapp9/pages/verify/process_timeline.dart';
+import 'package:myapp9/pages/verify/router/verify_router.dart';
 import 'package:myapp9/res/resources.dart';
 import 'package:myapp9/routers/fluro_navigator.dart';
 import 'package:myapp9/util/formFieldValidator.dart';
@@ -22,6 +23,7 @@ import 'package:myapp9/widgets/my_scroll_view.dart';
 import 'package:myapp9/widgets/text_field_item.dart';
 import 'package:oktoast/oktoast.dart';
 
+import '../../models/city_entity.dart';
 import '../../widgets/my_scroll_view2.dart';
 import 'iviews/loan_bank_i_mvp_view.dart';
 import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
@@ -337,6 +339,23 @@ class _LoanBankPageState extends State<LoanBankPage>
             FocusScope.of(ctx2).requestFocus(FocusNode());
             _controllers[field.cCode]!.text = a!.areaName!;
             _submittedField["${field.cCode}"] = a.areaId!;
+          },
+        );
+
+        break;
+      case "picker2":
+        tmp3 = ClickItem2(
+          title: field.bName.nullSafe,
+          content: '2',
+          controller: _controllers["${field.cCode}"],
+          validator: validator,
+          onTap: () async {
+            NavigatorUtils.pushResult(context, VerifyRouter.citySelectPage, (Object result) {
+              final CityEntity model = result as CityEntity;
+              FocusScope.of(ctx2).requestFocus(FocusNode());
+              _controllers[field.cCode]!.text = model.name;
+              _submittedField["${field.cCode}"] = model.cityCode;
+            });
           },
         );
 
