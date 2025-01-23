@@ -106,12 +106,13 @@ class _SignPageState extends State<SignPage>
               children: [
                 MyButton(
                   onPressed: () {
-                    showDialog<void>(
+                    /*showDialog<void>(
                         context: context,
                         barrierDismissible: false,
                         builder: (_) => ConfirmDialog(onPressed: (id) {
                               dBorrowsStore(id);
-                            }));
+                            }));*/
+                    dBorrowsStore(int.parse(widget.productId!));
                   },
                   text: Myapp9Localizations.of(context)!.apply,
                 ),

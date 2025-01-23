@@ -4,6 +4,7 @@ import 'package:livelyness_detection/livelyness_detection.dart';
 import 'package:myapp9/mvp/base_page.dart';
 import 'package:myapp9/pages/liveness/iviews/liveness_i_mvp_view.dart';
 import 'package:myapp9/pages/liveness/presenters/liveness_page_presenter.dart';
+import 'package:myapp9/pages/liveness/widgets/confirm_dialog.dart';
 import 'package:myapp9/pages/sign/router/sign_router.dart';
 import 'package:myapp9/res/raw/gaps.dart';
 import 'package:myapp9/routers/fluro_navigator.dart';
@@ -315,7 +316,13 @@ class _LivenessPageState extends State<LivenessPage> with BasePageMixin<Liveness
                         // 现在 fileList 是一个 List<File>
                         fileList.forEach((file) => print(file.path));
                         if (fileList.length > 0) {
-                          dBorrowsStore(listFace);
+                          // dBorrowsStore(listFace);
+                          showDialog<void>(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) => ConfirmDialog(onPressed: (id) {
+                                dBorrowsStore(listFace);
+                              }));
                         } else {
                           showToast("Face recognition failed, please retry!");
                         }
