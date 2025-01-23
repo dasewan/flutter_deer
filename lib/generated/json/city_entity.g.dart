@@ -17,6 +17,8 @@ CityEntity $CityEntityFromJson(Map<String, dynamic> json) {
       json['firstCharacter']);
   if (firstCharacter != null) {
     cityEntity.firstCharacter = firstCharacter;
+  }else{
+    cityEntity.firstCharacter = cityEntity.name[0].toUpperCase();
   }
   return cityEntity;
 }

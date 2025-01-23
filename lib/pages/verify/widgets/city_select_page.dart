@@ -68,7 +68,7 @@ class _CitySelectPageState extends State<CitySelectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(
-        title: '开户地点',
+        title: 'Choose Mobile Money Type',
       ),
       body: SafeArea(
         child: AzListView(
