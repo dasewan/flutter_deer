@@ -245,9 +245,9 @@ BorrowDetailDataPeriods $BorrowDetailDataPeriodsFromJson(Map<String, dynamic> js
   if (rPaidViolateFee != null) {
     borrowDetailDataPeriods.rPaidViolateFee = rPaidViolateFee;
   }
-  final int? sPaidOverdueFee = jsonConvert.convert<int>(json['s_paid_overdue_fee']);
-  if (sPaidOverdueFee != null) {
-    borrowDetailDataPeriods.sPaidOverdueFee = sPaidOverdueFee;
+  final int? sPaidOverdueAmount = jsonConvert.convert<int>(json['s_paid_overdue_amount']);
+  if (sPaidOverdueAmount != null) {
+    borrowDetailDataPeriods.sPaidOverdueAmount = sPaidOverdueAmount;
   }
   final int? aUCurrentDeductionFee = jsonConvert.convert<int>(json['a_u_current_deduction_fee']);
   if (aUCurrentDeductionFee != null) {
@@ -290,7 +290,7 @@ Map<String, dynamic> $BorrowDetailDataPeriodsToJson(BorrowDetailDataPeriods enti
   data['p_paid_interest'] = entity.pPaidInterest;
   data['q_paid_service_fee'] = entity.qPaidServiceFee;
   data['r_paid_violate_fee'] = entity.rPaidViolateFee;
-  data['s_paid_overdue_fee'] = entity.sPaidOverdueFee;
+  data['s_paid_overdue_amount'] = entity.sPaidOverdueAmount;
   data['a_u_current_deduction_fee'] = entity.aUCurrentDeductionFee;
   data['a_v_borrow_amount'] = entity.aVBorrowAmount;
   data['a_w_interest'] = entity.aWInterest;
@@ -317,7 +317,7 @@ extension BorrowDetailDataPeriodsExtension on BorrowDetailDataPeriods {
     int? pPaidInterest,
     int? qPaidServiceFee,
     int? rPaidViolateFee,
-    int? sPaidOverdueFee,
+    int? sPaidOverdueAmount,
     int? aUCurrentDeductionFee,
     int? aVBorrowAmount,
     int? aWInterest,
@@ -341,7 +341,7 @@ extension BorrowDetailDataPeriodsExtension on BorrowDetailDataPeriods {
       ..pPaidInterest = pPaidInterest ?? this.pPaidInterest
       ..qPaidServiceFee = qPaidServiceFee ?? this.qPaidServiceFee
       ..rPaidViolateFee = rPaidViolateFee ?? this.rPaidViolateFee
-      ..sPaidOverdueFee = sPaidOverdueFee ?? this.sPaidOverdueFee
+      ..sPaidOverdueAmount = sPaidOverdueAmount ?? this.sPaidOverdueAmount
       ..aUCurrentDeductionFee = aUCurrentDeductionFee ?? this.aUCurrentDeductionFee
       ..aVBorrowAmount = aVBorrowAmount ?? this.aVBorrowAmount
       ..aWInterest = aWInterest ?? this.aWInterest

@@ -206,8 +206,9 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                                   _selectedPeriodRange.clear();
                                   for (var i = 0; i < _selectedCount; i++) {
                                     _selectedIds.add(provider.periods![i].id!);
-                                    _selectedTotalAmount += provider.periods![i].fExpectRepayTotalAmount!;
-                                    _selectedAmountRange.add(provider.periods![i].fExpectRepayTotalAmount!);
+                                    int _periodShouldRepayAmount = provider.periods![i].fExpectRepayTotalAmount! - provider.periods![i].pPaidInterest! - provider.periods![i].qPaidServiceFee! - provider.periods![i].sPaidOverdueAmount! - provider.periods![i].oPaidBorrowAmount!;
+                                    _selectedTotalAmount += _periodShouldRepayAmount;
+                                    _selectedAmountRange.add(_periodShouldRepayAmount);
                                     _selectedPeriodRange.add(provider.periods![i].dIndex!);
                                   }
                                   setState(() {});
