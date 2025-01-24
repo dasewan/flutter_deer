@@ -34,6 +34,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
   static const platform = MethodChannel('samples.flutter.io/battery');
   late List<bool> _selected = List.generate(10, (_) => false);
   late List<int> _selectedIds = [];
+  late String _sn = '';
   late final List<int> _selectedAmountRange = [];
   late final List<int> _selectedPeriodRange = [];
   late Timer _timer;
@@ -62,12 +63,13 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
   }
 
   @override
-  void setInitial(List<bool> initialSelected, int initialSelectedCount, int initialSelectedAmount, List<int> initialSelectedIds) {
+  void setInitial(List<bool> initialSelected, int initialSelectedCount, int initialSelectedAmount, List<int> initialSelectedIds, String sn) {
     setState(() {
       _selected = initialSelected;
       _selectedCount = initialSelectedCount;
       _selectedTotalAmount = initialSelectedAmount;
       _selectedIds = initialSelectedIds;
+      _sn = sn;
     });
     scrollController.animateTo((initialSelectedCount + 1) * 200, duration: Duration(milliseconds: 1000 + (initialSelectedCount) * 100), curve: Curves.ease);
     Future.delayed(Duration(milliseconds: 1000 + (initialSelectedCount) * 100), () {
@@ -238,7 +240,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                     backgroundColor: provider.borrow?.jStatus == 90 ? Colors.redAccent[700] : Colours.app_main,
                     onPressed: () {
                       NavigatorUtils.push(context,
-                          '${RepayRouter.bank}?productId=${widget.productId}&payType=settled&amount=$_selectedTotalAmount&periods=${_selectedIds.join(',')}',
+                          '${RepayRouter.bank}?productId=${widget.productId}&payType=settled&amount=$_selectedTotalAmount&sn=$_sn&periods=${_selectedIds.join(',')}',
                           clearStack: false);
                     },
                     text: 'Repay',

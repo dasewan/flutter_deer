@@ -32,6 +32,7 @@ class RepayRouter implements IRouterProvider {
       final String amount = params['amount']!.first;
       final String payType = params['payType']!.first;
       final String? extendDays = params['extendDays']?.first;
+      final String? sn = params['sn']?.first;
       int extendDays2 = 0;
       if (extendDays != null) {
         extendDays2 = int.parse(extendDays);
@@ -47,6 +48,7 @@ class RepayRouter implements IRouterProvider {
         payType: payType,
         extendDays: extendDays2,
         periods: periods2,
+        sn: sn,
       );
     }));
     router.define(methodPay, handler: Handler(handlerFunc: (_, params) {

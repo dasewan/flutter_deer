@@ -11,9 +11,10 @@ import '../../util/image_utils.dart';
 import '../../widgets/load_image.dart';
 
 class BankPage extends StatefulWidget {
-  const BankPage({Key? key, required this.productId, required this.payType, required this.amount, this.extendDays = 0, this.periods = ''}) : super(key: key);
+  const BankPage({Key? key, required this.productId, required this.payType, required this.amount, this.extendDays = 0, this.periods = '', this.sn = ''}) : super(key: key);
   final String productId;
   final String payType;
+  final String sn;
   final int amount;
   final int extendDays;
   final String periods;
