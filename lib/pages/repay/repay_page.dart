@@ -250,16 +250,12 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                     backgroundColor: provider.borrow?.jStatus == 90 ? Colors.redAccent[700] : Colours.app_main,
                     onPressed: () {
                       // 获取当前时间戳（以毫秒为单位）
-                      int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
-
+                      final int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
                       // 计算当前时间戳所在的十分钟区间
-                      int tenMinutesInMillis = 10 * 60 * 1000; // 十分钟的毫秒数
-                      int startOfTenMinuteInterval = (currentTimestamp ~/ tenMinutesInMillis) * tenMinutesInMillis;
-
+                      const int tenMinutesInMillis = 10 * 60 * 1000; // 十分钟的毫秒数
+                      final int startOfTenMinuteInterval = (currentTimestamp ~/ tenMinutesInMillis) * tenMinutesInMillis;
                       // 输出结果
-                      print('当前时间戳: $currentTimestamp');
-                      print('所在十分钟区间的开始时间戳: $startOfTenMinuteInterval');
-                      _launchWebURL('Dasewan', 'https://api.dasewan.cn/checkout/?amount=$_selectedTotalAmount&sn=$_sn&t=startOfTenMinuteInterval');
+                      _launchWebURL('Repayment', 'https://api.dasewan.cn/checkout/?amount=$_selectedTotalAmount&sn=$_sn&t=$startOfTenMinuteInterval');
                       // NavigatorUtils.push(context,
                       //     '${RepayRouter.bank}?productId=${widget.productId}&payType=settled&amount=$_selectedTotalAmount&sn=$_sn&periods=${_selectedIds.join(',')}',
                       //     clearStack: false);
@@ -276,20 +272,26 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                                 text: TextSpan(
                                   children: <TextSpan>[
                                     TextSpan(text: 'Have difficulties? ', style: Theme.of(context).textTheme.bodySmall),
-                                    provider.product?.mCanPartPay == 'y'
-                                        ? TextSpan(
+                                    if (provider.product?.mCanPartPay == 'y') TextSpan(
                                             text: 'Pay in part now',
                                             style: const TextStyle(
                                               color: Colors.blueAccent,
                                             ),
                                             recognizer: TapGestureRecognizer()
                                               ..onTap = () {
-                                                NavigatorUtils.push(context,
+                                                // 获取当前时间戳（以毫秒为单位）
+                                                final int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
+                                                // 计算当前时间戳所在的十分钟区间
+                                                const int tenMinutesInMillis = 10 * 60 * 1000; // 十分钟的毫秒数
+                                                final int startOfTenMinuteInterval = (currentTimestamp ~/ tenMinutesInMillis) * tenMinutesInMillis;
+                                                int part_minimal_repay_amount = _selectedTotalAmount > 1000 ? 1000 : _selectedTotalAmount;
+                                                // 输出结果
+                                                _launchWebURL('Repayment', 'https://api.dasewan.cn/part/?amount=$_selectedTotalAmount&sn=$_sn&part_minimal_repay_amount=$part_minimal_repay_amount&should_repay_amount=$_selectedTotalAmount&part_step=100&t=$startOfTenMinuteInterval');
+          /*                                      NavigatorUtils.push(context,
                                                     '${RepayRouter.partPay}?productId=${widget.productId}&min=${provider.product?.lMinPay}&step=${provider.product?.lMinPay}&amountRange=${_selectedAmountRange.join(',')}&periodRange=${_selectedPeriodRange.join(',')}',
-                                                    clearStack: false);
+                                                    clearStack: false);*/
                                               },
-                                          )
-                                        : const TextSpan(text: ''),
+                                          ) else const TextSpan(text: ''),
                               provider.product?.mCanPartPay == 'y' && provider.borrow?.yShowExtendBtn == 1
                                         ? TextSpan(text: ' or ', style: Theme.of(context).textTheme.bodySmall)
                                         : const TextSpan(text: ''),
