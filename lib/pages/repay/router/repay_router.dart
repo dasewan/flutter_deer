@@ -42,13 +42,17 @@ class RepayRouter implements IRouterProvider {
       if (periods != null) {
         periods2 = periods;
       }
+      String sn2 = '';
+      if (sn != null) {
+        sn2 = sn;
+      }
       return BankPage(
         productId: id,
         amount: int.parse(amount),
         payType: payType,
         extendDays: extendDays2,
         periods: periods2,
-        sn: sn,
+        sn: sn2,
       );
     }));
     router.define(methodPay, handler: Handler(handlerFunc: (_, params) {

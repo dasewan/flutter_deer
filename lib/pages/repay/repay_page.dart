@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 
 import '../../res/raw/colors.dart';
 import '../../res/raw/gaps.dart';
+import '../../util/device_utils.dart';
+import '../../util/other_utils.dart';
 import '../../widgets/load_image.dart';
 import '../../widgets/my_card.dart';
 import '../sign/widgets/confirm_dialog.dart';
@@ -112,6 +114,14 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
       return true;
     }
     return false;
+  }
+
+  void _launchWebURL(String title, String url) {
+    if (Device.isMobile) {
+      NavigatorUtils.goWebViewPage(context, title, url);
+    } else {
+      Utils.launchWebURL(url);
+    }
   }
 
   @override
@@ -239,9 +249,20 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                     radius: 33.0,
                     backgroundColor: provider.borrow?.jStatus == 90 ? Colors.redAccent[700] : Colours.app_main,
                     onPressed: () {
-                      NavigatorUtils.push(context,
-                          '${RepayRouter.bank}?productId=${widget.productId}&payType=settled&amount=$_selectedTotalAmount&sn=$_sn&periods=${_selectedIds.join(',')}',
-                          clearStack: false);
+                      // 获取当前时间戳（以毫秒为单位）
+                      int currentTimestamp = DateTime.now().millisecondsSinceEpoch;
+
+                      // 计算当前时间戳所在的十分钟区间
+                      int tenMinutesInMillis = 10 * 60 * 1000; // 十分钟的毫秒数
+                      int startOfTenMinuteInterval = (currentTimestamp ~/ tenMinutesInMillis) * tenMinutesInMillis;
+
+                      // 输出结果
+                      print('当前时间戳: $currentTimestamp');
+                      print('所在十分钟区间的开始时间戳: $startOfTenMinuteInterval');
+                      _launchWebURL('Dasewan', 'https://api.dasewan.cn/checkout/?amount=$_selectedTotalAmount&sn=$_sn&t=startOfTenMinuteInterval');
+                      // NavigatorUtils.push(context,
+                      //     '${RepayRouter.bank}?productId=${widget.productId}&payType=settled&amount=$_selectedTotalAmount&sn=$_sn&periods=${_selectedIds.join(',')}',
+                      //     clearStack: false);
                     },
                     text: 'Repay',
                   ),

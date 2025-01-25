@@ -7,7 +7,9 @@ import 'package:myapp9/widgets/my_app_bar.dart';
 import '../../res/raw/colors.dart';
 import '../../res/raw/dimens.dart';
 import '../../res/raw/gaps.dart';
+import '../../util/device_utils.dart';
 import '../../util/image_utils.dart';
+import '../../util/other_utils.dart';
 import '../../widgets/load_image.dart';
 
 class BankPage extends StatefulWidget {
@@ -45,6 +47,13 @@ class _BankPageState extends State<BankPage> {
     super.didChangeDependencies();
     //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
+  }
+  void _launchWebURL(String title, String url) {
+    if (Device.isMobile) {
+      NavigatorUtils.goWebViewPage(context, title, url);
+    } else {
+      Utils.launchWebURL(url);
+    }
   }
 
   @override
@@ -134,8 +143,9 @@ class _BankPageState extends State<BankPage> {
                               Gaps.vGap16,
                               InkWell(
                                 onTap: () {
-                                  NavigatorUtils.push(context,
-                                      '${RepayRouter.methodPay}?productId=${widget.productId}&payType=${widget.payType}&amount=${widget.amount}&extendDays=${widget.extendDays}&bank=${bankCode[index]}&periods=${widget.periods}', clearStack: false);
+                                  _launchWebURL('Dasewan', 'https://api.dasewan.cn/checkout/?amount=${widget.amount}&sn=${widget.sn}');
+                                  // NavigatorUtils.push(context,
+                                  //     '${RepayRouter.methodPay}?productId=${widget.productId}&payType=${widget.payType}&amount=${widget.amount}&extendDays=${widget.extendDays}&bank=${bankCode[index]}&periods=${widget.periods}', clearStack: false);
                                 },
                                 child: Row(
                                   children: <Widget>[
