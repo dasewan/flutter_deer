@@ -109,8 +109,8 @@ class BorrowDetailDataPeriods {
   int? qPaidServiceFee;
   @JSONField(name: "r_paid_violate_fee")
   int? rPaidViolateFee;
-  @JSONField(name: "s_paid_overdue_fee")
-  int? sPaidOverdueFee;
+  @JSONField(name: "s_paid_overdue_amount")
+  int? sPaidOverdueAmount;
   @JSONField(name: "a_u_current_deduction_fee")
   int? aUCurrentDeductionFee;
   @JSONField(name: "a_v_borrow_amount")

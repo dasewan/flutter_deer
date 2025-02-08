@@ -162,7 +162,7 @@ class PeriodItem extends StatelessWidget {
             ),
           ],
         ),
-        if (period.lOverdueDays! == 0)
+/*        if (period.lOverdueDays! == 0)
           Gaps.empty
         else
           Column(
@@ -181,13 +181,13 @@ class PeriodItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$${period.jExpectViolateFee! + period.rPaidViolateFee!}',
+                    '\$${period.jExpectViolateFee! - period.rPaidViolateFee!}',
                     style: TextStyles.textBold14,
                   ),
                 ],
               ),
             ],
-          ),
+          ),*/
         if (period.lOverdueDays! <= 0)
           Gaps.empty
         else
@@ -207,7 +207,7 @@ class PeriodItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$${period.kExpectOverdueFee! + period.sPaidOverdueFee!}',
+                    '\$${period.kExpectOverdueFee! - period.sPaidOverdueAmount!}',
                     style: TextStyles.textBold14,
                   ),
                 ],
@@ -288,7 +288,7 @@ class PeriodItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '\$${period.fExpectRepayTotalAmount!}',
+                  '\$${period.fExpectRepayTotalAmount! - period.pPaidInterest! - period.qPaidServiceFee! - period.sPaidOverdueAmount! - period.oPaidBorrowAmount!}',
                   style: TextStyles.textBold14,
                 ),
               ],

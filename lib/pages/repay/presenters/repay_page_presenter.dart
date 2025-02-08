@@ -53,10 +53,11 @@ class RepayPagePresenter extends BasePagePresenter<RepayIMvpView> {
           if (initialSelectedCount == 0) {
             initialSelected[0] = true;
             initialSelectedCount = 1;
-            initialSelectedAmount += duePeriods[0].fExpectRepayTotalAmount!;
+            int _periodShouldRepayAmount = duePeriods[0].fExpectRepayTotalAmount! - duePeriods[0].pPaidInterest! - duePeriods[0].qPaidServiceFee! - duePeriods[0].sPaidOverdueAmount! - duePeriods[0].oPaidBorrowAmount!;
+            initialSelectedAmount += _periodShouldRepayAmount;
             initialSelectedIds.add(duePeriods[0].id!);
           }
-          view.setInitial(initialSelected, initialSelectedCount, initialSelectedAmount, initialSelectedIds);
+          view.setInitial(initialSelected, initialSelectedCount, initialSelectedAmount, initialSelectedIds, data.data!.borrow!.hSn!);
         }
         if (data.data!.product != null) {
           view.provider.setProduct(data.data!.product!);
