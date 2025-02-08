@@ -33,4 +33,5 @@ class HttpApi{
   static const String dBorrowIndex = '/v1/d_borrows';
   static const String verificationCodes = '/v1/verificationCodes';
   static const String captchas = '/v1/captchas';
+  static const String repayLog = '/v1/r-a-repay-logs';
 }

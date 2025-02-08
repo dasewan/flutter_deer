@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "errorMessage": "messages.retrieved",
+  "data": [
+    {
+      "id": 1,
+      "s_reference": "xVXoE8hlc4",
+      "u_amount": 60,
+      "j_status": 330,
+      "updated_at": "2010-09-20T17:35:46.000000Z"
+    }
+  ],
+  "other": {
+    "all": 100,
+    "review": 100,
+    "rejected": 100,
+    "disbursing": 100,
+    "outstanding": 100,
+    "overdue": 100,
+    "closed": 100,
+    "cleared": 100
+  },
+  "total": 1009,
+  "currentPage": 1,
+  "perPage": 5,
+  "hasMorePages": true
+}

@@ -13,6 +13,7 @@ import 'package:myapp9/models/authorizations_store_entity.dart';
 import 'package:myapp9/models/b_product_entity.dart';
 import 'package:myapp9/models/borrow_detail_entity.dart';
 import 'package:myapp9/models/borrow_list_entity.dart';
+import 'package:myapp9/models/city_entity.dart';
 import 'package:myapp9/models/d_borrow_sign_entity.dart';
 import 'package:myapp9/models/d_borrow_store_entity.dart';
 import 'package:myapp9/models/device_info_entity.dart';
@@ -24,6 +25,7 @@ import 'package:myapp9/models/index_no_entity.dart';
 import 'package:myapp9/models/n_user_profile_entity.dart';
 import 'package:myapp9/models/q_a_ocr_entity.dart';
 import 'package:myapp9/models/q_verify_item_entity.dart';
+import 'package:myapp9/models/repay_log_entity.dart';
 import 'package:myapp9/models/sync_entity.dart';
 import 'package:myapp9/models/verify_item_store_entity.dart';
 
@@ -247,6 +249,10 @@ class JsonConvert {
       return data.map<BorrowListOther>((Map<String, dynamic> e) =>
           BorrowListOther.fromJson(e)).toList() as M;
     }
+    if (<CityEntity>[] is M) {
+      return data.map<CityEntity>((Map<String, dynamic> e) =>
+          CityEntity.fromJson(e)).toList() as M;
+    }
     if (<DBorrowSignEntity>[] is M) {
       return data.map<DBorrowSignEntity>((Map<String, dynamic> e) =>
           DBorrowSignEntity.fromJson(e)).toList() as M;
@@ -371,6 +377,14 @@ class JsonConvert {
       return data.map<QVerifyItemEntity>((Map<String, dynamic> e) =>
           QVerifyItemEntity.fromJson(e)).toList() as M;
     }
+    if (<RepayLogEntity>[] is M) {
+      return data.map<RepayLogEntity>((Map<String, dynamic> e) =>
+          RepayLogEntity.fromJson(e)).toList() as M;
+    }
+    if (<RepayLogData>[] is M) {
+      return data.map<RepayLogData>((Map<String, dynamic> e) =>
+          RepayLogData.fromJson(e)).toList() as M;
+    }
     if (<SyncEntity>[] is M) {
       return data.map<SyncEntity>((Map<String, dynamic> e) =>
           SyncEntity.fromJson(e)).toList() as M;
@@ -426,6 +440,7 @@ class JsonConvertClassCollection {
     (BorrowListEntity).toString(): BorrowListEntity.fromJson,
     (BorrowListData).toString(): BorrowListData.fromJson,
     (BorrowListOther).toString(): BorrowListOther.fromJson,
+    (CityEntity).toString(): CityEntity.fromJson,
     (DBorrowSignEntity).toString(): DBorrowSignEntity.fromJson,
     (DBorrowSignData).toString(): DBorrowSignData.fromJson,
     (DBorrowSignDataPreComputeItem).toString(): DBorrowSignDataPreComputeItem
@@ -459,6 +474,8 @@ class JsonConvertClassCollection {
     (QAOcrData).toString(): QAOcrData.fromJson,
     (QAOcrDataOcrResult).toString(): QAOcrDataOcrResult.fromJson,
     (QVerifyItemEntity).toString(): QVerifyItemEntity.fromJson,
+    (RepayLogEntity).toString(): RepayLogEntity.fromJson,
+    (RepayLogData).toString(): RepayLogData.fromJson,
     (SyncEntity).toString(): SyncEntity.fromJson,
     (VerifyItemStoreEntity).toString(): VerifyItemStoreEntity.fromJson,
     (VerifyItemStoreData).toString(): VerifyItemStoreData.fromJson,
