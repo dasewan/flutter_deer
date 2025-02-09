@@ -66,12 +66,8 @@ class _MessageItemState extends State<_MessageItem> {
                     const Expanded(child: Text('准时还款，信用分+1000')),
                     Container(
                       margin: const EdgeInsets.only(right: 4.0),
-                      height: 8.0,
-                      width: 8.0,
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
+
+                      child: Icon(Icons.arrow_upward, color: Colors.green,size: 24),
                     ),
                   ],
                 ),
