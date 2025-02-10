@@ -231,7 +231,7 @@ class OrderItem extends StatelessWidget {
                         fontSize: Dimens.font_sp14,
                         backgroundColor: Colors.redAccent[700],
                         onPressed: () {
-                          NavigatorUtils.push(context, '${RepayRouter.repay}?borrowId=${item.id}');
+                          NavigatorUtils.push(context, '${RepayRouter.repay}?productId=${item.dProductId}');
                         },
                         text: 'Repay',
                       ),

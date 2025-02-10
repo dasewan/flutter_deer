@@ -7,15 +7,20 @@ BorrowListEntity $BorrowListEntityFromJson(Map<String, dynamic> json) {
   if (success != null) {
     borrowListEntity.success = success;
   }
-  final String? errorMessage = jsonConvert.convert<String>(json['errorMessage']);
+  final String? errorMessage = jsonConvert.convert<String>(
+      json['errorMessage']);
   if (errorMessage != null) {
     borrowListEntity.errorMessage = errorMessage;
   }
-  final List<BorrowListData>? data = (json['data'] as List<dynamic>?)?.map((e) => jsonConvert.convert<BorrowListData>(e) as BorrowListData).toList();
+  final List<BorrowListData>? data = (json['data'] as List<dynamic>?)
+      ?.map(
+          (e) => jsonConvert.convert<BorrowListData>(e) as BorrowListData)
+      .toList();
   if (data != null) {
     borrowListEntity.data = data;
   }
-  final BorrowListOther? other = jsonConvert.convert<BorrowListOther>(json['other']);
+  final BorrowListOther? other = jsonConvert.convert<BorrowListOther>(
+      json['other']);
   if (other != null) {
     borrowListEntity.other = other;
   }
@@ -88,6 +93,10 @@ BorrowListData $BorrowListDataFromJson(Map<String, dynamic> json) {
   if (jStatus != null) {
     borrowListData.jStatus = jStatus;
   }
+  final int? dProductId = jsonConvert.convert<int>(json['d_product_id']);
+  if (dProductId != null) {
+    borrowListData.dProductId = dProductId;
+  }
   final int? kSubStatus = jsonConvert.convert<int>(json['k_sub_status']);
   if (kSubStatus != null) {
     borrowListData.kSubStatus = kSubStatus;
@@ -96,19 +105,23 @@ BorrowListData $BorrowListDataFromJson(Map<String, dynamic> json) {
   if (mBorrowAmount != null) {
     borrowListData.mBorrowAmount = mBorrowAmount;
   }
-  final String? qExpectRepayTime = jsonConvert.convert<String>(json['q_expect_repay_time']);
+  final String? qExpectRepayTime = jsonConvert.convert<String>(
+      json['q_expect_repay_time']);
   if (qExpectRepayTime != null) {
     borrowListData.qExpectRepayTime = qExpectRepayTime;
   }
-  final String? tSettledTime = jsonConvert.convert<String>(json['t_settled_time']);
+  final String? tSettledTime = jsonConvert.convert<String>(
+      json['t_settled_time']);
   if (tSettledTime != null) {
     borrowListData.tSettledTime = tSettledTime;
   }
-  final int? yShowExtendBtn = jsonConvert.convert<int>(json['y_show_extend_btn']);
+  final int? yShowExtendBtn = jsonConvert.convert<int>(
+      json['y_show_extend_btn']);
   if (yShowExtendBtn != null) {
     borrowListData.yShowExtendBtn = yShowExtendBtn;
   }
-  final int? aTMaxExtendDays = jsonConvert.convert<int>(json['a_t_max_extend_days']);
+  final int? aTMaxExtendDays = jsonConvert.convert<int>(
+      json['a_t_max_extend_days']);
   if (aTMaxExtendDays != null) {
     borrowListData.aTMaxExtendDays = aTMaxExtendDays;
   }
@@ -128,6 +141,7 @@ Map<String, dynamic> $BorrowListDataToJson(BorrowListData entity) {
   data['id'] = entity.id;
   data['h_sn'] = entity.hSn;
   data['j_status'] = entity.jStatus;
+  data['d_product_id'] = entity.dProductId;
   data['k_sub_status'] = entity.kSubStatus;
   data['m_borrow_amount'] = entity.mBorrowAmount;
   data['q_expect_repay_time'] = entity.qExpectRepayTime;
@@ -144,6 +158,7 @@ extension BorrowListDataExtension on BorrowListData {
     int? id,
     String? hSn,
     int? jStatus,
+    int? dProductId,
     int? kSubStatus,
     int? mBorrowAmount,
     String? qExpectRepayTime,
@@ -157,6 +172,7 @@ extension BorrowListDataExtension on BorrowListData {
       ..id = id ?? this.id
       ..hSn = hSn ?? this.hSn
       ..jStatus = jStatus ?? this.jStatus
+      ..dProductId = dProductId ?? this.dProductId
       ..kSubStatus = kSubStatus ?? this.kSubStatus
       ..mBorrowAmount = mBorrowAmount ?? this.mBorrowAmount
       ..qExpectRepayTime = qExpectRepayTime ?? this.qExpectRepayTime

@@ -33,6 +33,8 @@ class BorrowListData {
   String? hSn;
   @JSONField(name: "j_status")
   int? jStatus;
+  @JSONField(name: "d_product_id")
+  int? dProductId;
   @JSONField(name: "k_sub_status")
   int? kSubStatus;
   @JSONField(name: "m_borrow_amount")
