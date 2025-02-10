@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp9/pages/html/router/html_router.dart';
 import 'package:myapp9/providers/center_provider.dart';
 import 'package:myapp9/util/helper.dart';
 import 'package:provider/provider.dart';
@@ -268,7 +269,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                             darkImage: const ['dark_dpsz', 'dark_dpsz', 'dark_dpsz'],
                             onItemClick: (index) {
                               if (index == 0) {
-                                _launchWebURL('作者博客', 'https://www.baidu.com');
+                                NavigatorUtils.push(context, HtmlRouter.creditScorePage);
                               } else if (index == 1) {
                                 _launchWebURL('作者博客', 'https://www.baidu.com');
                               } else {

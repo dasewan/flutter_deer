@@ -11,6 +11,7 @@ import 'package:myapp9/pages/login2/router/login_router.dart';
 import 'package:myapp9/pages/repay/router/repay_router.dart';
 import 'package:myapp9/pages/sign/router/sign_router.dart';
 import 'package:myapp9/pages/verify/router/verify_router.dart';
+import 'package:myapp9/pages/html/router/html_router.dart';
 import '../pages/home/webview_page.dart';
 import '../pages/privacy/router/privacy_router.dart';
 import '../pages/setting/router/setting_router.dart';
@@ -52,6 +53,7 @@ class Routes {
     _listRouter.add(ShopRouter());
     _listRouter.add(SettingRouter());
     _listRouter.add(PrivacyRouter());
+    _listRouter.add(HtmlRouter());
 
   
     /// 初始化路由
