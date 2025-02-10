@@ -8,6 +8,7 @@ import 'package:myapp9/widgets/my_app_bar.dart';
 
 import '../../models/repay_log_entity.dart';
 import '../../mvp/base_page.dart';
+import '../../util/other_utils.dart';
 import '../index/index_repay_page.dart';
 import 'iviews/amount_record_list_i_mvp_view.dart';
 
@@ -119,8 +120,8 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
               top: 0.0,
               right: 0.0,
               child: Text(
-                transaction.jStatus == 20 ? 'Paid success' : 'Paid failed',
-                style: transaction.jStatus == 20
+                transaction.jStatus == 50 ? 'Paid success' : 'Paid failed',
+                style: transaction.jStatus == 50
                     ? TextStyle(
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
@@ -139,7 +140,7 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
             Positioned(
               bottom: 0.0,
               right: 0.0,
-              child: Text('amt.${transaction.uAmount!.toStringAsFixed(2)}', style: Theme.of(context).textTheme.titleSmall),
+              child: Text(Utils.formatPrice2(transaction.uAmount!), style: Theme.of(context).textTheme.titleSmall),
             ),
           ],
         ),

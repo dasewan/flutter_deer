@@ -149,7 +149,7 @@ class OrderItem extends StatelessWidget {
                       style: textTextStyle3,
                     ),
                   ),
-                  Text(Utils.formatPrice(item.mBorrowAmount.toString(), format: MoneyFormat.NORMAL))
+                  Text(Utils.formatPrice2(item.mBorrowAmount!))
                 ],
               ),
               Gaps.vGap4,

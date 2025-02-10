@@ -9,6 +9,7 @@ import 'package:keyboard_actions/keyboard_actions_config.dart';
 import 'package:keyboard_actions/keyboard_actions_item.dart';
 import 'package:sp_util/sp_util.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:currency_formatter/currency_formatter.dart';
 
 class Utils {
 
@@ -47,6 +48,18 @@ class Utils {
 
   static String formatPrice(String price, {MoneyFormat format = MoneyFormat.END_INTEGER}){
     return MoneyUtil.changeYWithUnit(NumUtil.getDoubleByValueStr(price) ?? 0, MoneyUnit.YUAN, format: format);
+  }
+  static String formatPrice2(num price){
+    const CurrencyFormat euroSettings = CurrencyFormat(
+      // formatter settings for euro
+      code: 'ng',
+      symbol: '₦',
+      symbolSide: SymbolSide.left,
+      thousandSeparator: ',',
+      decimalSeparator: '.',
+      symbolSeparator: '',
+    );
+    return CurrencyFormatter.format(price, euroSettings);
   }
 
   static KeyboardActionsConfig getKeyboardActionsConfig(BuildContext context, List<FocusNode> list) {
