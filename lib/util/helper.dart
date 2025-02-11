@@ -150,8 +150,8 @@ class Helper {
     return false;
   }
 
-  static void launchWebURL(String title, String url, BuildContext context) {
-    String uuid = SpUtil.getString(Constant.uuid) ?? '';
+  static void launchWebURL(String title, String url, String type, BuildContext context) {
+    /*String uuid = SpUtil.getString(Constant.uuid) ?? '';
     DateTime now = DateTime.now();
     int timestamp = now.millisecondsSinceEpoch;
     Map<String, dynamic> loginInfo = {
@@ -170,9 +170,13 @@ class Helper {
       loginInfo['e_n_max_md5'] = dynamicInfo['e_n_max_md5'];
       loginInfo['brand'] = dynamicInfo['brand'];
       loginInfo['deviceID'] = dynamicInfo['deviceID'];
-    }
-    if (Device.isMobile) {
-      NavigatorUtils.goWebViewPage(context, title, '$url?${buildQueryString(loginInfo)}');
+    }*/
+    if(type == '2'){
+      Utils.launchWebURL(url);
+    } else if (Device.isMobile) {
+      //todo 记录埋点信息
+      // NavigatorUtils.goWebViewPage(context, title, '$url?${buildQueryString(loginInfo)}');
+      NavigatorUtils.goWebViewPage(context, title, url);
     } else {
       Utils.launchWebURL(url);
     }

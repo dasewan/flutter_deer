@@ -362,7 +362,7 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
                               image: CachedNetworkImageProvider("${banner.bPic}"),
                               onImageTap: (i) {
                                 // Toast.show('image2');
-                                Helper.launchWebURL(banner.aTitle!, banner.eUrl!, context);
+                                Helper.launchWebURL(banner.aTitle!, banner.eUrl!, banner!.gType!, context);
                               },
                             );
                           }).toList(),
