@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapp9/generated/d_borrow_index_entity.dart';
+import 'package:myapp9/res/gaps.dart';
 
+import '../../../models/html_entity.dart';
 import '../../../mvp/base_page.dart';
 import '../../../widgets/my_app_bar.dart';
 import '../../shop/iview/order_iview.dart';
 import '../../shop/presenter/order_presenter.dart';
+import '../iview/html_iview.dart';
 import '../presenter/html_page_presenter.dart';
 
 void main() {
@@ -31,11 +34,26 @@ class CreditScorePage extends StatefulWidget {
   State<CreditScorePage> createState() => _CreditScorePageState();
 }
 
-class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<CreditScorePage, HtmlPagePresenter>, AutomaticKeepAliveClientMixin<CreditScorePage> implements OrderIMvpView {
+class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<CreditScorePage, HtmlPagePresenter>, AutomaticKeepAliveClientMixin<CreditScorePage> implements HtmlIMvpView {
   late HtmlPagePresenter _htmlPagePresenter;
-  List<String> _list = [];
-  List<String> _title = [];
+  List<HtmlDataCreditList> _list = [];
+  String _title = '';
+  @override
+  void initState() {
+    super.initState();
 
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _htmlPagePresenter.index(1, true);
+    });
+  }
+  @override
+  void setData(HtmlData data) {
+    setState(() {
+      _list = data.credit!.list!;
+      _title = data.credit!.title!;
+    });
+
+  }
   @override
   HtmlPagePresenter createPresenter() {
     _htmlPagePresenter = HtmlPagePresenter();
@@ -57,20 +75,13 @@ class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<Cr
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 200,
-              child: SvgPicture.asset(
-                'assets/images/html/increase.svg',
-                fit: BoxFit.fitHeight,
-              ),
-            ),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Your credit score is directly linked to your loan amount limit. Here are 4 tips to boost your credit score:',
+                    _title,
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.blueAccent,
@@ -78,10 +89,18 @@ class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<Cr
                     ),
                   ),
                   SizedBox(height: 10),
-                  _buildTip('Make sure the information you provide is accurate. If the system detects any false information, it may lower your credit score.'),
-                  _buildTip('Pay your bills on time to maintain a good credit history. Each on-time payment will positively impact your credit score.'),
-                  _buildTip('Too many late payments can lower your credit score and make it difficult for you to borrow again.'),
-                  _buildTip('Opening the app daily can help increase your credit score.'),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: _list.length,
+                    itemBuilder: (context, index) {
+                      return _buildTip(_list[index].content!, index, _list[index].img!);
+                    },
+                  ),
+                  // _buildTip('Make sure the information you provide is accurate. If the system detects any false information, it may lower your credit score.'),
+                  // _buildTip('Pay your bills on time to maintain a good credit history. Each on-time payment will positively impact your credit score.'),
+                  // _buildTip('Too many late payments can lower your credit score and make it difficult for you to borrow again.'),
+                  // _buildTip('Opening the app daily can help increase your credit score.'),
                 ],
               ),
             ),
@@ -103,7 +122,7 @@ class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<Cr
     );
   }
 
-  Widget _buildTip(String text) {
+  Widget _buildTip(String text, int index, String img) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       padding: EdgeInsets.all(10),
@@ -111,12 +130,29 @@ class _CreditScorePageState extends State<CreditScorePage> with BasePageMixin<Cr
         color: Colors.blue.shade50,
         border: Border(left: BorderSide(color: Colors.blueAccent.shade200, width: 5)),
       ),
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 16),
+      child: Row(
+        children: [
+          Container(
+            height: 80,
+            width: 80,
+            child: SvgPicture.asset(
+              'assets/images/html/credit_$index.svg',
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          Gaps.hGap16,
+          Expanded(
+            child: Text(
+              text,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ],
       ),
     );
   }
+
+
 
 
 }

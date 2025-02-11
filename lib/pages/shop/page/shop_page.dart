@@ -269,11 +269,16 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                             darkImage: const ['dark_dpsz', 'dark_dpsz', 'dark_dpsz'],
                             onItemClick: (index) {
                               if (index == 0) {
-                                NavigatorUtils.push(context, HtmlRouter.creditScorePage);
+                                _launchWebURL('Increase Amount', 'https://api.dasewan.cn/credit.html');
+                                // NavigatorUtils.push(context, HtmlRouter.creditScorePage);
                               } else if (index == 1) {
-                                _launchWebURL('作者博客', 'https://www.baidu.com');
-                              } else {
-                                _launchWebURL('作者博客', 'https://www.baidu.com');
+                                _launchWebURL('Help Center', 'https://api.dasewan.cn/help.html');
+                                // NavigatorUtils.push(context, HtmlRouter.helpPage);
+                              } else if (index == 2)  {
+                                _launchWebURL('About Us', 'https://api.dasewan.cn/about.html');
+                                // NavigatorUtils.push(context, HtmlRouter.aboutUsPage);
+                              }else{
+                                _launchWebURL('Privacy Policy', 'https://api.dasewan.cn/privacy.html');
                               }
                             },
                           ),

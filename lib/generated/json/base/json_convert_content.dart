@@ -19,6 +19,7 @@ import 'package:myapp9/models/d_borrow_store_entity.dart';
 import 'package:myapp9/models/device_info_entity.dart';
 import 'package:myapp9/models/g_verifies_show_entity.dart';
 import 'package:myapp9/models/g_verify_entity.dart';
+import 'package:myapp9/models/html_entity.dart';
 import 'package:myapp9/models/index_entity.dart';
 import 'package:myapp9/models/index_first_entity.dart';
 import 'package:myapp9/models/index_no_entity.dart';
@@ -289,6 +290,46 @@ class JsonConvert {
       return data.map<GVerifyEntity>((Map<String, dynamic> e) =>
           GVerifyEntity.fromJson(e)).toList() as M;
     }
+    if (<HtmlEntity>[] is M) {
+      return data.map<HtmlEntity>((Map<String, dynamic> e) =>
+          HtmlEntity.fromJson(e)).toList() as M;
+    }
+    if (<HtmlData>[] is M) {
+      return data.map<HtmlData>((Map<String, dynamic> e) =>
+          HtmlData.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataCredit>[] is M) {
+      return data.map<HtmlDataCredit>((Map<String, dynamic> e) =>
+          HtmlDataCredit.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataCreditList>[] is M) {
+      return data.map<HtmlDataCreditList>((Map<String, dynamic> e) =>
+          HtmlDataCreditList.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataAbout>[] is M) {
+      return data.map<HtmlDataAbout>((Map<String, dynamic> e) =>
+          HtmlDataAbout.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataAboutList>[] is M) {
+      return data.map<HtmlDataAboutList>((Map<String, dynamic> e) =>
+          HtmlDataAboutList.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataHelp>[] is M) {
+      return data.map<HtmlDataHelp>((Map<String, dynamic> e) =>
+          HtmlDataHelp.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataHelpList>[] is M) {
+      return data.map<HtmlDataHelpList>((Map<String, dynamic> e) =>
+          HtmlDataHelpList.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataPrivacy>[] is M) {
+      return data.map<HtmlDataPrivacy>((Map<String, dynamic> e) =>
+          HtmlDataPrivacy.fromJson(e)).toList() as M;
+    }
+    if (<HtmlDataPrivacyList>[] is M) {
+      return data.map<HtmlDataPrivacyList>((Map<String, dynamic> e) =>
+          HtmlDataPrivacyList.fromJson(e)).toList() as M;
+    }
     if (<IndexEntity>[] is M) {
       return data.map<IndexEntity>((Map<String, dynamic> e) =>
           IndexEntity.fromJson(e)).toList() as M;
@@ -451,6 +492,16 @@ class JsonConvertClassCollection {
     (GVerifiesShowEntity).toString(): GVerifiesShowEntity.fromJson,
     (GVerifiesShowData).toString(): GVerifiesShowData.fromJson,
     (GVerifyEntity).toString(): GVerifyEntity.fromJson,
+    (HtmlEntity).toString(): HtmlEntity.fromJson,
+    (HtmlData).toString(): HtmlData.fromJson,
+    (HtmlDataCredit).toString(): HtmlDataCredit.fromJson,
+    (HtmlDataCreditList).toString(): HtmlDataCreditList.fromJson,
+    (HtmlDataAbout).toString(): HtmlDataAbout.fromJson,
+    (HtmlDataAboutList).toString(): HtmlDataAboutList.fromJson,
+    (HtmlDataHelp).toString(): HtmlDataHelp.fromJson,
+    (HtmlDataHelpList).toString(): HtmlDataHelpList.fromJson,
+    (HtmlDataPrivacy).toString(): HtmlDataPrivacy.fromJson,
+    (HtmlDataPrivacyList).toString(): HtmlDataPrivacyList.fromJson,
     (IndexEntity).toString(): IndexEntity.fromJson,
     (IndexData).toString(): IndexData.fromJson,
     (IndexDataAUser).toString(): IndexDataAUser.fromJson,

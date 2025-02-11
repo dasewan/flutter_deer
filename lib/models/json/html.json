@@ -1,0 +1,60 @@
+{
+  "success": true,
+  "data": {
+    "credit": {
+      "title": "Your credit score is directly linked to your loan amount limit. Here are 4 tips to boost your credit score:",
+      "list": [{
+        "title": "Our Mission",
+        "img": "credit_0.svg",
+        "content": "Make sure the information you provide is accurate. If the system detects any false information, it may lower your credit score."
+      }, {
+        "title": "Our Vision",
+        "img": "credit_1.svg",
+        "content": "Pay your bills on time to maintain a good credit history. Each on-time payment will positively impact your credit score."
+      }, {
+        "title": "Our Vision",
+        "img": "credit_2.svg",
+        "content": "Too many late payments can lower your credit score and make it difficult for you to borrow again."
+      }]
+    },
+    "about": {
+      "title": "About Us",
+      "list": [{
+        "title": "Our Mission",
+        "img": "Our Mission",
+        "content": "We are a financial technology company that provides convenient and efficient financial services to users. Our goal is to provide users with a better financial experience and help them achieve their financial goals."
+      }, {
+        "title": "Our Vision",
+        "img": "Our Mission",
+        "content": "We are committed to providing users with a safe and reliable financial platform. We use advanced technology to protect user information and ensure the security of user transactions."
+      }]
+    },
+    "help": {
+      "title": "Help Center",
+      "list": [{
+        "q": "How do I apply for a loan?",
+        "a": "To apply for a loan, you need to download the app and complete the registration process. After completing the registration process, you can apply for a loan through the app."
+      }, {
+        "q": "How do I repay my loan?",
+        "a": "To repay your loan, you need to log in to the app and go to the \"Repay\" page. You can choose to repay the loan in full or in installments."
+      }, {
+        "q": "What should I do if I have trouble repaying my loan?",
+        "a": "If you have trouble repaying your loan, you can contact our customer service team for assistance. We will work with you to find a solution that works for you."
+      }]
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "list": [{
+        "title": "Our Mission",
+        "img": "Our Mission",
+        "content": "We are a financial technology company that provides convenient and efficient financial services to users. Our goal is to provide users with a better financial experience and help them achieve their financial goals."
+      }, {
+        "title": "Our Vision",
+        "img": "Our Mission",
+        "content": "We are committed to providing users with a safe and reliable financial platform. We use advanced technology to protect user information and ensure the security of user transactions."
+      }]
+    }
+  },
+  "other": [],
+  "message": "AUser deleted"
+}
