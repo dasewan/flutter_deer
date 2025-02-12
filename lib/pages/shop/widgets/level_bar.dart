@@ -3,6 +3,7 @@ import 'package:myapp9/pages/shop/widgets/progerssoo.dart';
 import 'package:myapp9/res/raw/gaps.dart';
 
 import '../../../generated/center_entity.dart';
+import '../../../util/other_utils.dart';
 
 class LevelBar extends StatelessWidget {
   const LevelBar({super.key, required this.amountProgress, required this.levelProgress, required this.points, required this.tips});
@@ -34,25 +35,27 @@ class LevelBar extends StatelessWidget {
               Container(
                 height: 24,
                 child: GridView.count(
-                  crossAxisCount: 11,
+                  crossAxisCount: 6,
                   childAspectRatio: 1.0,
                   padding: EdgeInsets.only(left: 1),
                   children: amountProgress.map((item) {
                     TextStyle textStyle = TextStyle(color: Colors.transparent);
-                    if (item.amount! > 0 && item.type == 1) {
+                    if (item.amount! > 0 && item.type == 1 ) {
                       textStyle = const TextStyle(color: Colors.white54, fontSize: 11);
                     } else if (item.amount! > 0 && item.type == 2) {
                       textStyle = const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800);
                     }
-                    return Text(
-                      "\$${item.amount.toString()}",
-                      style: textStyle,
+                    return Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(Utils.formatPrice2(item.amount!),
+                        style: textStyle,
+                      ),
                     );
                   }).toList(),
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: _widgetSize.width / 11 / 2, right: _widgetSize.width / 11 / 2),
+                padding: EdgeInsets.only(left: _widgetSize.width / 6 / 2, right: _widgetSize.width / 6 / 2),
                 margin: EdgeInsets.only(bottom: 2),
                 child: Progressoo(
                     progress: 0.6,
@@ -71,7 +74,7 @@ class LevelBar extends StatelessWidget {
               Container(
                 height: 28,
                 child: GridView.count(
-                  crossAxisCount: 11,
+                  crossAxisCount: 6,
                   childAspectRatio: 1.0,
                   padding: EdgeInsets.only(left: 1, top: 8),
                   children: levelProgress.map((item) {
@@ -81,9 +84,12 @@ class LevelBar extends StatelessWidget {
                     } else if (item.level! != '' && item.type == 2) {
                       textStyle = const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700);
                     }
-                    return Text(
-                      item.level!,
-                      style: textStyle,
+                    return Align(
+                      alignment: Alignment.topCenter,
+                      child: Text(
+                        item.level!,
+                        style: textStyle,
+                      ),
                     );
                   }).toList(),
                 ),
