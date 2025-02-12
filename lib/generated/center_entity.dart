@@ -28,6 +28,8 @@ class CenterData {
   String? bName;
   @JSONField(name: "whatsapp")
   String? whatsapp;
+  @JSONField(name: "credit_url")
+  String? creditUrl;
   @JSONField(name: "a_phone")
   String? aPhone;
   @JSONField(name: "a_e_message")

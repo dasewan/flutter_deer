@@ -6,12 +6,13 @@ import '../../../generated/center_entity.dart';
 import '../../../util/other_utils.dart';
 
 class LevelBar extends StatelessWidget {
-  const LevelBar({super.key, required this.amountProgress, required this.levelProgress, required this.points, required this.tips});
+  const LevelBar({super.key, required this.amountProgress, required this.levelProgress, required this.points, required this.tips, required this.progress});
 
   final List<CenterDataAmountProgress> amountProgress;
   final List<CenterDataLevelProgress> levelProgress;
   final List<double> points;
   final String tips;
+  final double progress;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class LevelBar extends StatelessWidget {
                     if (item.amount! > 0 && item.type == 1 ) {
                       textStyle = const TextStyle(color: Colors.white54, fontSize: 11);
                     } else if (item.amount! > 0 && item.type == 2) {
-                      textStyle = const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w800);
+                      textStyle = const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700);
                     }
                     return Align(
                       alignment: Alignment.topCenter,
@@ -58,7 +59,7 @@ class LevelBar extends StatelessWidget {
                 padding: EdgeInsets.only(left: _widgetSize.width / 6 / 2, right: _widgetSize.width / 6 / 2),
                 margin: EdgeInsets.only(bottom: 2),
                 child: Progressoo(
-                    progress: 0.6,
+                    progress: progress,
                     points: points,
                     pointRadius: 7,
                     progressStrokeWidth: 6,
@@ -82,7 +83,7 @@ class LevelBar extends StatelessWidget {
                     if (item.level! != '' && item.type == 1) {
                       textStyle = const TextStyle(color: Colors.white54, fontSize: 10);
                     } else if (item.level! != '' && item.type == 2) {
-                      textStyle = const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700);
+                      textStyle = const TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w700);
                     }
                     return Align(
                       alignment: Alignment.topCenter,

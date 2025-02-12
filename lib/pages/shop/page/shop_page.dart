@@ -145,7 +145,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                                         ),
                                         children: <TextSpan>[
                                           TextSpan(text: provider.centerData.gCreditFraction!.toString()),
-                                          TextSpan(text: ' (level ${provider.centerData.currentLevel})', style: Theme.of(context).textTheme.titleSmall),
+                                          TextSpan(text: ' ${provider.centerData.currentLevel}', style: Theme.of(context).textTheme.titleSmall),
                                         ],
                                       ),
                                     ),
@@ -182,8 +182,8 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                                           color: Color(0xFF253840),
                                         ),
                                         children: <TextSpan>[
-                                          TextSpan(text: '\$${provider.centerData.fCreditAmount}'),
-                                          TextSpan(text: ' (next \$${provider.centerData.nextAmount})', style: Theme.of(context).textTheme.titleSmall),
+                                          TextSpan(text: Utils.formatPrice2(provider.centerData.fCreditAmount!)),
+                                          TextSpan(text: ' next ${Utils.formatPrice2(provider.centerData.nextAmount!)}', style: Theme.of(context).textTheme.titleSmall),
                                         ],
                                       ),
                                     ),
@@ -207,14 +207,20 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                             ],
                           ),
                         ),
-                        Container(
-                            padding: const EdgeInsets.only(left: 4, right: 4),
-                            child: LevelBar(
-                              amountProgress: provider.centerData.amountProgress!,
-                              levelProgress: provider.centerData.levelProgress!,
-                              points: provider.centerData.point!,
-                              tips: provider.centerData.processTip!,
-                            )),
+                        InkWell(
+                          onTap: () {
+                            _launchWebURL('Credit Score', provider.centerData.creditUrl!);
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.only(left: 4, right: 4),
+                              child: LevelBar(
+                                amountProgress: provider.centerData.amountProgress!,
+                                levelProgress: provider.centerData.levelProgress!,
+                                points: provider.centerData.point!,
+                                tips: provider.centerData.processTip!,
+                                progress: double.parse((provider.centerData.gCreditFraction!/1000).toStringAsFixed(2)),
+                              )),
+                        ),
                         Gaps.vGap10,
                         line,
                         Gaps.vGap5,

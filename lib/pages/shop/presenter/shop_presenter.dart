@@ -16,9 +16,9 @@ class ShopPagePresenter extends BasePagePresenter<ShopIMvpView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       int lastHomeFetchAt = SpUtil.getInt(Constant.lastHomeFetchAt, defValue: currentTimeInSeconds)!;
-      if (currentTimeInSeconds == lastHomeFetchAt || currentTimeInSeconds - lastHomeFetchAt > 30) {
+      // if (currentTimeInSeconds == lastHomeFetchAt || currentTimeInSeconds - lastHomeFetchAt > 30) {
         index(false);
-      }
+      // }
 
       /// 接口请求例子
       /// get请求参数queryParameters  post请求参数params

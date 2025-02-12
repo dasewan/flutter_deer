@@ -57,6 +57,10 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
   if (whatsapp != null) {
     centerData.whatsapp = whatsapp;
   }
+  final String? creditUrl = jsonConvert.convert<String>(json['credit_url']);
+  if (creditUrl != null) {
+    centerData.creditUrl = creditUrl;
+  }
   final String? aPhone = jsonConvert.convert<String>(json['a_phone']);
   if (aPhone != null) {
     centerData.aPhone = aPhone;
@@ -131,6 +135,7 @@ Map<String, dynamic> $CenterDataToJson(CenterData entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['b_name'] = entity.bName;
   data['whatsapp'] = entity.whatsapp;
+  data['credit_url'] = entity.creditUrl;
   data['a_phone'] = entity.aPhone;
   data['a_e_message'] = entity.aEMessage;
   data['a_o_service_count'] = entity.aOServiceCount;
@@ -153,6 +158,7 @@ extension CenterDataExtension on CenterData {
   CenterData copyWith({
     String? bName,
     String? whatsapp,
+    String? creditUrl,
     String? aPhone,
     int? aEMessage,
     int? aOServiceCount,
@@ -170,6 +176,7 @@ extension CenterDataExtension on CenterData {
     return CenterData()
       ..bName = bName ?? this.bName
       ..whatsapp = whatsapp ?? this.whatsapp
+      ..creditUrl = creditUrl ?? this.creditUrl
       ..aPhone = aPhone ?? this.aPhone
       ..aEMessage = aEMessage ?? this.aEMessage
       ..aOServiceCount = aOServiceCount ?? this.aOServiceCount
