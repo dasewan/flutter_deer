@@ -88,7 +88,8 @@ class Constant {
 
   /// 产品最新更新时间
   static const String lastIndexFetchAt = 'lastIndexFetchAt';
-
+  /// 产品最新更新时间
+  static const String lastHomeFetchAt = 'lastHomeFetchAt';
   /// 上次获取设备信息时间
   static const String lastDeviceInfoFetchAt = 'lastDeviceInfoFetchAt';
 

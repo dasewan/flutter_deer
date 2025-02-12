@@ -26,6 +26,8 @@ class CenterEntity {
 class CenterData {
   @JSONField(name: "b_name")
   String? bName;
+  @JSONField(name: "whatsapp")
+  String? whatsapp;
   @JSONField(name: "a_phone")
   String? aPhone;
   @JSONField(name: "a_e_message")

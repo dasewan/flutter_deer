@@ -15,8 +15,8 @@ class ShopPagePresenter extends BasePagePresenter<ShopIMvpView> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-      int lastIndexFetchAt = SpUtil.getInt(Constant.lastIndexFetchAt, defValue: currentTimeInSeconds)!;
-      if (currentTimeInSeconds == lastIndexFetchAt || currentTimeInSeconds - lastIndexFetchAt > 30) {
+      int lastHomeFetchAt = SpUtil.getInt(Constant.lastHomeFetchAt, defValue: currentTimeInSeconds)!;
+      if (currentTimeInSeconds == lastHomeFetchAt || currentTimeInSeconds - lastHomeFetchAt > 30) {
         index(false);
       }
 
@@ -55,7 +55,7 @@ class ShopPagePresenter extends BasePagePresenter<ShopIMvpView> {
         }
         view.provider.setCenterData(reponse.data!);
         int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-        SpUtil.putInt(Constant.lastIndexFetchAt, currentTimeInSeconds);
+        SpUtil.putInt(Constant.lastHomeFetchAt, currentTimeInSeconds);
       }
     }, onError: (_, __) {
       /// 加载失败

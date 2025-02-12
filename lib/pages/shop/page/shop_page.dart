@@ -306,7 +306,8 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                     IconButton(
                       tooltip: 'contact',
                       onPressed: () {
-                        NavigatorUtils.push(context, SettingRouter.settingPage);
+                        Utils.launchWebURL(provider.centerData.whatsapp!);
+                        // NavigatorUtils.push(context, SettingRouter.settingPage);
                       },
                       icon: LoadAssetImage(
                         'shop/contact2',

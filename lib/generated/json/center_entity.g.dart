@@ -1,5 +1,5 @@
-import 'package:myapp9/generated/center_entity.dart';
 import 'package:myapp9/generated/json/base/json_convert_content.dart';
+import 'package:myapp9/generated/center_entity.dart';
 
 CenterEntity $CenterEntityFromJson(Map<String, dynamic> json) {
   final CenterEntity centerEntity = CenterEntity();
@@ -11,7 +11,8 @@ CenterEntity $CenterEntityFromJson(Map<String, dynamic> json) {
   if (data != null) {
     centerEntity.data = data;
   }
-  final List<dynamic>? other = (json['other'] as List<dynamic>?)?.map((e) => e).toList();
+  final List<dynamic>? other = (json['other'] as List<dynamic>?)?.map(
+          (e) => e).toList();
   if (other != null) {
     centerEntity.other = other;
   }
@@ -52,6 +53,10 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
   if (bName != null) {
     centerData.bName = bName;
   }
+  final String? whatsapp = jsonConvert.convert<String>(json['whatsapp']);
+  if (whatsapp != null) {
+    centerData.whatsapp = whatsapp;
+  }
   final String? aPhone = jsonConvert.convert<String>(json['a_phone']);
   if (aPhone != null) {
     centerData.aPhone = aPhone;
@@ -60,15 +65,18 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
   if (aEMessage != null) {
     centerData.aEMessage = aEMessage;
   }
-  final int? aOServiceCount = jsonConvert.convert<int>(json['a_o_service_count']);
+  final int? aOServiceCount = jsonConvert.convert<int>(
+      json['a_o_service_count']);
   if (aOServiceCount != null) {
     centerData.aOServiceCount = aOServiceCount;
   }
-  final int? gCreditFraction = jsonConvert.convert<int>(json['g_credit_fraction']);
+  final int? gCreditFraction = jsonConvert.convert<int>(
+      json['g_credit_fraction']);
   if (gCreditFraction != null) {
     centerData.gCreditFraction = gCreditFraction;
   }
-  final String? currentLevel = jsonConvert.convert<String>(json['current_level']);
+  final String? currentLevel = jsonConvert.convert<String>(
+      json['current_level']);
   if (currentLevel != null) {
     centerData.currentLevel = currentLevel;
   }
@@ -84,7 +92,8 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
   if (processTip != null) {
     centerData.processTip = processTip;
   }
-  final String? lastRefreshTime = jsonConvert.convert<String>(json['last_refresh_time']);
+  final String? lastRefreshTime = jsonConvert.convert<String>(
+      json['last_refresh_time']);
   if (lastRefreshTime != null) {
     centerData.lastRefreshTime = lastRefreshTime;
   }
@@ -92,17 +101,26 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
   if (showActive != null) {
     centerData.showActive = showActive;
   }
-  final List<CenterDataAmountProgress>? amountProgress =
-      (json['amount_progress'] as List<dynamic>?)?.map((e) => jsonConvert.convert<CenterDataAmountProgress>(e) as CenterDataAmountProgress).toList();
+  final List<
+      CenterDataAmountProgress>? amountProgress = (json['amount_progress'] as List<
+      dynamic>?)?.map(
+          (e) =>
+      jsonConvert.convert<CenterDataAmountProgress>(
+          e) as CenterDataAmountProgress).toList();
   if (amountProgress != null) {
     centerData.amountProgress = amountProgress;
   }
-  final List<CenterDataLevelProgress>? levelProgress =
-      (json['level_progress'] as List<dynamic>?)?.map((e) => jsonConvert.convert<CenterDataLevelProgress>(e) as CenterDataLevelProgress).toList();
+  final List<
+      CenterDataLevelProgress>? levelProgress = (json['level_progress'] as List<
+      dynamic>?)?.map(
+          (e) =>
+      jsonConvert.convert<CenterDataLevelProgress>(
+          e) as CenterDataLevelProgress).toList();
   if (levelProgress != null) {
     centerData.levelProgress = levelProgress;
   }
-  final List<double>? point = (json['point'] as List<dynamic>?)?.map((e) => jsonConvert.convert<double>(e) as double).toList();
+  final List<double>? point = (json['point'] as List<dynamic>?)?.map(
+          (e) => jsonConvert.convert<double>(e) as double).toList();
   if (point != null) {
     centerData.point = point;
   }
@@ -112,6 +130,7 @@ CenterData $CenterDataFromJson(Map<dynamic, dynamic> json) {
 Map<String, dynamic> $CenterDataToJson(CenterData entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['b_name'] = entity.bName;
+  data['whatsapp'] = entity.whatsapp;
   data['a_phone'] = entity.aPhone;
   data['a_e_message'] = entity.aEMessage;
   data['a_o_service_count'] = entity.aOServiceCount;
@@ -122,8 +141,10 @@ Map<String, dynamic> $CenterDataToJson(CenterData entity) {
   data['process_tip'] = entity.processTip;
   data['last_refresh_time'] = entity.lastRefreshTime;
   data['show_active'] = entity.showActive;
-  data['amount_progress'] = entity.amountProgress?.map((v) => v.toJson()).toList();
-  data['level_progress'] = entity.levelProgress?.map((v) => v.toJson()).toList();
+  data['amount_progress'] =
+      entity.amountProgress?.map((v) => v.toJson()).toList();
+  data['level_progress'] =
+      entity.levelProgress?.map((v) => v.toJson()).toList();
   data['point'] = entity.point;
   return data;
 }
@@ -131,6 +152,7 @@ Map<String, dynamic> $CenterDataToJson(CenterData entity) {
 extension CenterDataExtension on CenterData {
   CenterData copyWith({
     String? bName,
+    String? whatsapp,
     String? aPhone,
     int? aEMessage,
     int? aOServiceCount,
@@ -147,6 +169,7 @@ extension CenterDataExtension on CenterData {
   }) {
     return CenterData()
       ..bName = bName ?? this.bName
+      ..whatsapp = whatsapp ?? this.whatsapp
       ..aPhone = aPhone ?? this.aPhone
       ..aEMessage = aEMessage ?? this.aEMessage
       ..aOServiceCount = aOServiceCount ?? this.aOServiceCount
@@ -163,7 +186,8 @@ extension CenterDataExtension on CenterData {
   }
 }
 
-CenterDataAmountProgress $CenterDataAmountProgressFromJson(Map<String, dynamic> json) {
+CenterDataAmountProgress $CenterDataAmountProgressFromJson(
+    Map<String, dynamic> json) {
   final CenterDataAmountProgress centerDataAmountProgress = CenterDataAmountProgress();
   final int? amount = jsonConvert.convert<int>(json['amount']);
   if (amount != null) {
@@ -176,7 +200,8 @@ CenterDataAmountProgress $CenterDataAmountProgressFromJson(Map<String, dynamic> 
   return centerDataAmountProgress;
 }
 
-Map<String, dynamic> $CenterDataAmountProgressToJson(CenterDataAmountProgress entity) {
+Map<String, dynamic> $CenterDataAmountProgressToJson(
+    CenterDataAmountProgress entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['amount'] = entity.amount;
   data['type'] = entity.type;
@@ -194,7 +219,8 @@ extension CenterDataAmountProgressExtension on CenterDataAmountProgress {
   }
 }
 
-CenterDataLevelProgress $CenterDataLevelProgressFromJson(Map<String, dynamic> json) {
+CenterDataLevelProgress $CenterDataLevelProgressFromJson(
+    Map<String, dynamic> json) {
   final CenterDataLevelProgress centerDataLevelProgress = CenterDataLevelProgress();
   final String? level = jsonConvert.convert<String>(json['level']);
   if (level != null) {
@@ -207,7 +233,8 @@ CenterDataLevelProgress $CenterDataLevelProgressFromJson(Map<String, dynamic> js
   return centerDataLevelProgress;
 }
 
-Map<String, dynamic> $CenterDataLevelProgressToJson(CenterDataLevelProgress entity) {
+Map<String, dynamic> $CenterDataLevelProgressToJson(
+    CenterDataLevelProgress entity) {
   final Map<String, dynamic> data = <String, dynamic>{};
   data['level'] = entity.level;
   data['type'] = entity.type;

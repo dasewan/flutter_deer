@@ -7,6 +7,7 @@ class CenterProvider extends ChangeNotifier {
   CenterData _centerData = $CenterDataFromJson({
     "b_name": "",
     "a_phone": "52345678905",
+    "whatsapp": "15921185025",
     "a_e_message": 88,
     "a_o_service_count": 0,
     "g_credit_fraction": 0,
