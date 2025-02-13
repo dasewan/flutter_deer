@@ -33,6 +33,16 @@ class Helper {
         (gVerifyEntity.jIdnumberVerifyStatus == Constant.wait || gVerifyEntity.jIdnumberVerifyStatus == Constant.refuse)) {
       SpUtil.putString(Constant.idCardOrPhoto, VerifyRouter.idCard);
     }
+
+    if(gVerifyEntity.jIdnumberVerifyStatus == Constant.notYet || gVerifyEntity.jIdnumberVerifyStatus == Constant.wait){
+      view.getContext().read<VerifyProvider>().setNext(1);
+    }else if(gVerifyEntity.nContactVerifyStatus == Constant.notYet || gVerifyEntity.nContactVerifyStatus == Constant.wait){
+      view.getContext().read<VerifyProvider>().setNext(2);
+    }else if(gVerifyEntity.pJobVerifyStatus == Constant.notYet || gVerifyEntity.pJobVerifyStatus == Constant.wait){
+      view.getContext().read<VerifyProvider>().setNext(3);
+    }else if(gVerifyEntity.rLoanBankStatus == Constant.notYet || gVerifyEntity.rLoanBankStatus == Constant.wait){
+      view.getContext().read<VerifyProvider>().setNext(4);
+    }
     view.getContext().read<VerifyProvider>().setNContactVerifyStatus(gVerifyEntity.nContactVerifyStatus ?? Constant.notYet);
     view.getContext().read<VerifyProvider>().setPJobVerifyStatus(gVerifyEntity.pJobVerifyStatus ?? Constant.notYet);
     view.getContext().read<VerifyProvider>().setRLoanBankStatus(gVerifyEntity.rLoanBankStatus ?? Constant.notYet);

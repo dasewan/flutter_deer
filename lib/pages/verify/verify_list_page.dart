@@ -74,25 +74,24 @@ class _VerifiListPageState extends State<VerifiListPage> with BasePageMixin<Veri
           padding: const EdgeInsets.symmetric(vertical: 16.0),
           bottomButton: Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
-            child: Selector<VerifyProvider, String>(
+            child: Selector<VerifyProvider, int>(
               selector: (_, provider) {
-                return provider.updatedAt;
+                return provider.next;
               },
 
               /// 精准判断刷新条件（provider 4.0新属性）
               shouldRebuild: (previous, next) => previous != next,
-              builder: (_, status, __) {
+              builder: (_, next, __) {
                 // 只会触发sortIndex变化的刷新
                 return MyButton(
                   onPressed: () {
-                    print(provider.jIdnumberVerifyStatus);
-                    if (provider.jIdnumberVerifyStatus == Constant.notYet) {
+                    if (next == 1) {
                       NavigatorUtils.push(context, _routeMap[Constant.idNumber]!);
-                    } else if (provider.nContactVerifyStatus == Constant.notYet) {
+                    } else if (next == 2) {
                       NavigatorUtils.push(context, _routeMap[Constant.contact]!);
-                    } else if (provider.pJobVerifyStatus == Constant.notYet) {
+                    } else if (next == 3) {
                       NavigatorUtils.push(context, _routeMap[Constant.job]!);
-                    } else if (provider.rLoanBankStatus == Constant.notYet) {
+                    } else if (next == 4) {
                       NavigatorUtils.push(context, _routeMap[Constant.loanBank]!);
                     }
                     // _idCardPagePresenter.midnumbers(_submittedField, false);

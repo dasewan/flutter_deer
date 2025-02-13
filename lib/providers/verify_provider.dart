@@ -13,6 +13,7 @@ class VerifyProvider extends ChangeNotifier {
   int _yOcrVerifyStatus = 10;
   int _aASupplementVerifyStatus = 10;
   String _updatedAt = '';
+  int _next = 0; // 0:ocr 1:id 2:contact 3:job 4:bank
 
   GVerifyEntity? get gVerifyEntity => _gVerifyEntity;
 
@@ -114,9 +115,18 @@ class VerifyProvider extends ChangeNotifier {
 
   String get updatedAt => _updatedAt;
 
-  void setUpdatedAt(String jIdnumberVerifyStatus) {
+  void setUpdatedAt(String updatedAt) {
     if (_updatedAt != updatedAt) {
       _updatedAt = updatedAt;
+      notifyListeners();
+    }
+  }
+
+  int get next => _next;
+
+  void setNext(int next) {
+    if (_next != next) {
+      _next = next;
       notifyListeners();
     }
   }
