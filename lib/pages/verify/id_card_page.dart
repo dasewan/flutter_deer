@@ -50,13 +50,14 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
 
     _verifyItem?.forEach((QVerifyItemEntity item) {
       _submittedField["${item.cCode}"] = "";
-      if (item.cCode == 'm_idnumber' && widget.id != null) {
+/*      if (item.cCode == 'm_idnumber' && widget.id != null) {
         _controllers["${item.cCode}"] = TextEditingController(text: widget.id);
       } else if (item.cCode == 'q_name1' && widget.name != null) {
         _controllers["${item.cCode}"] = TextEditingController(text: widget.name);
       } else {
         _controllers["${item.cCode}"] = TextEditingController();
-      }
+      }*/
+      _controllers["${item.cCode}"] = TextEditingController();
 
       _focusNodes["${item.cCode}"] = FocusNode();
     });
@@ -185,7 +186,7 @@ class _IdCardPageState extends State<IdCardPage> with BasePageMixin<IdCardPage, 
   Widget _buildItem(QVerifyItemEntity field, BuildContext ctx2) {
     List<FieldValidator> validator = [];
     List<String>? validators = field.rMultiValidator?.split(",");
-    if (validators != null) {
+    if (field.rMultiValidator!.isNotEmpty && validators != null && validators.isNotEmpty) {
       List<List> validatorsDetails = [for (var e in validators) e.split(":")];
       for (List validatorOne in validatorsDetails) {
         String _errorText = validatorOne[1] as String;

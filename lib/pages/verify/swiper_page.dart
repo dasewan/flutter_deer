@@ -30,10 +30,19 @@ class _SwiperPageState extends State<SwiperPage> with SingleTickerProviderStateM
   StreamSubscription? _subscription;
   final List<String> _guideList = ['verify/swipper/swipper0', 'verify/swipper/swipper1', 'verify/swipper/swipper2'];
   final List<String> _guideTitleList = ['Verify Info', 'Apply For A Loan', 'Repay The Order'];
-  final List<String> _guideContentList2 = [
-    '1.Follow the steps to complete the certification \n\n2.Please ensure that the authentication information is true and accurate\n\n3.SMS and phone authorization is required, please pass authorization\n',
-    '1.Please select your intended product \n\n2.It takes 1 to 2 days to review the application\n\n3.After the review is passed, we will pay you, please pay attention to check\n\n',
-    '1.Please repay on time, and you can unlock higher amounts of products after repayment \n\n2.If you are unable to repay on time, you can choose to roll over to avoid affecting your credit\n\n3.After the review is passed, we will pay you, please pay attention to check\n\n'
+  final List<List<Map<String, String>>> _guideContentList2 = [
+    [
+      {'title': 'Verify Your Information', 'content': 'Ensure that your identification details are accurate and up-to-date before proceeding.'},
+      {'title': 'Grant Necessary Permissions', 'content': 'During the verification process, you will be asked to grant access to your SMS and contacts. Please allow these permissions to complete the verification. Without them, the process cannot be finalized.'},
+    ],
+    [
+      {'title': 'Select Your Preferred Loan Product', 'content': 'Once your verification is complete, choose the loan product that best suits your needs and submit your application.'},
+      {'title': 'Fast Approval and Disbursement', 'content': 'After submitting your application, the loan will be disbursed in as little as 30 minutes upon approval. You will receive an SMS notification once the funds are successfully transferred. Please wait patiently during this process.'},
+    ],
+    [
+      {'title': 'Repay on Time to Build Credit', 'content': 'Timely repayment will positively impact your credit score and increase your credit limit for future loans.'},
+      {'title': 'Avoid Late Payments', 'content': 'If your loan repayment is delayed, it may negatively affect your credit score and reduce your credit limit. Please ensure payments are made on time.'},
+    ],
   ];
 
   @override
@@ -126,9 +135,21 @@ class _SwiperPageState extends State<SwiperPage> with SingleTickerProviderStateM
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(_guideTitleList[index], style: TextStyles.textSize16),
-                          Gaps.vGap10,
-                          Text(_guideContentList2[index]),
+                          // Text(_guideTitleList[index], style: TextStyles.textSize16),
+                          Gaps.vGap4,
+                          Expanded(
+                            child: ListView.builder(
+                              padding: const EdgeInsets.all(16.0),
+                              itemCount: _guideContentList2[index].length,
+                              itemBuilder: (context, index2) {
+                                final step = _guideContentList2[index][index2];
+                                return _buildStep(
+                                  title: step['title']!,
+                                  description: step['content']!,
+                                );
+                              },
+                            ),
+                          )
                           // Gaps.vGap32,
                           // _buildButton(context),
                         ],
@@ -184,6 +205,41 @@ class _SwiperPageState extends State<SwiperPage> with SingleTickerProviderStateM
             radius: 18.0,
           ),
         )
+      ],
+    );
+  }
+
+  Widget _buildStep({
+    required String title,
+    required String description,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                ),
+              ),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+            ],
+          ),
+        ),
       ],
     );
   }

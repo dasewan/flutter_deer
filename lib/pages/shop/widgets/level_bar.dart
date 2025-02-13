@@ -120,7 +120,7 @@ class LevelBar extends StatelessWidget {
                           ),
                           child: const Center(
                             child: Text(
-                              'learn more',
+                              'Increase Credit Limit',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,

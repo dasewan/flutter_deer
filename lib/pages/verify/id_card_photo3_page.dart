@@ -185,8 +185,8 @@ class _IdCardPhotoPageState extends State<IdCardPhoto3Page>
           <Widget>[
             Gaps.vGap50,
             const Text(
-              'Submit identity card (front)',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+              'Hold your ID document and take a photo',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
             Container(
               color: Colors.transparent,
@@ -199,15 +199,33 @@ class _IdCardPhotoPageState extends State<IdCardPhoto3Page>
               ),
             ),
             Gaps.vGap50,
-            Container(
-              padding: EdgeInsets.all(20),
-              child: const Text(
-                'Please take a photo with your phone according to the example. Ensure all four corners are aligned and the image is clear.',
-                style: TextStyle(fontSize: 14),
-              ),
-            ),
+            SizedBox(height: 10),
+            _buildStep(1, 'Hold your ID document in one hand.'),
+            _buildStep(2, 'Ensure all details on the ID are visible.'),
+            _buildStep(3, 'Stand in a well-lit area.'),
+            _buildStep(4, 'Position the ID near your chest.'),
+            _buildStep(5, 'Look straight at the camera.'),
+            SizedBox(height: 20),
           ],
         ));
+  }
+  Widget _buildStep(int stepNumber, String stepText) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$stepNumber.',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(width: 8),
+          Expanded(
+            child: Text(stepText),
+          ),
+        ],
+      ),
+    );
   }
 
   // 摄像头界面

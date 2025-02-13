@@ -145,7 +145,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                                         ),
                                         children: <TextSpan>[
                                           TextSpan(text: provider.centerData.gCreditFraction!.toString()),
-                                          TextSpan(text: ' ${provider.centerData.currentLevel}', style: Theme.of(context).textTheme.titleSmall),
+                                          TextSpan(text: ' Grade ${provider.centerData.currentLevel}', style: Theme.of(context).textTheme.titleSmall),
                                         ],
                                       ),
                                     ),
@@ -153,7 +153,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                                     Padding(
                                       padding: EdgeInsets.only(top: 6),
                                       child: Text(
-                                        'My Credit Score',
+                                        'My Current Credit Grade',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: 'Roboto',
@@ -191,7 +191,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                                     Padding(
                                       padding: EdgeInsets.only(top: 6),
                                       child: Text(
-                                        'My Credit Amount',
+                                        'My Current Credit Limit',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           fontFamily: 'Roboto',
@@ -209,7 +209,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                         ),
                         InkWell(
                           onTap: () {
-                            _launchWebURL('Credit Score', provider.centerData.creditUrl!);
+                            _launchWebURL('Increase Credit Limit', provider.centerData.creditUrl!);
                           },
                           child: Container(
                               padding: const EdgeInsets.only(left: 4, right: 4),

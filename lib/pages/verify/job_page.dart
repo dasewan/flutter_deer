@@ -229,7 +229,7 @@ class _JobPageState extends State<JobPage> with BasePageMixin<JobPage, JobPagePr
     }
     List<FieldValidator> validator = [];
     List<String>? validators = field.rMultiValidator?.split(",");
-    if (validators != null) {
+    if (field.rMultiValidator!.isNotEmpty && validators != null && validators.isNotEmpty) {
       List<List> validatorsDetails = [for (var e in validators) e.split(":")];
       for (List validatorOne in validatorsDetails) {
         String _errorText = validatorOne[1] as String;
