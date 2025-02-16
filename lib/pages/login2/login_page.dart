@@ -21,6 +21,7 @@ import 'package:myapp9/widgets/my_scroll_view.dart';
 import 'package:sp_util/sp_util.dart';
 
 import '../../models/index_entity.dart';
+import '../../util/device_utils.dart';
 import '../../util/toast_utils.dart';
 import '../../widgets/load_image.dart';
 import '../privacy/router/privacy_router.dart';
@@ -112,6 +113,13 @@ class _LoginPageState extends State<LoginPage>
       '简体中文',
     ];
     final List<String> listLanguange = ['en', 'id', 'fr', 'es', 'pt', 'ru', 'vi', 'ja', 'zh_CN'];
+    void _launchWebURL(String title, String url) {
+      if (Device.isMobile) {
+        NavigatorUtils.goWebViewPage(context, title, url);
+      } else {
+        Utils.launchWebURL(url);
+      }
+    }
 
     void showBottomSheet() {
       showModalBottomSheet<void>(
@@ -197,12 +205,13 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     GestureDetector(
                       onTap: (){
-                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                        _launchWebURL('Privacy Policy', 'https://api.dasewan.cn/privacy.html');
+/*                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
                           setState(() {
                             final bool privacyAgreement = result as bool;
                             _privacyAgreement = privacyAgreement;
                           });
-                        });
+                        });*/
                       },
                       child: Text(
                         'Privacy Policy',
@@ -232,12 +241,13 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     GestureDetector(
                       onTap: () {
-                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                        _launchWebURL('Privacy Policy', 'https://api.dasewan.cn/service.html');
+/*                        NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
                           setState(() {
                             final bool privacyAgreement = result as bool;
                             _privacyAgreement = privacyAgreement;
                           });
-                        });
+                        });*/
                       },
                       child: Text(
                         'Terms of Service',
@@ -265,12 +275,13 @@ class _LoginPageState extends State<LoginPage>
               if(_privacyAgreement){
                 NavigatorUtils.push(context, LoginRouter.loginPhonePage);
               }else{
-                NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
+                NavigatorUtils.push(context, LoginRouter.loginPhonePage);
+/*                NavigatorUtils.pushResult(context, PrivacyRouter.privacyPage, (Object result) {
                   setState(() {
                     final bool privacyAgreement = result as bool;
                     _privacyAgreement = privacyAgreement;
                   });
-                });
+                });*/
               }
               // _privacyAgreement ? _login() : Toast.show(Myapp9Localizations.of(context)!.inputPrivacy);
             },

@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPhonePage>
   IndexDataLoginPageInfo? _loginPageInfo;
   late LoginPagePresenter _loginPagePresenter;
   late Image _image = Image.asset("assets/images/back.png");
-  Country? country;
+  Country country = Country.fromJson({"alpha2":"NG","alpha3":"NGA","continent":"Africa","countryCode":"234","currencyCode":"NGN","gec":"NI","geo":{"coordinate":{"latitude":9.081999,"longitude":8.675277},"maxCoordinate":{"latitude":13.8856449,"longitude":14.677982},"minCoordinate":{"latitude":4.1821001,"longitude":2.676932}},"internationalPrefix":"009","ioc":"NGR","isoLongName":"The Federal Republic of Nigeria","isoShortName":"Nigeria","name":"Nigeria","flag":"assets/flags/nga.png","dialCode":"+234","languagesOfficial":["en"],"languagesSpoken":["en"],"nationalDestinationCodeLengths":[2],"nationalNumberLengths":[10],"nationalPrefix":"0","nationality":"Nigerian","number":"566","postalCode":true,"postalCodeFormat":"\\d{6}","region":"Africa","unofficialNames":["Nigeria","Nigéria","the Federal Republic of Nigeria","ナイジェリア"],"addressFormat":null,"altCurrency":null,"isoShortNameByLocale":{"ab":"Nigeria","af":"Nigerië","ak":"Nigeria","am":"ና፤ጄሱ።","an":"Nigeria","ar":"نيجيريا","as":"নাইজেৰিয়া","ay":"Nigeria","az":"Nigeriya","ba":"Nigeria","be":"Нігерыя","bg":"Нигерия","bi":"Nigeria","bn":"নাইজেরিয়া","bn_IN":"নাইজেরিয়া","br":"Nigeria","bs":"Nigerija","ca":"Nigèria","ce":"Нигери","ch":"Nigeria","cs":"Nigérie","cv":"Нигери","cy":"Nigeria","da":"Nigeria","de":"Nigeria","dv":"ނައިޖީރިއާ","dz":"ནའི་ཇི་རི་ཡ།","ee":"Nigeria","el":"Νιγηρία","en":"Nigeria","eo":"Niĝerio","es":"Nigeria","et":"Nigeeria","eu":"Nigeria","fa":"نیجریه","ff":"Niiseriya","fi":"Nigeria","fo":"Nigeria","fr":"Nigeria","fy":"Nigearia","ga":"An Nigéir","gl":"Nixeria","gn":"Nigeria","gu":"નાઇજેરિયા","gv":"Yn Naigeer","ha":"Nijeriya","he":"ניגריה","hi":"नाईजीरिया","hr":"Nigerija","ht":"Nijerya","hu":"Nigéria","hy":"Նիգերիա","ia":"Nigeria","id":"Nigeria","io":"Nigeria","is":"Nígería","it":"Nigeria","iu":"Nigeria","ja":"ナイジェリア","ka":"ნიგერია","ki":"Nigeria","kk":"Нигерия","kl":"Nigeria","km":"នីហ្សេរីយ៉ា","kn":"ನೈಜೀರಿಯಾ","ko":"나이지리아","ku":"Nîjerya","kv":"Nigeria","kw":"Nijeri","ky":"Нигерия","lo":"Nigeria","lt":"Nigerija","lv":"Nigērija","mi":"Nigeria","mk":"Нигерија","ml":"നൈജീരിയ","mn":"Нигерь","mr":"नायजेरिया","ms":"Nigeria","mt":"Niġerja","my":"နိုင်ဂျီးရီးယားနိုင်ငံ","na":"Nigeria","nb":"Nigeria","ne":"नाइजेरिया","nl":"Nigeria","nn":"Nigeria","nv":"Naakaii Łizhinii Biʼéénézí Bikéyah","oc":"Nigèria","or":"ନିଈଜୀରିୟା","pa":"ਨੀਜ਼ੀਰਆ","pi":"नैजीरिया","pl":"Nigeria","ps":"نایجیریا","pt":"Nigéria","pt_BR":"Nigéria","ro":"Nigeria","ru":"Нигерия","rw":"Nigeriya","sc":"Nigèria","sd":"نائيجيريا","si":"නයිජීරියා","sk":"Nigéria","sl":"Nigerija","so":"Nayjeeriya","sq":"Nigeri","sr":"Нигерија","sv":"Nigeria","sw":"Nigeria","ta":"நைஜீரியா","te":"నైజీరియా","tg":"Нигерия","th":"ไนจีเรีย","ti":"ናይጄሪያ","tk":"Nigeriýa","tl":"Nigeria","tr":"Nijerya","tt":"Ниgериа","ug":"نىگېرىيە","uk":"Нігерія","ur":"نائجیریا","uz":"Nigeriya","ve":"Nigeria","vi":"Ni-giê-ri-a","wa":"Nidjeria","wo":"Nijeeria","xh":"Nigeria","yo":"Nàìjíríà","zh_CN":"尼日利亚","zh_HK":"尼日利亞","zh_TW":"奈及利亞","zu":"INigeria"}});
 
   @override
   Map<ChangeNotifier, List<VoidCallback>?>? changeNotifier() {
@@ -477,7 +477,7 @@ class _LoginPageState extends State<LoginPhonePage>
                 local = 'zh_CN';
               }
               //todo 支持的国家由后台返回
-              country = await AdvanceCountryPicker().showCountryPickerSheet(
+              country = (await AdvanceCountryPicker().showCountryPickerSheet(
                   context,
                   title: Myapp9Localizations.of(context)!.chooseCountry,
                   searchHintText:
@@ -539,7 +539,7 @@ class _LoginPageState extends State<LoginPhonePage>
                     '54',
                     '95',
                     '880'
-                  ]);
+                  ]))!;
               setState(() {
                 country = country;
               });
