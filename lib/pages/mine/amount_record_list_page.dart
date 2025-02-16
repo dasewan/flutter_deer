@@ -9,6 +9,7 @@ import 'package:myapp9/widgets/my_app_bar.dart';
 import '../../models/repay_log_entity.dart';
 import '../../mvp/base_page.dart';
 import '../../util/other_utils.dart';
+import '../../widgets/state_layout.dart';
 import '../index/index_repay_page.dart';
 import 'iviews/amount_record_list_i_mvp_view.dart';
 
@@ -26,6 +27,7 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
   late AmountRecordListPagePresenter _amountRecordListPagePresenter;
   // 模拟真实数据
   List<RepayLogData> _transactions = [];
+  int _total = -1;
   @override
   AmountRecordListPagePresenter createPresenter() {
     _amountRecordListPagePresenter = AmountRecordListPagePresenter();
@@ -36,6 +38,7 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
   void setStateData(List<RepayLogData> data) {
     setState(() {
       _transactions = data;
+      _total = data.length;
     });
 
   }
@@ -49,7 +52,7 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
       appBar: const MyAppBar(
         centerTitle: 'Repay Log',
       ),
-      body: CustomScrollView(
+      body: _total == 0 ? const StateLayout(type: StateType.empty) : CustomScrollView(
         slivers: _buildGroups(),
       ),
     );
