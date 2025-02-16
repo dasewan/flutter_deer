@@ -15,8 +15,10 @@ class OrderListPageProvider extends ChangeNotifier {
 
   /// 分页
   final List<int> _tabPageCurrentList = [1, 1, 1, 1, 1, 1, 1, 1];
+  final List<int> _tabPageCurrentTotal= [-1, -1, -1, -1, -1, -1, -1, -1];
 
   List<int> get tabPageCurrentList => _tabPageCurrentList;
+  List<int> get tabPageCurrentTotal => _tabPageCurrentTotal;
 
   /// 分页
   final List<bool> _hasMorePagesList = [true, true, true, true, true, true, true, true];
@@ -50,6 +52,10 @@ class OrderListPageProvider extends ChangeNotifier {
 
   void setTabPageCurrent(int page) {
     _tabPageCurrentList[index] = page;
+    notifyListeners();
+  }
+  void setTabPageTotal(int total) {
+    _tabPageCurrentTotal[index] = total;
     notifyListeners();
   }
 

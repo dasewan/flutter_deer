@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage>
         BasePageMixin<LoginPage, LoginPagePresenter>,
         AutomaticKeepAliveClientMixin<LoginPage>
     implements LoginIMvpView {
-  String _sortName = '';
+  String _sortName = 'English';
   bool _privacyAgreement = false;
 
   IndexDataLoginPageInfo? _loginPageInfo;

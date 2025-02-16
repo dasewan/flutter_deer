@@ -95,7 +95,7 @@ class _OrderListTabPageState extends State<OrderListTabPage>
         child: Consumer<OrderListPageProvider>(builder: (_, provider, __) {
           return MyListView(
               itemCount: provider.tabPageData[widget.index].length,
-              stateType: _stateType,
+              stateType: provider.tabPageCurrentTotal[widget.index] == 0 ? StateType.empty : StateType.loading,
               onRefresh: _onRefresh,
               loadMore: _loadMore,
               hasMore: provider.hasMorePagesList[widget.index],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:livelyness_detection/index.dart';
 import 'package:myapp9/res/resources.dart';
 import 'package:myapp9/util/theme_utils.dart';
 import 'package:myapp9/widgets/load_image.dart';
@@ -32,6 +33,19 @@ class StateLayout extends StatelessWidget {
                 width: 120,
               ),
             ),
+
+        if (type == StateType.empty)
+          Container(
+            color: Colors.transparent,
+            child: Lottie.asset(
+              'assets/images/state/empty.json',
+              animate: true,
+              repeat: false,
+              reverse: false,
+
+              // fit: BoxFit.contain,
+            ),
+          ),
         const SizedBox(width: double.infinity, height: Dimens.gap_dp16,),
         Text(
           hintText ?? type.hintText,
@@ -70,6 +84,6 @@ extension StateTypeExtension on StateType {
   String get hintText => <String>[
     '暂无订单', '暂无商品', 
     '无网络连接', '暂无消息', 
-    '马上添加提现账号吧', '', ''
+    '马上添加提现账号吧', '', 'No records found'
   ][index];
 }

@@ -62,6 +62,8 @@ class OrderListTabPagePresenter extends BasePagePresenter<OrderListIMvpView> {
           }
           view.provider.setHasMorePages(data.hasMorePages!);
         }
+        view.provider.setTabPageTotal(data.total!);
+
       }
     }, onError: (_, __) {
       /// 加载失败

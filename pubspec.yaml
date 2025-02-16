@@ -152,6 +152,7 @@ flutter:
     - assets/images/verify/id/1.json
     - assets/images/verify/id/2.json
     - assets/images/verify/id/3.json
+    - assets/images/state/
     - assets/lottie/scroll.json
     - assets/lottie/scroll2.json
 
