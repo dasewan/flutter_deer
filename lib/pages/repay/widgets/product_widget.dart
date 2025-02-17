@@ -149,7 +149,7 @@ class _ProductWidgetState extends State<ProductWidget> with SingleTickerProvider
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           // const MyTag(color: Colours.orange, text: '专享'),
-                          Text("${widget.product?.zPeriod} ${widget.product?.dUnit == 'w' ? 'Weeks' : 'Months'}", style: textTextStyle4),
+                          Text("${widget.product?.eLife} ${widget.product?.dUnit == 'd' ? 'Days' : 'Weeks'}", style: textTextStyle4),
                         ],
                       )
                     ],

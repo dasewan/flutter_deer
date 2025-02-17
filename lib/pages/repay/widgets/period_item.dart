@@ -12,6 +12,7 @@ import '../../../widgets/load_image.dart';
 class PeriodItem extends StatelessWidget {
   final int index;
   final int type;
+  final int totalCount;
   final bool isSelected;
   final ValueChanged<bool> onSelect;
   final BorrowDetailDataPeriods period;
@@ -20,6 +21,7 @@ class PeriodItem extends StatelessWidget {
     Key? key,
     required this.index,
     required this.type,
+    required this.totalCount,
     required this.isSelected,
     required this.onSelect,
     required this.period,
@@ -64,7 +66,7 @@ class PeriodItem extends StatelessWidget {
                 text: TextSpan(
                   style: textTextStyle,
                   children: <TextSpan>[
-                    TextSpan(text: '${period.dIndex}/8 ', style: TextStyle(fontSize: Dimens.font_sp16)),
+                    TextSpan(text: '${period.dIndex}/$totalCount ', style: TextStyle(fontSize: Dimens.font_sp16)),
                     TextSpan(text: 'Installments', style: Theme.of(context).textTheme.titleSmall),
                   ],
                 ),
@@ -84,7 +86,7 @@ class PeriodItem extends StatelessWidget {
                 text: TextSpan(
                   style: textTextStyle,
                   children: <TextSpan>[
-                    TextSpan(text: "Repayment Date", style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(text: "Due Date", style: Theme.of(context).textTheme.bodySmall),
                   ],
                 ),
               ),
@@ -103,7 +105,7 @@ class PeriodItem extends StatelessWidget {
                 text: TextSpan(
                   style: textTextStyle,
                   children: <TextSpan>[
-                    TextSpan(text: "Borrow Amount", style: Theme.of(context).textTheme.bodySmall),
+                    TextSpan(text: "Loan Amount", style: Theme.of(context).textTheme.bodySmall),
                   ],
                 ),
               ),

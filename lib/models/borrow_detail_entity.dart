@@ -62,6 +62,9 @@ class BorrowDetailDataBorrow {
   int? yShowExtendBtn;
   @JSONField(name: "a_t_max_extend_days")
   int? aTMaxExtendDays;
+  @JSONField(name: "a_p_period_count")
+  int? aPPeriodCount;
+
 
   BorrowDetailDataBorrow();
 

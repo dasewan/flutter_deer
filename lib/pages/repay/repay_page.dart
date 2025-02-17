@@ -168,18 +168,33 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                       // shadowColor: Colors.black38,
                       shadowColor: Colors.blue[800],
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: InkWell(
-                          onTap: () => {},
-                          child: Row(
-                            children: <Widget>[
-                              const LoadAssetImage('ywc_s', width: 16.0, height: 16.0),
-                              Gaps.hGap10,
-                              const Text('Period that have been settled'),
-                              const Expanded(child: Gaps.empty),
-                              Text('${provider.borrow?.uSettledPeriod != null ? provider.borrow?.uSettledPeriod?.toString() : '0'} periods')
-                            ],
-                          ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: () => {},
+                              child: Row(
+                                children: <Widget>[
+                                  const LoadAssetImage('shop/voting_10332492', width: 16.0, height: 16.0),
+                                  Gaps.hGap10,
+                                  const Text('Late repayments wil incur extra fees'),
+                                  const Expanded(child: Gaps.empty),
+                                ],
+                              ),
+                            ),
+                            Gaps.vGap4,
+                            InkWell(
+                              onTap: () => {},
+                              child: Row(
+                                children: <Widget>[
+                                  const LoadAssetImage('ywc_s', width: 16.0, height: 16.0),
+                                  Gaps.hGap10,
+                                  Text('You have paid ${provider.borrow!.uSettledPeriod!} out of ${provider.borrow!.aPPeriodCount!} installments so far.'),
+                                  const Expanded(child: Gaps.empty),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -198,6 +213,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                                 isSelected: _selected[index],
                                 period: provider.periods![index],
                                 type: provider.product!.fSettlementType!,
+                                totalCount: provider.product!.zPeriod!,
                                 onSelect: (select) {
                                   if (select) {
                                     for (var i = 0; i <= index; i++) {
