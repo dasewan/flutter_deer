@@ -34,7 +34,7 @@ class LoanBankPagePresenter extends BasePagePresenter<LoanBankIMvpView> {
           }
           Helper.handleNextVerifyItem(view: view, next: data.data!.next);
           view.getContext().read<VerifyProvider>().setRLoanBankStatus(Constant.success);
-          view.onCreateSuccess(data.data!.next!);
+          view.onCreateSuccess(data.data!.next!, data.data!.next! == '/home');
         }
       }
     }, onError: (_, __) {

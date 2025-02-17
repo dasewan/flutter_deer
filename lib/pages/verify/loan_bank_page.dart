@@ -77,11 +77,11 @@ class _LoanBankPageState extends State<LoanBankPage>
   }
 
   @override
-  void onCreateSuccess(String route) {
+  void onCreateSuccess(String route, bool toHome) {
     // NavigatorUtils.goBack(context);
     // NavigatorUtils.goBack(context);
     showToast("oncreateSuccess");
-    NavigatorUtils.push(context, route, replace: true);
+    NavigatorUtils.push(context, route, clearStack: toHome);
   }
 
   @override
@@ -329,6 +329,7 @@ class _LoanBankPageState extends State<LoanBankPage>
         tmp3 = ClickItem2(
           title: field.bName.nullSafe,
           content: '2',
+          hintText: field.pHintText.nullSafe,
           controller: _controllers["${field.cCode}"],
           validator: validator,
           onTap: () async {
@@ -349,6 +350,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           content: '2',
           controller: _controllers["${field.cCode}"],
           validator: validator,
+          hintText: field.pHintText.nullSafe,
           onTap: () async {
             NavigatorUtils.pushResult(context, VerifyRouter.citySelectPage, (Object result) {
               final CityEntity model = result as CityEntity;

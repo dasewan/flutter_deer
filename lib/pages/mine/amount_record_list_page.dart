@@ -51,6 +51,9 @@ class _AccountRecordListPageState extends State<AccountRecordListPage>
     return Scaffold(
       appBar: const MyAppBar(
         centerTitle: 'Repay Log',
+        backgroundColor: Colors.blueAccent,
+        titleColor: Colors.white,
+        backImgColor: Colors.white,
       ),
       body: _total == 0 ? const StateLayout(type: StateType.empty) : CustomScrollView(
         slivers: _buildGroups(),
