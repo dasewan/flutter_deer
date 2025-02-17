@@ -203,7 +203,7 @@ class PeriodItem extends StatelessWidget {
                       text: TextSpan(
                         style: textTextStyle,
                         children: <TextSpan>[
-                          TextSpan(text: "Due Amount", style: Theme.of(context).textTheme.bodySmall),
+                          TextSpan(text: "Penalty Fee", style: Theme.of(context).textTheme.bodySmall),
                         ],
                       ),
                     ),

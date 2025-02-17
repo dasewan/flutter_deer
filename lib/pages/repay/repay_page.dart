@@ -177,7 +177,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                                 children: <Widget>[
                                   const LoadAssetImage('shop/voting_10332492', width: 16.0, height: 16.0),
                                   Gaps.hGap10,
-                                  const Text('Late repayments wil incur extra fees'),
+                                  Text(provider.tips?[0] ?? ''),
                                   const Expanded(child: Gaps.empty),
                                 ],
                               ),
@@ -189,7 +189,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
                                 children: <Widget>[
                                   const LoadAssetImage('ywc_s', width: 16.0, height: 16.0),
                                   Gaps.hGap10,
-                                  Text('You have paid ${provider.borrow!.uSettledPeriod!} out of ${provider.borrow!.aPPeriodCount!} installments so far.'),
+                                  Text(provider.tips?[1] ?? ''),
                                   const Expanded(child: Gaps.empty),
                                 ],
                               ),
