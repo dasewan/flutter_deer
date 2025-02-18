@@ -133,15 +133,22 @@ class _MessageItemState extends State<_MessageItem> {
   }
   Widget _buildText(CreditHistoryData item) {
     String text = '';
-    if (item.dAmount! > 0 || item.jCreditScore! > 0) {
+    if(item.bType == 3 || item.bType == 4){
+      if (item.dAmount! > 0 || item.jCreditScore! > 0) {
         if(item.kOverdueDays! > 0){
           text = ', you were ${item.kOverdueDays!} day late on a payment.';
         }else{
           text = ', you made an on-time payment.';
         }
-    }else if(item.kOverdueDays! > 0){
-      text = ', you are ${item.kOverdueDays!} days overdue**..';
+      }else if(item.kOverdueDays! > 0){
+        text = ', you were ${item.kOverdueDays!} days overdue.';
+      }
+    }else if(item.bType == 1){
+      text = ', you registered.';
+    }else if(item.bType == 5){
+      text = ', the system added a credit limit increase.';
     }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

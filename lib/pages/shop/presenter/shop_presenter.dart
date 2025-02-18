@@ -16,9 +16,15 @@ class ShopPagePresenter extends BasePagePresenter<ShopIMvpView> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       int currentTimeInSeconds = DateTime.now().millisecondsSinceEpoch ~/ 1000;
       int lastHomeFetchAt = SpUtil.getInt(Constant.lastHomeFetchAt, defValue: currentTimeInSeconds)!;
-      // if (currentTimeInSeconds == lastHomeFetchAt || currentTimeInSeconds - lastHomeFetchAt > 30) {
+      if (currentTimeInSeconds == lastHomeFetchAt || currentTimeInSeconds - lastHomeFetchAt > 15) {
         index(false);
-      // }
+      }else{
+        //从缓存中补充产品列表数据
+        Map? data = SpUtil.getObject(Constant.lastFetchCenterData);
+        if (data != null) {
+          view.provider.setCenterData($CenterDataFromJson(data));
+        }
+      }
 
       /// 接口请求例子
       /// get请求参数queryParameters  post请求参数params
