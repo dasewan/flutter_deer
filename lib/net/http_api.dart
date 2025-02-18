@@ -34,5 +34,6 @@ class HttpApi{
   static const String verificationCodes = '/v1/verificationCodes';
   static const String captchas = '/v1/captchas';
   static const String repayLog = '/v1/r-a-repay-logs';
+  static const String creditLog = '/v1/a-b-credit-historys';
   static const String htmlData = '/v1/html-data';
 }

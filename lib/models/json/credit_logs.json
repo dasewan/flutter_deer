@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "errorMessage": "messages.retrieved",
+  "message": "messages.retrieved",
+  "data": [{
+    "id": 81,
+    "b_type": 20,
+    "d_amount": 20,
+    "j_credit_score": 20,
+    "i_before_credit_score": 20,
+    "c_before_credit_amount": 20,
+    "k_overdue_days": 20,
+    "l_after_credit_amount": 20,
+    "m_after_credit_score": 20,
+    "created_at": "2025-01-25T02:23:44.000000Z",
+    "updated_at": "2025-01-25T02:23:44.000000Z"
+  }, {
+    "id": 81,
+    "b_type": 20,
+    "d_amount": 20,
+    "j_credit_score": 20,
+    "i_before_credit_score": 20,
+    "c_before_credit_amount": 20,
+    "k_overdue_days": 20,
+    "l_after_credit_amount": 20,
+    "m_after_credit_score": 20,
+    "created_at": "2025-01-25T02:23:44.000000Z",
+    "updated_at": "2025-01-25T02:23:44.000000Z"
+  }],
+  "other": [],
+  "total": 21,
+  "currentPage": 1,
+  "perPage": 40,
+  "hasMorePages": false
+}

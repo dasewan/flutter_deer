@@ -14,6 +14,7 @@ import 'package:myapp9/models/b_product_entity.dart';
 import 'package:myapp9/models/borrow_detail_entity.dart';
 import 'package:myapp9/models/borrow_list_entity.dart';
 import 'package:myapp9/models/city_entity.dart';
+import 'package:myapp9/models/credit_history_entity.dart';
 import 'package:myapp9/models/d_borrow_sign_entity.dart';
 import 'package:myapp9/models/d_borrow_store_entity.dart';
 import 'package:myapp9/models/device_info_entity.dart';
@@ -254,6 +255,14 @@ class JsonConvert {
       return data.map<CityEntity>((Map<String, dynamic> e) =>
           CityEntity.fromJson(e)).toList() as M;
     }
+    if (<CreditHistoryEntity>[] is M) {
+      return data.map<CreditHistoryEntity>((Map<String, dynamic> e) =>
+          CreditHistoryEntity.fromJson(e)).toList() as M;
+    }
+    if (<CreditHistoryData>[] is M) {
+      return data.map<CreditHistoryData>((Map<String, dynamic> e) =>
+          CreditHistoryData.fromJson(e)).toList() as M;
+    }
     if (<DBorrowSignEntity>[] is M) {
       return data.map<DBorrowSignEntity>((Map<String, dynamic> e) =>
           DBorrowSignEntity.fromJson(e)).toList() as M;
@@ -482,6 +491,8 @@ class JsonConvertClassCollection {
     (BorrowListData).toString(): BorrowListData.fromJson,
     (BorrowListOther).toString(): BorrowListOther.fromJson,
     (CityEntity).toString(): CityEntity.fromJson,
+    (CreditHistoryEntity).toString(): CreditHistoryEntity.fromJson,
+    (CreditHistoryData).toString(): CreditHistoryData.fromJson,
     (DBorrowSignEntity).toString(): DBorrowSignEntity.fromJson,
     (DBorrowSignData).toString(): DBorrowSignData.fromJson,
     (DBorrowSignDataPreComputeItem).toString(): DBorrowSignDataPreComputeItem
