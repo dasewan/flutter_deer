@@ -12,6 +12,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.backgroundColor,
     this.titleColor,
+    this.actionWidget,
     this.title = '',
     this.centerTitle = '',
     this.actionName = '',
@@ -28,6 +29,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String backImg;
   final Color? backImgColor;
   final String actionName;
+  final Widget? actionWidget;
   final VoidCallback? onPressed;
   final bool isBack;
 
@@ -56,6 +58,24 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           textColor: context.isDark ? Colours.dark_text : Colours.text,
           backgroundColor: Colors.transparent,
           onPressed: onPressed,
+        ),
+      ),
+    ) : Gaps.empty;
+    final Widget action2 = actionWidget != null ? Positioned(
+      right: 0.0,
+      child: Theme(
+        data: Theme.of(context).copyWith(
+          buttonTheme: const ButtonThemeData(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            minWidth: 60.0,
+          ),
+        ),
+        child: InkWell(
+          onTap: onPressed,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: actionWidget,
+          ),
         ),
       ),
     ) : Gaps.empty;
@@ -101,6 +121,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               titleWidget,
               back,
               action,
+              action2
             ],
           ),
         ),

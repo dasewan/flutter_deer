@@ -7,6 +7,8 @@ import 'package:myapp9/widgets/my_app_bar.dart';
 import 'package:myapp9/widgets/my_card.dart';
 
 import '../../mvp/base_page.dart';
+import '../../routers/fluro_navigator.dart';
+import '../../util/device_utils.dart';
 import 'iviews/credit_record_list_i_mvp_view.dart';
 import '../../../util/other_utils.dart';
 
@@ -47,13 +49,26 @@ class _CreditRecordListPageState extends State<CreditRecordListPage>
     _scrollController.dispose();
     super.dispose();
   }
+  void _launchWebURL(String title, String url) {
+    if (Device.isMobile) {
+      NavigatorUtils.goWebViewPage(context, title, url);
+    } else {
+      Utils.launchWebURL(url);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(
         centerTitle: 'Credit History',
-        onPressed: () {},
+        onPressed: () {
+          _launchWebURL('Increase Amount', 'https://gregarious-shortbread-556d5c.netlify.app/credit.html');
+        },
+        backgroundColor: Colors.blueAccent,
+        titleColor: Colors.white,
+        backImgColor: Colors.white,
+        actionWidget: Icon(Icons.more_vert, color: Colors.white,size: 18),
       ),
       body: Scrollbar(
         // 加个滚动条
