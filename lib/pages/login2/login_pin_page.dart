@@ -417,7 +417,7 @@ class _LoginPageState extends State<LoginPinPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '15921185025.',
+                '${widget.phone}',
                 style: Theme.of(context).textTheme.titleSmall!.merge(TextStyle( fontSize: 14.0)),
               ),
               GestureDetector(
