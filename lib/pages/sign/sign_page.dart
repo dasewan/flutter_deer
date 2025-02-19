@@ -127,7 +127,7 @@ class _SignPageState extends State<SignPage>
                     ),
                   //todo 后台分配是个whatsapp账号，根据用户手机号来指定每个用户所属的whatsapp
                   GestureDetector(
-                    onTap: () => Utils.launchWhatsAppURL('123123'),
+                    onTap: () => Utils.launchWhatsAppURL('15921185025'),
                     child: Text(
                       'WhatsApp',
                       style: TextStyle(

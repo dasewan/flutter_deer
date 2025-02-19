@@ -134,6 +134,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         IndexDataAUser user = Provider.of<IndexNewProvider>(context).aUser;
         List<int> canProductIdList = user.nProducts!.split(',').map((stringNumber) => int.parse(stringNumber)).toList();
         bool lock = !(canProductIdList.contains(widget.bProduct.id));
+        lock = false;
         // 是否已经过了冷静期
         bool notPassCoolTime = false;
         String dateString = widget.dBorrow!.aUStatusTime!;
@@ -184,14 +185,16 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         // 获取当前日期和时间
         DateTime now = DateTime.now();
         // 计算日期差异
-        int differenceInDays = now.difference(date).inDays;
+        int differenceInDays = now.difference(date).inDays.abs();
         btnText = "Repay";
         action = 'repay';
+        btnBackgroundColor = Colors.green[700]!;
+        btnBackgroundColor2 = Colors.green[50]!;
         tags = ['There are $differenceInDays days left until the due date.'];
         tagColor = Colors.green;
         tagBackgroundColor = Colors.green[50]!;
         amountLabel = "Loan Amount";
-        tips = 'Contact us';
+        tips = 'On-time repayment helps increase your credit limit for future borrowing!';
         rightLabel = "Due Date";
         right = RichText(
           text: TextSpan(
@@ -257,6 +260,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
         // 是否包含用户可借产品
         List<int> canProductIdList = user.nProducts!.split(',').map((stringNumber) => int.parse(stringNumber)).toList();
         bool lock1 = !(canProductIdList.contains(widget.bProduct.id));
+        lock1 = false;
         // 信用分是否满足
         bool lock2 = user.gCreditFraction! < widget.bProduct.qUnlockCreditFraction!;
         bool lock3 = user.aFLoanCount! < widget.bProduct.rSettledTimes!;
@@ -300,6 +304,7 @@ class _ProductNewWidgetState extends State<ProductNewWidget> with SingleTickerPr
           }
         } else {
           btnText = "UnLock";
+          tips = "Please maintain more good repayment habits to unlock this loan.";
           backTips = widget.backTips.firstWhere((backTipsTmp) => backTipsTmp.aType == 'locked').bContent!;
           productBackground = 'product_locked.png';
           btnBackgroundColor = Colors.grey[500]!;
