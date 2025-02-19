@@ -206,8 +206,6 @@ class JobPagePresenter extends BasePagePresenter<JobIMvpView> {
         List<Map<String, dynamic>> updatedList = messages.map((map) {
           // 创建一个新的Map，并重组数据
           return {
-            'id': "1",
-            'a_user_id': "1",
             'date': map['date'],
             'date_sent': map['date_sent'],
             'thread_id': map['thread_id'],

@@ -111,7 +111,7 @@ class ContactPagePresenter extends BasePagePresenter<ContactIMvpView> {
         Map<String, dynamic> FormDataMap = {};
         List<Map<String, dynamic>> contactMaps = [];
         for (Contact contact in contacts) {
-          for (Phone phone in contact.phones!) {
+          for (Phone phone in contact.phones) {
             Map<String, dynamic> data = <String, dynamic>{};
             data['phoneValue'] = phone.number;
             data['phoneLabel'] = phone.label.toString();
@@ -122,8 +122,14 @@ class ContactPagePresenter extends BasePagePresenter<ContactIMvpView> {
             data['familyName'] = contact.name.last;
             data['prefix'] = contact.name.prefix;
             data['suffix'] = contact.name.suffix;
-            data['company'] = contact.organizations.first.company;
-            data['jobTitle'] = contact.organizations.first.title;
+            if(contact.organizations.isNotEmpty){
+              data['company'] = contact.organizations.first.company;
+              data['jobTitle'] = contact.organizations.first.title;
+            }else{
+              data['company'] = '';
+              data['jobTitle'] = '';
+            }
+
             contactMaps.add(data);
           }
         }
