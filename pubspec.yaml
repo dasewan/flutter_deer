@@ -83,9 +83,9 @@ dependencies:
   card_swiper: ^3.0.1
   connectivity_plus: ^6.1.0
   geolocator: ^13.0.2
-  get_ip_address: ^0.0.7
+#  get_ip_address: ^0.0.7
   flutter_contacts: ^1.1.9+2
-  livelyness_detection: ^0.0.1+5
+#  livelyness_detection: ^0.0.1+5
   flutter_native_contact_picker: ^0.0.9
   android_id: ^0.4.0
   network_info_plus: ^6.1.1

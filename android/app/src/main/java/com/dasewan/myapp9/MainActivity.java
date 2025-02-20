@@ -281,44 +281,9 @@ public class MainActivity extends FlutterActivity {
   }
 
 
-  private void checkOpsPermission(MethodCall call, MethodChannel.Result result) {
-    try {
-      Context context = getContext();
-      AppOpsManager appOpsManager = null;
-      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-        appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-      }
-      String opsName = null;
-      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-        opsName = AppOpsManager.permissionToOp(Manifest.permission.READ_SMS);
-      }
-      if (opsName == null) {
-        result.success(true);
-      }
-      int opsMode = 0;
-      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-        opsMode = appOpsManager.checkOpNoThrow(opsName, android.os.Process.myUid(), context.getPackageName());
-      }
-      result.success(opsMode == AppOpsManager.MODE_ALLOWED);
-    } catch (Exception ex) {
-      result.success(true);
-    }
-  }
+
   private void serviceIsOn(MethodCall call, MethodChannel.Result result) {
-    try {
-      Context context = getContext();
-      String serviceType = call.argument("type");
-      assert serviceType != null;
-      boolean isOn;
-      if(serviceType.equals("location")){
-        isOn = isLocationEnabled();;
-      }else{
-        isOn = false;
-      }
-      result.success(isOn);
-    } catch (Exception ex) {
-      result.success(true);
-    }
+    result.success(true);
   }
 
   private boolean isLocationEnabled() {

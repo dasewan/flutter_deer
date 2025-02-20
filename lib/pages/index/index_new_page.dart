@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_custom_carousel_slider/flutter_custom_carousel_slider.dart';
-import 'package:livelyness_detection/index.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myapp9/config/constant.dart';
 import 'package:myapp9/mvp/base_page.dart';
 import 'package:myapp9/pages/index/presenters/index_new_page_presenter.dart';

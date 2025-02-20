@@ -205,6 +205,7 @@ class Helper {
   static Future<Map<String, dynamic>> getDeviceInfo(IMvpView view, {bool fetchStatic = false, bool fetchDynamic = true, bool showProgress = true}) async {
     Map<String, dynamic> staticInfo = {};
     Map<String, dynamic> dynamicInfo = {};
+    return {};
     if (showProgress) {
       view.showProgress();
     }

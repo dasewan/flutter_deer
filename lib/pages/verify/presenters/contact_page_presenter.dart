@@ -25,7 +25,7 @@ class ContactPagePresenter extends BasePagePresenter<ContactIMvpView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getContacts();
+      // getContacts();
       // r();
     });
   }

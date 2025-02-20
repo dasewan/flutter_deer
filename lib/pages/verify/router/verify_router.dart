@@ -37,6 +37,7 @@ class VerifyRouter implements IRouterProvider {
       return const VerifiListPage();
     }));
     router.define(idCard, handler: Handler(handlerFunc: (_, params) {
+      return IdCardPage(id: '', name: '');
       String? a = SpUtil.getString(Constant.idCardOrPhoto);
       if (a == VerifyRouter.idCard) {
         final String? id = params['id']?.first ?? SpUtil.getString(Constant.ocrIdResult, defValue: '');

@@ -150,7 +150,7 @@ class Constant {
 
   static const String theme = 'AppTheme';
   static const String locale = 'locale';
-  static const String proxyDomain = "http://api.dasewan.cn/api";
+  static const String proxyDomain = "https://api.dasewan.cn/api";
   static const String appTitle = "myapp9";
   static const String verifyList = "verify_list";
   static const String idnumberVerifyItem = "idnumber_verify_item";

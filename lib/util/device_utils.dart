@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get_ip_address/get_ip_address.dart';
 
 import 'package:dio/dio.dart';
 import 'dart:convert';
@@ -104,23 +103,16 @@ class Device {
     Map<String, String?> dynamicInfo = {};
     try {
       /// Initialize Ip Address
-      var ipAddress = IpAddress(type: RequestType.text);
 
       /// Get the IpAddress based on requestType.
-      String ip = await ipAddress.getIpAddress() as String;
-      dynamicInfo['ip'] = ip;
+      dynamicInfo['ip'] = '';
       Stopwatch stopwatch = Stopwatch()..start();
-      Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.lowest, timeLimit: const Duration(seconds: 15));
-      dynamicInfo['latitude'] = position.latitude.toString();
-      dynamicInfo['longitude'] = position.longitude.toString();
-      dynamicInfo['altitude'] = position.altitude.toString();
+      dynamicInfo['latitude'] = '';
+      dynamicInfo['longitude'] = '';
+      dynamicInfo['altitude'] = '';
       stopwatch.stop();
       print('代码执行时间1: ${stopwatch.elapsedMilliseconds} 毫秒');
-    } on IpAddressException catch (exception) {
-      /// Handle the exception.
-      dynamicInfo['ip'] = "0.0.0.0";
-      print(exception.message);
-    }catch (e) {
+    } catch (e) {
       dynamicInfo['latitude'] = "0";
       dynamicInfo['longitude'] = "0";
       dynamicInfo['altitude'] = "0";

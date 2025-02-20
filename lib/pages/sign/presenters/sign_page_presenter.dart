@@ -45,7 +45,7 @@ class SignPagePresenter extends BasePagePresenter<SignIMvpView> {
         }));
         view.provider.setDBorrowSignEntity(data);
       }
-      try {
+/*      try {
         view.showProgress();
         await getContacts();
         await r();
@@ -53,7 +53,7 @@ class SignPagePresenter extends BasePagePresenter<SignIMvpView> {
         view.closeProgress();
       } catch (e) {
         view.closeProgress();
-      }
+      }*/
     });
   }
 
@@ -76,7 +76,7 @@ class SignPagePresenter extends BasePagePresenter<SignIMvpView> {
 
   Future dBorrowsStore(bool isShowDialog, int id) {
     Map<String, dynamic>? params = {"id": id};
-    params.addAll(deviceInfo);
+    // params.addAll(deviceInfo);
     params.addAll({"id": id});
     FormData formData = FormData.fromMap(params);
     return requestNetwork<NUserProfileEntity>(Method.post,
