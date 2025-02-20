@@ -6,6 +6,7 @@ import 'package:myapp9/res/resources.dart';
 import 'package:myapp9/util/image_utils.dart';
 
 import '../../../models/borrow_detail_entity.dart';
+import '../../../util/other_utils.dart';
 
 class ProductWidget extends StatefulWidget {
   const ProductWidget({
@@ -128,7 +129,7 @@ class _ProductWidgetState extends State<ProductWidget> with SingleTickerProvider
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("\$${widget.borrow?.mBorrowAmount}", style: textTextStyle4),
+                          Text(Utils.formatPrice2(widget.borrow?.mBorrowAmount != null ? widget.borrow!.mBorrowAmount! as num : 0), style: textTextStyle4),
                         ],
                       )
                     ],

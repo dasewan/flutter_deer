@@ -344,7 +344,8 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                     )
                   ],
                 ),
-                Stack(
+                //todo 消息
+                /*Stack(
                   fit: StackFit.passthrough,
                   children: [
                     IconButton(
@@ -380,7 +381,7 @@ class _ShopPageState extends State<ShopPage> with BasePageMixin<ShopPage, ShopPa
                           : const Center(),
                     )
                   ],
-                ),
+                ),*/
                 IconButton(
                   tooltip: 'setting',
                   onPressed: () {
