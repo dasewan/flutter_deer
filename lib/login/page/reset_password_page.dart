@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/login/widgets/my_text_field.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/change_notifier_manage.dart';
-import 'package:flutter_deer/util/other_utils.dart';
-import 'package:flutter_deer/util/toast_utils.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
-import 'package:flutter_deer/widgets/my_button.dart';
-import 'package:flutter_deer/widgets/my_scroll_view.dart';
+import 'package:myapp8/login/widgets/my_text_field.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/util/change_notifier_manage.dart';
+import 'package:myapp8/util/other_utils.dart';
+import 'package:myapp8/util/toast_utils.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
+import 'package:myapp8/widgets/my_button.dart';
+import 'package:myapp8/widgets/my_scroll_view.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 
 

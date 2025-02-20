@@ -1,5 +1,5 @@
-import 'package:flutter_deer/generated/json/base/json_convert_content.dart';
-import 'package:flutter_deer/shop/models/user_entity.dart';
+import 'package:myapp8/generated/json/base/json_convert_content.dart';
+import 'package:myapp8/shop/models/user_entity.dart';
 
 UserEntity $UserEntityFromJson(Map<String, dynamic> json) {
 	final UserEntity userEntity = UserEntity();

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/goods/goods_router.dart';
-import 'package:flutter_deer/goods/page/goods_list_page.dart';
-import 'package:flutter_deer/goods/provider/goods_page_provider.dart';
-import 'package:flutter_deer/goods/widgets/goods_add_menu.dart';
-import 'package:flutter_deer/goods/widgets/goods_sort_menu.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/util/toast_utils.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
-import 'package:flutter_deer/widgets/popup_window.dart';
+import 'package:myapp8/goods/goods_router.dart';
+import 'package:myapp8/goods/page/goods_list_page.dart';
+import 'package:myapp8/goods/provider/goods_page_provider.dart';
+import 'package:myapp8/goods/widgets/goods_add_menu.dart';
+import 'package:myapp8/goods/widgets/goods_sort_menu.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/util/toast_utils.dart';
+import 'package:myapp8/widgets/load_image.dart';
+import 'package:myapp8/widgets/popup_window.dart';
 import 'package:provider/provider.dart';
 
 

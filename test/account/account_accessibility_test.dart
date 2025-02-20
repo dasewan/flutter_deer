@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/account/page/account_page.dart';
-import 'package:flutter_deer/account/page/account_record_list_page.dart';
-import 'package:flutter_deer/account/page/add_withdrawal_account_page.dart';
-import 'package:flutter_deer/account/page/bank_select_page.dart';
-import 'package:flutter_deer/account/page/city_select_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_account_list_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_account_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_password_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_record_list_page.dart';
-import 'package:flutter_deer/account/page/withdrawal_result_page.dart';
-import 'package:flutter_deer/setting/provider/theme_provider.dart';
+import 'package:myapp8/account/page/account_page.dart';
+import 'package:myapp8/account/page/account_record_list_page.dart';
+import 'package:myapp8/account/page/add_withdrawal_account_page.dart';
+import 'package:myapp8/account/page/bank_select_page.dart';
+import 'package:myapp8/account/page/city_select_page.dart';
+import 'package:myapp8/account/page/withdrawal_account_list_page.dart';
+import 'package:myapp8/account/page/withdrawal_account_page.dart';
+import 'package:myapp8/account/page/withdrawal_page.dart';
+import 'package:myapp8/account/page/withdrawal_password_page.dart';
+import 'package:myapp8/account/page/withdrawal_record_list_page.dart';
+import 'package:myapp8/account/page/withdrawal_result_page.dart';
+import 'package:myapp8/setting/provider/theme_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

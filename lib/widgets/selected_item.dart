@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/resources.dart';
+import 'package:myapp8/res/resources.dart';
 
 class SelectedItem extends StatelessWidget {
 

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/demo/demo_page.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/setting/provider/locale_provider.dart';
-import 'package:flutter_deer/setting/provider/theme_provider.dart';
-import 'package:flutter_deer/setting/widgets/exit_dialog.dart';
-import 'package:flutter_deer/setting/widgets/update_dialog.dart';
-import 'package:flutter_deer/util/app_navigator.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/widgets/click_item.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
+import 'package:myapp8/demo/demo_page.dart';
+import 'package:myapp8/res/constant.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/setting/provider/locale_provider.dart';
+import 'package:myapp8/setting/provider/theme_provider.dart';
+import 'package:myapp8/setting/widgets/exit_dialog.dart';
+import 'package:myapp8/setting/widgets/update_dialog.dart';
+import 'package:myapp8/util/app_navigator.dart';
+import 'package:myapp8/util/device_utils.dart';
+import 'package:myapp8/widgets/click_item.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:sp_util/sp_util.dart';
 
@@ -70,8 +70,8 @@ class _SettingPageState extends State<SettingPage> {
                 onTap: _showExitDialog,
               ),
               if (Device.isMobile) ClickItem(
-                title: 'Deer Web版',
-                onTap: () => NavigatorUtils.goWebViewPage(context, 'Flutter Deer', 'https://simplezhli.github.io/flutter_deer/'),
+                title: 'Myaqpp8 Web版',
+                onTap: () => NavigatorUtils.goWebViewPage(context, 'Flutter Myaqpp8', 'https://simplezhli.github.io/myapp8/'),
               ),
               ClickItem(
                 title: '其他Demo',

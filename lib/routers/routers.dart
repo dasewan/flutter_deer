@@ -1,17 +1,17 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/account/account_router.dart';
-import 'package:flutter_deer/goods/goods_router.dart';
-import 'package:flutter_deer/home/home_page.dart';
-import 'package:flutter_deer/home/webview_page.dart';
-import 'package:flutter_deer/login/login_router.dart';
-import 'package:flutter_deer/order/order_router.dart';
-import 'package:flutter_deer/routers/i_router.dart';
-import 'package:flutter_deer/routers/not_found_page.dart';
-import 'package:flutter_deer/setting/setting_router.dart';
-import 'package:flutter_deer/shop/shop_router.dart';
-import 'package:flutter_deer/statistics/statistics_router.dart';
-import 'package:flutter_deer/store/store_router.dart';
+import 'package:myapp8/account/account_router.dart';
+import 'package:myapp8/goods/goods_router.dart';
+import 'package:myapp8/home/home_page.dart';
+import 'package:myapp8/home/webview_page.dart';
+import 'package:myapp8/login/login_router.dart';
+import 'package:myapp8/order/order_router.dart';
+import 'package:myapp8/routers/i_router.dart';
+import 'package:myapp8/routers/not_found_page.dart';
+import 'package:myapp8/setting/setting_router.dart';
+import 'package:myapp8/shop/shop_router.dart';
+import 'package:myapp8/statistics/statistics_router.dart';
+import 'package:myapp8/store/store_router.dart';
 
 class Routes {
 

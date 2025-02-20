@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/util/other_utils.dart';
-import 'package:flutter_deer/widgets/click_item.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/util/device_utils.dart';
+import 'package:myapp8/util/other_utils.dart';
+import 'package:myapp8/widgets/click_item.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
 
 class AboutPage extends StatefulWidget {
 
@@ -84,11 +84,11 @@ class _AboutPageState extends State<AboutPage> {
           ClickItem(
             title: 'Github',
             content: 'Go Star',
-            onTap: () => _launchWebURL('Flutter Deer', 'https://github.com/simplezhli/flutter_deer')
+            onTap: () => _launchWebURL('Flutter Myaqpp8', 'https://github.com/simplezhli/myapp8')
           ),
           ClickItem(
             title: '作者博客',
-            onTap: () => _launchWebURL('作者博客', 'https://weilu.blog.csdn.net')
+            onTap: () => _launchWebURL('作者博客', 'https://dasewan.blog.csdn.net')
           ),
         ],
       ),

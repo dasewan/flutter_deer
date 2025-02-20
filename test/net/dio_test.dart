@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_deer/net/net.dart';
-import 'package:flutter_deer/shop/models/user_entity.dart';
+import 'package:myapp8/net/net.dart';
+import 'package:myapp8/shop/models/user_entity.dart';
 import 'package:test/test.dart';
 
 void main() {

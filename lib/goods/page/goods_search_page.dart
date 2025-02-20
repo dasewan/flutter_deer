@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/util/toast_utils.dart';
-import 'package:flutter_deer/widgets/my_search_bar.dart';
+import 'package:myapp8/util/toast_utils.dart';
+import 'package:myapp8/widgets/my_search_bar.dart';
 
 class GoodsSearchPage extends StatefulWidget {
 

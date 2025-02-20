@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/account/models/city_entity.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
+import 'package:myapp8/account/models/city_entity.dart';
+import 'package:myapp8/res/constant.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
 
 /// design/6店铺-账户/index.html#artboard34
 class CitySelectPage extends StatefulWidget {

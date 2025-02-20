@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/demo/focus/focus_demo_page.dart';
-import 'package:flutter_deer/demo/lottie/lottie_demo.dart';
-import 'package:flutter_deer/demo/navigator/books_main.dart';
-import 'package:flutter_deer/demo/overlay/overlay_main.dart';
-import 'package:flutter_deer/demo/ripple/ripples_animation_page.dart';
-import 'package:flutter_deer/demo/scratcher/scratch_card_demo_page.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/app_navigator.dart';
-import 'package:flutter_deer/widgets/click_item.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
+import 'package:myapp8/demo/focus/focus_demo_page.dart';
+import 'package:myapp8/demo/lottie/lottie_demo.dart';
+import 'package:myapp8/demo/navigator/books_main.dart';
+import 'package:myapp8/demo/overlay/overlay_main.dart';
+import 'package:myapp8/demo/ripple/ripples_animation_page.dart';
+import 'package:myapp8/demo/scratcher/scratch_card_demo_page.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/util/app_navigator.dart';
+import 'package:myapp8/widgets/click_item.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
 
 
 class DemoPage extends StatefulWidget {

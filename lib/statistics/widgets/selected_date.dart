@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/util/theme_utils.dart';
 
 class SelectedDateButton extends StatelessWidget {
 

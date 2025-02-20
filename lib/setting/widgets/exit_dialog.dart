@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/login/login_router.dart';
-import 'package:flutter_deer/res/styles.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/widgets/base_dialog.dart';
+import 'package:myapp8/login/login_router.dart';
+import 'package:myapp8/res/styles.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/widgets/base_dialog.dart';
 
 class ExitDialog extends StatefulWidget {
 

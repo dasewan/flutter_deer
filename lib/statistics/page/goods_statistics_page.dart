@@ -1,16 +1,16 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/statistics/widgets/selected_date.dart';
-import 'package:flutter_deer/util/date_utils.dart' as date;
-import 'package:flutter_deer/util/image_utils.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
-import 'package:flutter_deer/widgets/my_card.dart';
-import 'package:flutter_deer/widgets/pie_chart/pie_chart.dart';
-import 'package:flutter_deer/widgets/pie_chart/pie_data.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/statistics/widgets/selected_date.dart';
+import 'package:myapp8/util/date_utils.dart' as date;
+import 'package:myapp8/util/image_utils.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/load_image.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
+import 'package:myapp8/widgets/my_card.dart';
+import 'package:myapp8/widgets/pie_chart/pie_chart.dart';
+import 'package:myapp8/widgets/pie_chart/pie_data.dart';
 
 /// design/5统计/index.html#artboard11
 class GoodsStatisticsPage extends StatefulWidget {

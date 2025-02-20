@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/setting/provider/theme_provider.dart';
-import 'package:flutter_deer/store/page/store_audit_page.dart';
-import 'package:flutter_deer/store/page/store_audit_result_page.dart';
+import 'package:myapp8/setting/provider/theme_provider.dart';
+import 'package:myapp8/store/page/store_audit_page.dart';
+import 'package:myapp8/store/page/store_audit_result_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

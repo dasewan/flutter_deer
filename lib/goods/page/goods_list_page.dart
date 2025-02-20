@@ -1,12 +1,12 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/goods/models/goods_item_entity.dart';
-import 'package:flutter_deer/goods/provider/goods_page_provider.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/util/toast_utils.dart';
-import 'package:flutter_deer/widgets/my_refresh_list.dart';
-import 'package:flutter_deer/widgets/state_layout.dart';
+import 'package:myapp8/goods/models/goods_item_entity.dart';
+import 'package:myapp8/goods/provider/goods_page_provider.dart';
+import 'package:myapp8/res/constant.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/util/toast_utils.dart';
+import 'package:myapp8/widgets/my_refresh_list.dart';
+import 'package:myapp8/widgets/state_layout.dart';
 import 'package:provider/provider.dart';
 
 import '../goods_router.dart';

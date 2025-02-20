@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/my_button.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/my_button.dart';
 
 import 'load_image.dart';
 

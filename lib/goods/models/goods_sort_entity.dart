@@ -1,5 +1,5 @@
-import 'package:flutter_deer/generated/json/base/json_field.dart';
-import 'package:flutter_deer/generated/json/goods_sort_entity.g.dart';
+import 'package:myapp8/generated/json/base/json_field.dart';
+import 'package:myapp8/generated/json/goods_sort_entity.g.dart';
 
 
 @JsonSerializable()

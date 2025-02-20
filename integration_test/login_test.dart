@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/login/page/login_page.dart';
-import 'package:flutter_deer/login/page/register_page.dart';
-import 'package:flutter_deer/main.dart';
+import 'package:myapp8/login/page/login_page.dart';
+import 'package:myapp8/login/page/register_page.dart';
+import 'package:myapp8/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 

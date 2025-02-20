@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/gaps.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
+import 'package:myapp8/res/gaps.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {

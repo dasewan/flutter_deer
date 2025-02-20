@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/account/models/withdrawal_account_model.dart';
-import 'package:flutter_deer/account/widgets/withdrawal_account_item.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/widgets/my_app_bar.dart';
-import 'package:flutter_deer/widgets/my_button.dart';
-import 'package:flutter_deer/widgets/state_layout.dart';
+import 'package:myapp8/account/models/withdrawal_account_model.dart';
+import 'package:myapp8/account/widgets/withdrawal_account_item.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/widgets/my_app_bar.dart';
+import 'package:myapp8/widgets/my_button.dart';
+import 'package:myapp8/widgets/state_layout.dart';
 
 import '../account_router.dart';
 
@@ -61,7 +61,7 @@ class _WithdrawalAccountPageState extends State<WithdrawalAccountPage> {
       axisAlignment: 1.0,
       sizeFactor: animation,
       child: WithdrawalAccountItem(
-        key: ObjectKey(data), /// 这里注意必须添加key，原因见： https://weilu.blog.csdn.net/article/details/104745624
+        key: ObjectKey(data), /// 这里注意必须添加key，原因见： https://dasewan.blog.csdn.net/article/details/104745624
         data: data,
         onLongPress: () => _showDeleteBottomSheet(index),
       ),

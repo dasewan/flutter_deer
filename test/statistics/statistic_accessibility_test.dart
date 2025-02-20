@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/setting/provider/theme_provider.dart';
-import 'package:flutter_deer/statistics/page/goods_statistics_page.dart';
-import 'package:flutter_deer/statistics/page/order_statistics_page.dart';
-import 'package:flutter_deer/statistics/page/statistics_page.dart';
+import 'package:myapp8/setting/provider/theme_provider.dart';
+import 'package:myapp8/statistics/page/goods_statistics_page.dart';
+import 'package:myapp8/statistics/page/order_statistics_page.dart';
+import 'package:myapp8/statistics/page/statistics_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

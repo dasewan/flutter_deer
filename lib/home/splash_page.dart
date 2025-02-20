@@ -1,16 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/demo/demo_page.dart';
-import 'package:flutter_deer/login/login_router.dart';
-import 'package:flutter_deer/res/constant.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/util/app_navigator.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/util/image_utils.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/fractionally_aligned_sized_box.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
+import 'package:myapp8/demo/demo_page.dart';
+import 'package:myapp8/login/login_router.dart';
+import 'package:myapp8/res/constant.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/util/app_navigator.dart';
+import 'package:myapp8/util/device_utils.dart';
+import 'package:myapp8/util/image_utils.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/fractionally_aligned_sized_box.dart';
+import 'package:myapp8/widgets/load_image.dart';
 import 'package:flutter_swiper_null_safety_flutter3/flutter_swiper_null_safety_flutter3.dart';
 import 'package:quick_actions/quick_actions.dart';
 import 'package:rxdart/rxdart.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/demo/overlay/bottom_navigation/my_bottom_navigation_bar.dart';
-import 'package:flutter_deer/demo/overlay/page/test_page.dart';
-import 'package:flutter_deer/demo/overlay/route/application.dart';
+import 'package:myapp8/demo/overlay/bottom_navigation/my_bottom_navigation_bar.dart';
+import 'package:myapp8/demo/overlay/page/test_page.dart';
+import 'package:myapp8/demo/overlay/route/application.dart';
 
 
 /// 需求说明： 底部固定悬浮BottomNavigationBar，点击切换时有移动动画。

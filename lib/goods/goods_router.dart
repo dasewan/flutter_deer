@@ -1,8 +1,8 @@
 
 import 'package:common_utils/common_utils.dart';
 import 'package:fluro/fluro.dart';
-import 'package:flutter_deer/goods/page/qr_code_scanner_page.dart';
-import 'package:flutter_deer/routers/i_router.dart';
+import 'package:myapp8/goods/page/qr_code_scanner_page.dart';
+import 'package:myapp8/routers/i_router.dart';
 
 import 'page/goods_edit_page.dart';
 import 'page/goods_page.dart';

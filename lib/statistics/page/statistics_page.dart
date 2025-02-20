@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/order/page/order_page.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/routers/fluro_navigator.dart';
-import 'package:flutter_deer/statistics/statistics_router.dart';
-import 'package:flutter_deer/util/image_utils.dart';
-import 'package:flutter_deer/util/screen_utils.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
-import 'package:flutter_deer/widgets/my_card.dart';
-import 'package:flutter_deer/widgets/my_flexible_space_bar.dart';
+import 'package:myapp8/order/page/order_page.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/routers/fluro_navigator.dart';
+import 'package:myapp8/statistics/statistics_router.dart';
+import 'package:myapp8/util/image_utils.dart';
+import 'package:myapp8/util/screen_utils.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/load_image.dart';
+import 'package:myapp8/widgets/my_card.dart';
+import 'package:myapp8/widgets/my_flexible_space_bar.dart';
 
 
 /// design/5统计/index.html

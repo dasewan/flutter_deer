@@ -1,5 +1,5 @@
-import 'package:flutter_deer/mvp/mvps.dart';
-import 'package:flutter_deer/shop/models/user_entity.dart';
+import 'package:myapp8/mvp/mvps.dart';
+import 'package:myapp8/shop/models/user_entity.dart';
 
 abstract class ShopIMvpView implements IMvpView {
 

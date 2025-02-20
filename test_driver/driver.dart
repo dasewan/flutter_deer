@@ -1,6 +1,6 @@
 
-import 'package:flutter_deer/main.dart' as app;
-import 'package:flutter_deer/res/constant.dart';
+import 'package:myapp8/main.dart' as app;
+import 'package:myapp8/res/constant.dart';
 import 'package:flutter_driver/driver_extension.dart';
 
 /// 集成测试运行 flutter drive --profile --target=test_driver/driver.dart （模拟器去除--profile）

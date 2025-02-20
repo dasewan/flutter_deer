@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_deer/res/resources.dart';
-import 'package:flutter_deer/util/device_utils.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
-import 'package:flutter_deer/widgets/my_button.dart';
+import 'package:myapp8/res/resources.dart';
+import 'package:myapp8/util/device_utils.dart';
+import 'package:myapp8/widgets/load_image.dart';
+import 'package:myapp8/widgets/my_button.dart';
 import 'package:flutter_gen/gen_l10n/deer_localizations.dart';
 
 

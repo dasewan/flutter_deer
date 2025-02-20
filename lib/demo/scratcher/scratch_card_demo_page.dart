@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_deer/res/colors.dart';
-import 'package:flutter_deer/res/gaps.dart';
-import 'package:flutter_deer/util/theme_utils.dart';
-import 'package:flutter_deer/widgets/load_image.dart';
+import 'package:myapp8/res/colors.dart';
+import 'package:myapp8/res/gaps.dart';
+import 'package:myapp8/util/theme_utils.dart';
+import 'package:myapp8/widgets/load_image.dart';
 import 'package:scratcher/scratcher.dart';
 
 class ScratchCardDemoPage extends StatefulWidget {
