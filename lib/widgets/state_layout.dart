@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:livelyness_detection/index.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myapp9/res/resources.dart';
 import 'package:myapp9/util/theme_utils.dart';
 import 'package:myapp9/widgets/load_image.dart';

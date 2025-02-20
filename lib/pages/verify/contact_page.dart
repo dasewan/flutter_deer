@@ -104,24 +104,12 @@ class _ContactPageState extends State<ContactPage>
 
   @override
   Future<bool> requestOpsPermission() async {
-    Map<String, dynamic> arguments = <String, dynamic>{
-      'type': "sms",
-    };
-    final bool has3 = await platform.invokeMethod('checkOpsPermission', arguments) as bool;
-    if (!has3) {
-      showCupertinoDialogSub(title: Myapp9Localizations.of(context)!.smsPermissionTitle, content: Myapp9Localizations.of(context)!.smsPermissionContent);
-    } else {
-      return true;
-    }
-    return false;
+    return true;
+
   }
 
   Future<bool> checkOpsPermission() async {
-    Map<String, dynamic> arguments = <String, dynamic>{
-      'type': "sms",
-    };
-    final bool has3 = await platform.invokeMethod('checkOpsPermission', arguments) as bool;
-    return has3;
+    return true;
   }
 
 

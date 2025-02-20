@@ -25,8 +25,8 @@ class JobPagePresenter extends BasePagePresenter<JobIMvpView> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // getPhoto();
-      getApps();
-      r();
+      // getApps();
+      // r();
     });
   }
 

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
-import 'package:livelyness_detection/index.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myapp9/mvp/base_page.dart';
 import 'package:myapp9/pages/verify/iviews/id_card_photo_i_mvp_view.dart';
 import 'package:myapp9/pages/verify/presenters/id_card_photo_page_presenter.dart';
