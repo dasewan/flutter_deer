@@ -43,7 +43,6 @@ Future<void> main() async {
   handleError(() async {
     /// 确保初始化完成
     WidgetsFlutterBinding.ensureInitialized();
-    SharedPreferences.setMockInitialValues({});
 
     if (Device.isDesktop) {
       await WindowManager.instance.ensureInitialized();
