@@ -81,8 +81,8 @@ dependencies:
   timelines: ^0.1.0
   google_fonts: ^6.2.1
   card_swiper: ^3.0.1
-  connectivity_plus: ^6.1.0
-  geolocator: ^13.0.2
+#  connectivity_plus: ^6.1.0
+#  geolocator: ^13.0.2
 #  get_ip_address: ^0.0.7
   flutter_contacts: ^1.1.9+2
 #  livelyness_detection: ^0.0.1+5
@@ -94,7 +94,7 @@ dependencies:
     git: git@gitee.com:dasewan/advance_country_picker_fork.git
   pinput: ^5.0.0
   cupertino_icons: ^1.0.6
-  camera: ^0.11.0+2
+#  camera: ^0.11.0+2
   currency_formatter: ^2.2.2
   flutter_svg: ^2.0.17
 #  photo_manager: ^3.0.0-dev.2

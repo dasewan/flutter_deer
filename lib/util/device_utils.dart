@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 
 import 'package:dio/dio.dart';
 import 'dart:convert';
@@ -9,7 +9,7 @@ import 'package:flustars_flutter3/flustars_flutter3.dart';
 import 'package:flutter/services.dart';
 import 'package:crypto/crypto.dart';
 import 'package:network_info_plus/network_info_plus.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
+// import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../config/constant.dart';
@@ -101,143 +101,7 @@ class Device {
         wifiBroadcast,
         wifiSubmask;
     Map<String, String?> dynamicInfo = {};
-    try {
-      /// Initialize Ip Address
 
-      /// Get the IpAddress based on requestType.
-      dynamicInfo['ip'] = '';
-      Stopwatch stopwatch = Stopwatch()..start();
-      dynamicInfo['latitude'] = '';
-      dynamicInfo['longitude'] = '';
-      dynamicInfo['altitude'] = '';
-      stopwatch.stop();
-      print('代码执行时间1: ${stopwatch.elapsedMilliseconds} 毫秒');
-    } catch (e) {
-      dynamicInfo['latitude'] = "0";
-      dynamicInfo['longitude'] = "0";
-      dynamicInfo['altitude'] = "0";
-      // 没有指定的类型，处理所有异常
-      print('Something really unknown: $e');
-    }
-
-    final connectivityResult = await (Connectivity().checkConnectivity());
-    String connectivityType = connectivityResult.toString();
-    dynamicInfo['connectivityType'] = connectivityType;
-    if (connectivityResult == ConnectivityResult.mobile) {
-      // I am connected to a mobile network.
-    } else if (connectivityResult == ConnectivityResult.wifi) {
-      final NetworkInfo _networkInfo = NetworkInfo();
-
-      try {
-        try {
-          if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-            // Request permissions as recommended by the plugin documentation:
-            // https://github.com/fluttercommunity/plus_plugins/tree/main/packages/network_info_plus/network_info_plus
-            if (await Permission.locationWhenInUse.request().isGranted) {
-              wifiName = await _networkInfo.getWifiName();
-            } else {
-              wifiName = 'Unauthorized to get Wifi Name';
-            }
-          } else {
-            wifiName = await _networkInfo.getWifiName();
-          }
-        } on PlatformException catch (e) {
-          wifiName = 'Failed to get Wifi Name';
-        }
-
-        try {
-          if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
-            // Request permissions as recommended by the plugin documentation:
-            // https://github.com/fluttercommunity/plus_plugins/tree/main/packages/network_info_plus/network_info_plus
-            if (await Permission.locationWhenInUse.request().isGranted) {
-              wifiBSSID = await _networkInfo.getWifiBSSID();
-            } else {
-              wifiBSSID = 'Unauthorized to get Wifi BSSID';
-            }
-          } else {
-            wifiName = await _networkInfo.getWifiName();
-          }
-        } on PlatformException catch (e) {
-          wifiBSSID = 'Failed to get Wifi BSSID';
-        }
-
-        try {
-          wifiIPv4 = await _networkInfo.getWifiIP();
-        } on PlatformException catch (e) {
-          wifiIPv4 = 'Failed to get Wifi IPv4';
-        }
-
-        try {
-          wifiIPv6 = await _networkInfo.getWifiIPv6();
-        } on PlatformException catch (e) {
-          wifiIPv6 = 'Failed to get Wifi IPv6';
-        }
-
-        try {
-          wifiSubmask = await _networkInfo.getWifiSubmask();
-        } on PlatformException catch (e) {
-          wifiSubmask = 'Failed to get Wifi submask address';
-        }
-
-        try {
-          wifiBroadcast = await _networkInfo.getWifiBroadcast();
-        } on PlatformException catch (e) {
-          wifiBroadcast = 'Failed to get Wifi broadcast';
-        }
-
-        try {
-          wifiGatewayIP = await _networkInfo.getWifiGatewayIP();
-        } on PlatformException catch (e) {
-          wifiGatewayIP = 'Failed to get Wifi gateway address';
-        }
-        dynamicInfo['address'] = wifiIPv4;
-        dynamicInfo['macAddress'] = wifiName;
-        dynamicInfo['connectionType'] =  'unknown';
-        dynamicInfo['ssid'] = wifiBSSID;
-        dynamicInfo['e_node'] = node;
-        dynamicInfo['c_device_id'] = SpUtil.getInt(Constant.deviceId)!.toString();
-        /*Set<ActiveHost> activeHost = {};
-
-        final String subnet = address.substring(0, address.lastIndexOf('.'));
-        Stopwatch stopwatch2 = Stopwatch()..start();
-        final stream = HostScanner.getAllPingableDevices(
-          subnet,
-          // firstHostId: 1,
-          // lastHostId: 254,
-          progressCallback: (progress) {
-            print('Progress for host discovery : $progress');
-          },
-        );
-        stream.listen(
-              (ActiveHost host) async {
-            activeHost.add(host);
-          },
-          onDone: () {
-            dynamicInfo['hostCount'] = activeHost.length.toString();
-            print(dynamicInfo);
-            stopwatch2.stop();
-            print('代码3执行时间: ${stopwatch2.elapsedMilliseconds} 毫秒');
-
-            dynamicInfo['e_node'] = node;
-            dynamicInfo['c_device_id'] = SpUtil.getInt(Constant.deviceId)!.toString();
-            FormData formData = FormData.fromMap(dynamicInfo);
-
-            DioUtils.instance.requestNetwork<dynamic>(
-              Method.post,
-              HttpApi.hDDynamicDevices,
-              params: formData,
-              onSuccess: (data) {
-                print("++++++++++++++++++++++++++++++++++++");
-              },
-              onError: (code, msg) {},
-            );
-          },
-        ); */ // Don't forget to cancel the stream when not in use.
-      } on PlatformException {
-        print("PlatformExceptionPlatformExceptionPlatformExceptionPlatformException");
-      }
-    }
-    print("123");
 
     return dynamicInfo;
   }
