@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
-import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
-import 'package:flutter_native_contact_picker/model/contact.dart';
 import 'package:intl/intl.dart';
 import 'package:myapp9/config/constant.dart';
 // import 'package:myapp9/generated/json/q_verify_item_entity_helper.dart';
@@ -349,19 +347,7 @@ class _JobPageState extends State<JobPage> with BasePageMixin<JobPage, JobPagePr
           controller: _controllers["${field.cCode}"],
           validator: validator,
           onTap: () async {
-            try {
-              final FlutterNativeContactPicker _contactPicker = FlutterNativeContactPicker();
-              Contact? contact = await _contactPicker.selectContact();
-              _submittedField["${field.uGroupName}_name"] = contact?.fullName ?? '';
-              _controllers["${field.uGroupName}_name"]!.text = contact?.fullName ?? '';
-              _submittedField["${field.uGroupName}_phone"] = contact?.phoneNumbers?[0] ?? '';
-              _controllers["${field.uGroupName}_phone"]!.text = contact?.phoneNumbers?[0] ?? '';
-            } catch (e) {
-              bool hasContactsPermission = await hasPermission('contacts');
-              if (!hasContactsPermission) {
-                showCupertinoDialogSub(title: "联系人权限", content: "请到系统设置，授权app读取联系人的权限");
-              }
-            }
+
 
             // _controllers["${field.uGroupName}_phone"]!.value = TextEditingValue(text:contact!.phoneNumber!.number!.toString());
           },

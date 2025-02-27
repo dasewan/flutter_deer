@@ -26,8 +26,6 @@ import 'package:oktoast/oktoast.dart';
 import '../../models/city_entity.dart';
 import '../../widgets/my_scroll_view2.dart';
 import 'iviews/loan_bank_i_mvp_view.dart';
-import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
-import 'package:flutter_native_contact_picker/model/contact.dart';
 
 /// design/6/index.html#artboard2
 class LoanBankPage extends StatefulWidget {
@@ -370,19 +368,7 @@ class _LoanBankPageState extends State<LoanBankPage>
           controller: _controllers["${field.cCode}"],
           validator: validator,
           onTap: () async {
-            try {
-              final FlutterNativeContactPicker _contactPicker = FlutterNativeContactPicker();
-              Contact? contact = await _contactPicker.selectContact();
-              _submittedField["${field.uGroupName}_name"] = contact?.fullName ?? '';
-              _controllers["${field.uGroupName}_name"]!.text = contact?.fullName ?? '';
-              _submittedField["${field.uGroupName}_phone"] = contact?.phoneNumbers?[0] ?? '';
-              _controllers["${field.uGroupName}_phone"]!.text = contact?.phoneNumbers?[0] ?? '';
-            } catch (e) {
-              bool hasContactsPermission = await hasPermission('contacts');
-              if (!hasContactsPermission) {
-                showCupertinoDialogSub(title: "联系人权限", content: "请到系统设置，授权app读取联系人的权限");
-              }
-            }
+
 
             // _controllers["${field.uGroupName}_phone"]!.value = TextEditingValue(text:contact!.phoneNumber!.number!.toString());
           },

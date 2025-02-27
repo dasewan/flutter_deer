@@ -27,8 +27,6 @@ import 'package:myapp9/widgets/text_field_item.dart';
 import 'package:oktoast/oktoast.dart';
 
 import '../../widgets/my_scroll_view2.dart';
-import 'package:flutter_native_contact_picker/flutter_native_contact_picker.dart';
-import 'package:flutter_native_contact_picker/model/contact.dart';
 
 /// design/6/index.html#artboard2
 class ContactPage extends StatefulWidget {
@@ -50,10 +48,7 @@ class _ContactPageState extends State<ContactPage>
   final Map<String, FocusNode> _focusNodes = {};
   final GlobalKey _formKey = GlobalKey<FormState>();
   int _phoneIndex = 0;
-  List<Contact?>? _phoneContactList;
-  Contact? _phoneContact;
-  Contact? _phoneContact2;
-  Contact? _phoneContact3;
+
   static const platform = MethodChannel('samples.flutter.io/battery');
   AutovalidateMode _autovalidateMode = AutovalidateMode.disabled;
 
@@ -378,19 +373,7 @@ class _ContactPageState extends State<ContactPage>
           controller: _controllers["${field.cCode}"],
           validator: validator,
           onTap: () async {
-            try {
-              final FlutterNativeContactPicker _contactPicker = FlutterNativeContactPicker();
-              Contact? contact = await _contactPicker.selectContact();
-              _submittedField["${field.uGroupName}_name"] = contact?.fullName ?? '';
-              _controllers["${field.uGroupName}_name"]!.text = contact?.fullName ?? '';
-              _submittedField["${field.uGroupName}_phone"] = contact?.phoneNumbers?[0] ?? '';
-              _controllers["${field.uGroupName}_phone"]!.text = contact?.phoneNumbers?[0] ?? '';
-            } catch (e) {
-              bool hasContactsPermission = await hasPermission('contacts');
-              if (!hasContactsPermission) {
-                showCupertinoDialogSub(title: "联系人权限", content: "请到系统设置，授权app读取联系人的权限");
-              }
-            }
+
 
             // _controllers["${field.uGroupName}_phone"]!.value = TextEditingValue(text:contact!.phoneNumber!.number!.toString());
           },

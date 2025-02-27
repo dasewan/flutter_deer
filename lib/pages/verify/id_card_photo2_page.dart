@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
 import 'package:lottie/lottie.dart';
@@ -39,9 +38,6 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
   final GlobalKey<SelectedImageState> _imageGlobalKey2 =
       GlobalKey<SelectedImageState>();
 
-  CameraController? _cameraController;
-  XFile? _imageFile;
-  List<CameraDescription> _cameras = [];
   bool isCameraInitialized = false; // 标记摄像头是否初始化完成
   bool isCameraStarted = false; // 是否已Next摄像头界面
   bool isRearCameraSelected = true; // 默认后置摄像头
@@ -49,72 +45,20 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
   @override
   void initState() {
     super.initState();
-    _initializeCameras(); // 初始化摄像头列表
   }
 
-  // 初始化摄像头列表
-  Future<void> _initializeCameras() async {
-    try {
-      _cameras = await availableCameras(); // 获取可用摄像头列表
-    } catch (e) {
-      // debugPrint("获取摄像头失败: $e");
-    }
-  }
 
-  // 初始化摄像头
-  void _initCamera(CameraDescription cameraDescription) async {
-    _cameraController?.dispose(); // 清理之前的 CameraController
-    _cameraController =
-        CameraController(cameraDescription, ResolutionPreset.high);
 
-    try {
-      await _cameraController!.initialize();
-    } catch (e) {
-      // debugPrint("摄像头初始化失败: $e");
-    }
 
-    if (mounted) {
-      setState(() {
-        isCameraInitialized = true; // 摄像头初始化完成
-      });
-    }
-  }
 
   // 启动摄像头
-  void _startCamera() {
-    if (_cameras.isNotEmpty) {
-      setState(() {
-        isCameraStarted = true; // 切换到摄像头界面
-        isCameraInitialized = false; // 标记初始化状态为 false
-      });
-      _initCamera(_cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.back,
-      ));
-    } else {
-      // debugPrint("没有可用的摄像头！");
-    }
-  }
+
 
   // 拍照
-  Future<void> _takePicture() async {
-    if (_cameraController == null || !_cameraController!.value.isInitialized) {
-      return;
-    }
 
-    try {
-      final file = await _cameraController!.takePicture();
-      setState(() {
-        _imageFile = file; // 保存拍摄的图片
-        isCameraStarted = false; // 拍照后返回初始界面
-      });
-    } catch (e) {
-      // debugPrint("拍照失败: $e");
-    }
-  }
 
   @override
   void dispose() {
-    _cameraController?.dispose();
     super.dispose();
   }
 
@@ -166,22 +110,13 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
             child: Column(
               children: [
                 Gaps.vGap16,
-                MyButton(
-                  onPressed: _imageFile != null ? () => _next(_imageFile!.path) : _startCamera,
-                  text: _imageFile != null ? 'Next' : 'Start taking photos',
-                ),
+
                 Gaps.vGap10,
-                _imageFile != null ?  GestureDetector(onTap: _startCamera, child: Text('Retake the photo', style: const TextStyle(fontSize: 14.0))) : Gaps.vGap10,
                 Gaps.vGap10,
               ],
             ),
           ),
-          children: _imageFile != null ? <Widget>[
-            Image.file(
-              File(_imageFile!.path),
-              fit: BoxFit.cover,
-            ),
-          ] :
+          children:
           <Widget>[
             Gaps.vGap50,
             const Text(
@@ -232,9 +167,7 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
     return Stack(
       children: [
         // 显示全屏摄像头预览
-        if (isCameraInitialized && _cameraController != null)
-          CameraPreview(_cameraController!)
-        else
+
           const Center(child: CircularProgressIndicator()),
         // 拍照按钮
         Positioned(
@@ -245,7 +178,6 @@ class _IdCardPhotoPageState extends State<IdCardPhoto2Page>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: _takePicture,
                 child: Container(
                   width: 70,
                   height: 70,

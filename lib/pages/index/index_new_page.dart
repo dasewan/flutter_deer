@@ -43,11 +43,11 @@ class _IndexNewPageState extends State<IndexNewPage> with BasePageMixin<IndexNew
 
   int scrollingTextIndex = 0;
   List<String> news = [
-    '1. Your repayment date is 2024-01-05, which is already 3 days overdue. Please make repayment. ',
-    '2. Please use the app to repay, or choose the repayment page to repay. Please do not transfer money to strangers.',
-    '3. Maintaining good repayment behavior can increase your limit and more loanable products.',
-    '4. Maintaining good repayment behavior can increase your limit and more loanable products.',
-    '5. Maintaining good repayment behavior can increase your limit and more loanable products.',
+    // '1. Your repayment date is 2024-01-05, which is already 3 days overdue. Please make repayment. ',
+    '1. Please use the app to repay, or choose the repayment page to repay. Please do not transfer money to strangers.',
+    '2. Maintaining good repayment behavior can increase your limit and more loanable products.',
+    // '4. Maintaining good repayment behavior can increase your limit and more loanable products.',
+    // '5. Maintaining good repayment behavior can increase your limit and more loanable products.',
   ];
 
   Map<String, IconData> notificationIcon = {

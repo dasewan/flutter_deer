@@ -6,7 +6,6 @@ import 'package:myapp9/routers/fluro_navigator.dart';
 import 'package:myapp9/util/log_utils.dart';
 import 'package:myapp9/util/toast_utils.dart';
 import 'package:myapp9/widgets/progress_dialog.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'mvps.dart';
 
 import 'package:flutter_gen/gen_l10n/myapp9_localizations.dart';
@@ -94,7 +93,6 @@ mixin BasePageMixin<T extends StatefulWidget, P extends BasePresenter> on State<
                 onPressed: () {
                   Navigator.pop(context);
                   // 打开手机上该app权限的页面
-                  openAppSettings();
                 },
               ),
             ],
