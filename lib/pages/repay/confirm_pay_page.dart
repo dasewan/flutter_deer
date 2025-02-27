@@ -72,16 +72,7 @@ class _ConfirmPayPageState extends State<ConfirmPayPage> with BasePageMixin<Conf
 
   @override
   Future<bool> requestOpsPermission() async {
-    Map<String, dynamic> arguments = <String, dynamic>{
-      'type': "sms",
-    };
-    final bool has3 = await platform.invokeMethod('checkOpsPermission', arguments) as bool;
-    if (!has3) {
-      showCupertinoDialogSub(title: "短信授权", content: "请到系统设置，授权app短信授权");
-    } else {
-      return true;
-    }
-    return false;
+    return true;
   }
 
   @override

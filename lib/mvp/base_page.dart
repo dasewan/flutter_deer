@@ -103,69 +103,12 @@ mixin BasePageMixin<T extends StatefulWidget, P extends BasePresenter> on State<
   }
   @override
   Future<bool> hasPermission(String type) async {
-    PermissionStatus status;
-    if (type == 'sms') {
-      status = await Permission.sms.status;
-    } else if (type == 'contacts') {
-      status = await Permission.contacts.status;
-    } else if (type == 'location') {
-      status = await Permission.location.status;
-    } else if (type == 'photos') {
-      status = await Permission.photos.status;
-    } else if (type == 'storage') {
-      status = await Permission.storage.status;
-    } else {
-      status = await Permission.sms.status;
-    }
-    return status == PermissionStatus.granted;
+    return true;
   }
   @override
   Future<bool> requestPermission(String type) async {
 
-    if (type == 'sms') {
-      final status = await Permission.sms.request();
-      if (status != PermissionStatus.granted) {
-        showCupertinoDialogSub(title: Myapp9Localizations.of(context)!.smsPermissionTitle, content: Myapp9Localizations.of(context)!.smsPermissionContent);
-      } else {
-        return true;
-      }
-    } else if (type == 'location') {
-      final status = await Permission.locationWhenInUse.request();
-      if (status != PermissionStatus.granted) {
-        showCupertinoDialogSub(
-            title: Myapp9Localizations.of(context)!.locationPermissionTitle, content: Myapp9Localizations.of(context)!.locationPermissionContent);
-      } else {
-        return true;
-      }
-    } else if (type == 'photos') {
-      final status = await Permission.photos.request();
-      if (status != PermissionStatus.granted) {
-        showCupertinoDialogSub(
-            title: Myapp9Localizations.of(context)!.photosPermissionTitle, content: Myapp9Localizations.of(context)!.photosPermissionContent);
-      } else {
-        return true;
-      }
-    } else if (type == 'storage') {
-      final status = await Permission.storage.request();
-      if (status != PermissionStatus.granted) {
-        showCupertinoDialogSub(
-            title: Myapp9Localizations.of(context)!.storagePermissionTitle, content: Myapp9Localizations.of(context)!.storagePermissionContent);
-      } else {
-        return true;
-      }
-    } else if (type == 'contacts') {
-      final status = await Permission.contacts.request();
-      if (status != PermissionStatus.granted) {
-        showCupertinoDialogSub(
-            title: Myapp9Localizations.of(context)!.contactsPermissionTitle, content: Myapp9Localizations.of(context)!.contactsPermissionContent);
-      } else {
-        return true;
-      }
-    } else {
-      return false;
-    }
-
-    return false;
+    return true;
   }
   @override
   Future<bool> serviceIsOn(String type) async {

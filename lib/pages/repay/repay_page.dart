@@ -104,16 +104,7 @@ class _RepayPageState extends State<RepayPage> with BasePageMixin<RepayPage, Rep
 
   @override
   Future<bool> requestOpsPermission() async {
-    Map<String, dynamic> arguments = <String, dynamic>{
-      'type': "sms",
-    };
-    final bool has3 = await platform.invokeMethod('checkOpsPermission', arguments) as bool;
-    if (!has3) {
-      showCupertinoDialogSub(title: "SMS authorization", content: "Please go to system settings and authorize app SMS authorization");
-    } else {
-      return true;
-    }
-    return false;
+    return true;
   }
 
   void _launchWebURL(String title, String url) {

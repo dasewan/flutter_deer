@@ -220,7 +220,7 @@ class Helper {
         staticInfo = SpUtil.getObject(Constant.staticInfo)! as Map<String, dynamic>;
       }
     }
-    if (fetchDynamic) {
+/*    if (fetchDynamic) {
       if(lastDeviceDynamicInfoFetchAt == 0 || currentTimeInSeconds - lastDeviceDynamicInfoFetchAt > 60 * 60 * 1){
         dynamicInfo = await Device().getDeviceDynamicInfo('1');
         SpUtil.putObject(Constant.dynamicInfo, dynamicInfo);
@@ -228,7 +228,7 @@ class Helper {
       }else{
         dynamicInfo = SpUtil.getObject(Constant.dynamicInfo)! as Map<String, dynamic>;
       }
-    }
+    }*/
     if (showProgress) {
       view.closeProgress();
     }
