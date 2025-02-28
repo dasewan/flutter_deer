@@ -167,25 +167,13 @@ class _ContactPageState extends State<ContactPage>
                     MyButton(
                       onPressed: () async {
                         if ((_formKey.currentState as FormState).validate()) {
-                          // print((_formKey.currentState as FormState).validate());
-                          // print(_submittedField);
-                          bool hasSmsPermission = await checkOpsPermission();
-                          if (hasSmsPermission) {
-                            //验证通过提交数据
-                            _contactPagePresenter.midnumbers(_submittedField, true);
-                            // _contactPagePresenter.midnumbers(_controllers, false);
-                            _contactPagePresenter.toString();
-                          } else {
-                            await requestOpsPermission();
-                          }
+                          _contactPagePresenter.midnumbers(_submittedField, true);
+                          _contactPagePresenter.toString();
                         } else {
                           setState(() {
                             _autovalidateMode = AutovalidateMode.onUserInteraction;
                           });
                         }
-                        // _contactPagePresenter.midnumbers(_submittedField, false);
-                        // // _contactPagePresenter.midnumbers(_controllers, false);
-                        // _contactPagePresenter.toString();
                       },
                       text: Myapp9Localizations.of(context)!.next,
                     ),

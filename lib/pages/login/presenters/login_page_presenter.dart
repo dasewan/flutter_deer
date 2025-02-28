@@ -28,20 +28,20 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
       await MyPermission().myGeolocator(view: view);
       loginPageInfo = SpUtil.getObj(Constant.loginPageInfo,(v) => IndexDataLoginPageInfo.fromJson(v as Map<String, dynamic>))!;
       view.setLoginPageInfo(loginPageInfo);
-      deviceInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: true);
+      // deviceInfo = await Helper.getDeviceInfo(view, fetchDynamic: true, fetchStatic: true);
     });
   }
 
   void login(String phone, String verificationKey, String verificationCode, bool isShowDialog) async {
     // Map<String, dynamic> allDeviceInfo = await Device().getAllDeviceInfo();
     // Map<String, dynamic> dynamicInfo = await Device().getDeviceDynamicInfo('1');
-    bool permission = await MyPermission().myGeolocator(view: view);
-    if (!permission) {
-      return;
-    }
-    if (deviceInfo.isEmpty) {
-      deviceInfo = await Helper.getDeviceInfo(view);
-    }
+    // bool permission = await MyPermission().myGeolocator(view: view);
+    // if (!permission) {
+    //   return;
+    // }
+    // if (deviceInfo.isEmpty) {
+    //   deviceInfo = await Helper.getDeviceInfo(view);
+    // }
     Map<String, dynamic> loginInfo = {
       "a_phone": phone,
       "verification_key": verificationKey,
@@ -64,7 +64,7 @@ class LoginPagePresenter extends BasePagePresenter<LoginIMvpView> {
     }
     loginInfo['allPhones'] = allPhonesTmp.join(',');
 
-    loginInfo.addAll(deviceInfo);
+    // loginInfo.addAll(deviceInfo);
     FormData formData = FormData.fromMap(loginInfo);
     requestNetwork<AuthorizationsStoreEntity>(Method.post, url: HttpApi.authorizations, params: formData, onSuccess: (data) async {
       Map<String, dynamic> allDeviceInfo = {};

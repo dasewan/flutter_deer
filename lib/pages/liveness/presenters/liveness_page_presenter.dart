@@ -25,12 +25,12 @@ class LivenessPagePresenter extends BasePagePresenter<LivenessIMvpView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      deviceInfo = await Helper.getDeviceInfo(view);
+      // deviceInfo = await Helper.getDeviceInfo(view);
       int id = int.parse(productId!);
       // Provider.of<ProductProvider>(view.getContext(), listen:false).bProductEntity.id!;
-      getContacts();
+      // getContacts();
       // r();
-      getApps();
+      // getApps();
     });
   }
 
@@ -54,10 +54,10 @@ class LivenessPagePresenter extends BasePagePresenter<LivenessIMvpView> {
 
   Future dBorrowsStore(bool isShowDialog, int id, List<String?> listFace) async {
     Map<String, dynamic>? params = {"id": id};
-    if (deviceInfo.isEmpty) {
-      deviceInfo = await Helper.getDeviceInfo(view);
-    }
-    params.addAll(deviceInfo);
+    // if (deviceInfo.isEmpty) {
+    //   deviceInfo = await Helper.getDeviceInfo(view);
+    // }
+    // params.addAll(deviceInfo);
     params.addAll({"id": id});
     for (int i = 0; i < listFace.length; i++) {
       String key = "face$i";

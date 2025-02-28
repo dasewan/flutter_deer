@@ -14,6 +14,7 @@ import 'package:sp_util/sp_util.dart';
 
 import '../../../config/index_action_constant.dart';
 import '../../../providers/user_provider.dart';
+import '../../../util/device_utils.dart';
 import '../../../util/helper.dart';
 
 class IdCardPagePresenter extends BasePagePresenter<IdCardIMvpView> {
@@ -31,6 +32,7 @@ class IdCardPagePresenter extends BasePagePresenter<IdCardIMvpView> {
     if (formmap['q_name1'] == null || formmap['q_name1']!.isEmpty) {
       formmap['q_name1'] = SpUtil.getString(Constant.ocrNameResult, defValue: '')!;
     }
+    formmap['is_web'] = Device.isWeb ? '1' : '0';
     FormData formData = FormData.fromMap(formmap);
     requestNetwork<VerifyItemStoreEntity>(Method.post, url: HttpApi.mIdnumbersStore, params: formData, isShow: isShowDialog as bool, onSuccess: (data) {
       if (data != null) {
@@ -42,8 +44,12 @@ class IdCardPagePresenter extends BasePagePresenter<IdCardIMvpView> {
             view.getContext().read<UserProvider>().setIndexAction(IndexActionConst.sign.actionNo);
           }
           Helper.handleNextVerifyItem(view: view, next: data.data!.next);
-              view.getContext().read<VerifyProvider>().setJIdnumberVerifyStatus(Constant.success);
-              view.onCreateSuccess(data.data!.next!);
+          view.getContext().read<VerifyProvider>().setJIdnumberVerifyStatus(Constant.success);
+          if(Device.isWeb){
+            Helper.handleNextVerifyItem(view: view, next: data.data!.next);
+            view.getContext().read<VerifyProvider>().setNContactVerifyStatus(Constant.success);
+          }
+          view.onCreateSuccess(data.data!.next!);
             }
           }
         }, onError: (_, __) {
